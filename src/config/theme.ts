@@ -12,6 +12,12 @@ export default {
       dark: '#721C20',
     },
   },
+  breakpoints: ['375px', '768px', '1440px'],
+  fonts: {
+    body: 'Kanit, sans-serif',
+    heading: 'Kanit, sans-serif',
+    mono: 'Kanit, sans-serif',
+  },
   fontSizes: {
     '2xs': '10px',
     xs: '12px',
