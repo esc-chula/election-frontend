@@ -10,7 +10,7 @@ const TopBar = () => {
       alignItems="center"
       boxShadow="0px 1px 1px rgba(0, 0, 0, 0.15)"
     >
-      <Image src="/images/esc-logo.png" ml={[0, 0, '16.67%']}></Image>
+      <Image src="/images/esc-logo.svg" ml={[0, 0, '16.67%']}></Image>
     </Flex>
   )
 }
