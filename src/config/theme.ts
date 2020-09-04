@@ -12,7 +12,7 @@ export default {
       dark: '#721C20',
     },
   },
-  breakpoints: ['375px', '768px', '1440px'],
+  breakpoints: ['768px'],
   fonts: {
     body: 'Kanit, sans-serif',
     heading: 'Kanit, sans-serif',

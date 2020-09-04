@@ -13,7 +13,7 @@ const TopBar = () => {
       top="0"
       position="fixed"
     >
-      <Image src="/images/esc-logo.svg" ml={[0, 0, '16.67%']}></Image>
+      <Image src="/images/esc-logo.svg" ml={[0, '16.67%']}></Image>
     </Flex>
   )
 }

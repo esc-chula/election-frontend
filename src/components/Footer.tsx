@@ -6,11 +6,11 @@ const Footer = () => {
     <Flex
       bg="intaniaRed.dark"
       w="100%"
-      h={['50px', '50px', '70px']}
+      h={['50px', '70px']}
       alignItems="center"
       justifyContent="center"
     >
-      <Text fontSize="lg" fontWeight="regular" color="white">
+      <Text fontSize={['2xs', 'lg']} fontWeight="regular" color="white">
         © 2020, กรรมการนิสิตคณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย
       </Text>
     </Flex>
