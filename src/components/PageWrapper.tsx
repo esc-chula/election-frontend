@@ -26,7 +26,12 @@ function useWindowDimensions() {
   return windowDimensions
 }
 
-const PageWrapper = (props: any) => {
+interface Props {
+  children: React.ReactNode
+}
+
+const PageWrapper = ({ children }: Props) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { height, width } = useWindowDimensions()
 
   return (
@@ -37,7 +42,7 @@ const PageWrapper = (props: any) => {
       flexDirection="column"
       pt="75px"
     >
-      {props.children}
+      {children}
     </Flex>
   )
 }
