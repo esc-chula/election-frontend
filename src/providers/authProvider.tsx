@@ -9,7 +9,7 @@ export interface AuthUser {
 }
 
 export interface AuthConstruct {
-  token: string | null
+  accessToken: string | null
   authUser: AuthUser | null
   logout: () => void
   exchangeTicket: (token: string) => void
@@ -23,11 +23,11 @@ interface AuthProviderProps {
 }
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [token, setToken] = useState<string | null>(null)
+  const [accessToken, setAccessToken] = useState<string | null>(null)
   const [authUser, setAuthUser] = useState<AuthUser | null>(null)
 
   const logout = useCallback(() => {
-    setToken(null)
+    setAccessToken(null)
     setAuthUser(null)
   }, [])
 
@@ -36,7 +36,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       const data: ExchangeTokenDTO = await axios.post(
         `${API_HOST}/auth/exchangetoken?token=${token}`,
       )
-      setToken(data.jwt)
+      setAccessToken(data.jwt)
       setAuthUser({ username: data.user.username } as AuthUser)
     } catch (e) {
       handleAxiosError(e)
@@ -44,7 +44,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   }, [])
 
   const value = {
-    token,
+    accessToken,
     authUser,
     logout,
     exchangeTicket,
