@@ -3,7 +3,6 @@ import { CSSReset } from '@chakra-ui/core'
 import Providers from 'providers'
 import './App.css'
 import './components/TopBar'
-import Landing from './pages/Landing'
 import TopBar from './components/TopBar'
 import Footer from './components/Footer'
 import PageWrapper from './components/PageWrapper'
@@ -13,10 +12,6 @@ import ProfilePage from 'pages/profile'
 import PolicyPage from 'pages/policy'
 import { css, Global } from '@emotion/core'
 import { BASENAME } from 'config/env'
-
-const Container = ({ children }: any) => {
-  return <Box>{children}</Box>
-}
 
 function App() {
   return (
