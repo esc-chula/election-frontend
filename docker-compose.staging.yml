@@ -6,7 +6,7 @@ services:
     environment:
       REACT_APP_API_HOST: ${REACT_APP_API_HOST}
     ports:
-      - ${PORT}:3000
+      - 3000:3000
     labels:
       - 'traefik.enable=true'
       - 'traefik.docker.network=shared'
