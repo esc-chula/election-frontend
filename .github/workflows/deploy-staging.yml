@@ -39,15 +39,17 @@ jobs:
           script: |
             set -e
 
-            WORKDIR=election-frontend-staging
-            rm -rf $WORKDIR
+            PROJECT_NAME=election-frontend-staging
+            rm -rf $PROJECT_NAME
+            mkdir $PROJECT_NAME
+            cd $PROJECT_NAME
 
-            git clone -b dev https://.:$GITHUB_TOKEN@github.com/esc-chula/election-frontend $WORKDIR
+            git clone -b dev https://.:$GITHUB_TOKEN@github.com/esc-chula/election-frontend
 
             docker login docker.pkg.github.com -u "bombnp" -p "$GITHUB_TOKEN"
             docker pull docker.pkg.github.com/esc-chula/election-frontend/election-frontend-staging:latest
 
-            docker-compose --project-name=$WORKDIR -f $WORKDIR/docker-compose.yml stop
-            docker-compose --project-name=$WORKDIR -f $WORKDIR/docker-compose.yml up -d
+            docker-compose --project-name=$PROJECT_NAME -f docker-compose.staging.yml stop
+            docker-compose --project-name=$PROJECT_NAME -f docker-compose.staging.yml up -d
 
-            rm -rf $WORKDIR
+            rm -rf $PROJECT_NAME
