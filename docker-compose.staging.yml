@@ -1,0 +1,24 @@
+version: '3'
+services:
+  app:
+    image: docker.pkg.github.com/esc-chula/election-frontend/election-frontend-staging:latest
+    restart: unless-stopped
+    environment:
+      REACT_APP_API_HOST: ${REACT_APP_API_HOST}
+    ports:
+      - ${PORT}:3000
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=shared'
+      - 'traefik.http.routers.election-frontend-staging.entrypoints=websecure'
+      - 'traefik.http.routers.election-frontend-staging.rule=Host(`esc.eng.chula.ac.th`) && PathPrefix(`/staging/election`)'
+      - 'traefik.http.routers.election-frontend-staging.tls=true'
+      - 'traefik.http.routers.election-frontend-staging.tls.certresolver=myhttpchallenge'
+      - 'traefik.http.routers.election-frontend-staging.middlewares=election-frontend-staging-strip-prefix'
+      - 'traefik.http.middlewares.election-frontend-staging-strip-prefix.stripprefix.prefixes=/staging/election'
+    networks:
+      - shared
+networks:
+  shared:
+    external:
+      name: shared
