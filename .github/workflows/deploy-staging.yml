@@ -41,10 +41,9 @@ jobs:
 
             PROJECT_NAME=election-frontend-staging
             rm -rf $PROJECT_NAME
-            mkdir $PROJECT_NAME
-            cd $PROJECT_NAME
 
-            git clone -b dev https://.:$GITHUB_TOKEN@github.com/esc-chula/election-frontend
+            git clone -b dev https://.:$GITHUB_TOKEN@github.com/esc-chula/election-frontend $PROJECT_NAME
+            cd $PROJECT_NAME
 
             docker login docker.pkg.github.com -u "bombnp" -p "$GITHUB_TOKEN"
             docker pull docker.pkg.github.com/esc-chula/election-frontend/election-frontend-staging:latest
@@ -52,4 +51,5 @@ jobs:
             docker-compose --project-name=$PROJECT_NAME -f docker-compose.staging.yml stop
             docker-compose --project-name=$PROJECT_NAME -f docker-compose.staging.yml up -d
 
+            cd ..
             rm -rf $PROJECT_NAME
