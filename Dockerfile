@@ -2,11 +2,13 @@ FROM node:12.18-alpine AS build
 
 WORKDIR /app
 
+ARG path-prefix
+
 COPY ["package.json", "yarn.lock", "./"]
 RUN yarn
 
 COPY . .
-RUN yarn build
+RUN PUBLIC_URL=$path-prefix yarn build
 
 FROM nginx:1.19.1-alpine
 
