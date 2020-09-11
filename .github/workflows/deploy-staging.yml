@@ -31,10 +31,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          host: ${{ env.VM_HOST }}
-          username: ${{ env.VM_USER }}
-          password: ${{ env.VM_PASS }}
-          port: ${{ env.VM_PORT }}
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          password: ${{ secrets.VM_PASS }}
+          port: ${{ secrets.VM_PORT }}
           envs: GITHUB_TOKEN
           script: |
             set -e
