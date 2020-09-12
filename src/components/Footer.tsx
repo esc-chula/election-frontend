@@ -1,12 +1,14 @@
 import React from 'react'
 import { Flex, Text } from '@chakra-ui/core'
+import { useWindowDimensions } from './PageWrapper'
 
 const Footer = () => {
+  const { width } = useWindowDimensions()
   return (
     <Flex
       bg="intaniaRed.700"
-      w="100%"
-      h={['50px', '70px']}
+      w={width}
+      h={['50px', '60px']}
       alignItems="center"
       justifyContent="center"
     >
