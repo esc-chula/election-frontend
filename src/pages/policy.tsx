@@ -1,10 +1,10 @@
-import { Box, Button, Checkbox, Divider, Stack, Text } from '@chakra-ui/core'
+import { Button, Checkbox, Divider, Stack, Text } from '@chakra-ui/core'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
 import { useWindowDimensions } from 'components/PageWrapper'
 import React, { useCallback, useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const textStyles = {
   header: {
