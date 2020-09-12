@@ -17,6 +17,15 @@ export default {
       800: '#3e0d10',
       900: '#1b0203',
     },
+    mono: {
+      0: '#FFFFFF',
+      1: '#E0E0E0',
+      2: '#BDBDBD',
+      3: '#828282',
+      4: '#4F4F4F',
+      5: '#333333',
+      6: '#2A282A',
+    },
   },
   breakpoints: ['768px'],
   fonts: {
