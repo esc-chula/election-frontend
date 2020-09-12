@@ -27,7 +27,7 @@ export default {
       6: '#2A282A',
     },
   },
-  breakpoints: ['768px'],
+  breakpoints: ['768px', '1280px'],
   fonts: {
     body: 'Kanit, sans-serif',
     heading: 'Kanit, sans-serif',

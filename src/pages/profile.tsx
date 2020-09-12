@@ -3,8 +3,8 @@ import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
 import { useWindowDimensions } from 'components/PageWrapper'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useCallback } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 
 const textStyles = {
   header: {
@@ -37,8 +37,14 @@ const ProfileRow = ({ rowKey, rowValue }: RowProps) => {
 
 const ProfileCard = () => {
   const { width } = useWindowDimensions()
+  const history = useHistory()
+
+  const nextPage = useCallback(() => {
+    history.push('/policy')
+  }, [history])
+
   return (
-    <Stack spacing="20px" alignItems="flex-end">
+    <Stack spacing="20px">
       <Card padding="12px" width="335px" maxWidth={`${width - 40}px`}>
         <ProfileRow rowKey="ชื่อ - นามสกุล" rowValue="สมชาย จงเจริญ" />
         <Divider />
@@ -46,19 +52,18 @@ const ProfileCard = () => {
         <Divider />
         <ProfileRow rowKey="รหัสนิสิต" rowValue="6232008821" />
       </Card>
-      <Link to="/policy">
-        <Button
-          variantColor="intaniaRed"
-          bg="intaniaRed.600"
-          size="md"
-          width="130px"
-          fontFamily="Kanit"
-          fontSize="md"
-          fontWeight="regular"
-        >
-          ขั้นตอนถัดไป
-        </Button>
-      </Link>
+      <Button
+        alignSelf="flex-end"
+        variantColor="intaniaRed"
+        bg="intaniaRed.600"
+        size="md"
+        width="130px"
+        fontSize="md"
+        fontWeight="regular"
+        onClick={nextPage}
+      >
+        ขั้นตอนถัดไป
+      </Button>
     </Stack>
   )
 }

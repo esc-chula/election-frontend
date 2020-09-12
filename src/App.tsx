@@ -9,16 +9,26 @@ import PageWrapper from './components/PageWrapper'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import IndexPage from 'pages'
 import ProfilePage from 'pages/profile'
+import PolicyPage from 'pages/policy'
+import { css, Global } from '@emotion/core'
 
 function App() {
   return (
     <Router>
+      <Global
+        styles={css`
+          body {
+            font-family: 'Kanit';
+          }
+        `}
+      />
       <Providers>
         <CSSReset />
         <TopBar />
         <PageWrapper>
           <Switch>
             <Route path="/profile" component={ProfilePage} />
+            <Route path="/policy" component={PolicyPage} />
             <Route path="/" component={IndexPage} />
           </Switch>
           <Footer />

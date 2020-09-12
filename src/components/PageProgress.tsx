@@ -9,12 +9,12 @@ interface PageProgressProps extends StackProps {
 
 const textStyles = {
   active: {
-    fontSize: ['2xl', '3xl'],
+    fontSize: ['2xl', '2xl', '3xl'],
     fontWeight: 'medium',
     color: 'black',
   },
   inactive: {
-    fontSize: ['md', 'xl'],
+    fontSize: ['md', 'md', 'lg'],
     fontWeight: 'light',
     color: 'mono.1',
   },
@@ -22,7 +22,7 @@ const textStyles = {
 
 const PageProgress = ({ page, ...rest }: PageProgressProps) => {
   return (
-    <Stack spacing="8px" {...rest}>
+    <Stack spacing="8px" {...rest} width={['230px', '230px', '270px']}>
       <Text {...textStyles[page === 'profile' ? 'active' : 'inactive']}>
         1. ข้อมูลผู้ใช้สิทธิ
       </Text>
