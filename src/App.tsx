@@ -11,10 +11,11 @@ import IndexPage from 'pages'
 import ProfilePage from 'pages/profile'
 import PolicyPage from 'pages/policy'
 import { css, Global } from '@emotion/core'
+import { BASENAME } from 'config/env'
 
 function App() {
   return (
-    <Router>
+    <Router basename={BASENAME}>
       <Global
         styles={css`
           body {
