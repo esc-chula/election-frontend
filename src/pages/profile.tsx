@@ -8,12 +8,12 @@ import { useHistory } from 'react-router-dom'
 
 const textStyles = {
   header: {
-    fontSize: 'md',
+    fontSize: ['md', 'md', 'lg'],
     fontWeight: 'regular',
     color: 'mono.6',
   },
   normal: {
-    fontSize: 'md',
+    fontSize: ['md', 'md', 'lg'],
     fontWeight: 'light',
     color: 'mono.4',
   },
@@ -27,7 +27,7 @@ interface RowProps {
 const ProfileRow = ({ rowKey, rowValue }: RowProps) => {
   return (
     <Stack direction="row">
-      <Text {...textStyles.header} width="100px">
+      <Text {...textStyles.header} width={['100px', '100px', '125px']}>
         {rowKey}
       </Text>
       <Text {...textStyles.normal}>{rowValue}</Text>
@@ -45,7 +45,11 @@ const ProfileCard = () => {
 
   return (
     <Stack spacing="20px">
-      <Card padding="12px" width="335px" maxWidth={`${width - 40}px`}>
+      <Card
+        padding="12px"
+        width={['335px', '335px', '500px']}
+        maxWidth={`${width - 40}px`}
+      >
         <ProfileRow rowKey="ชื่อ - นามสกุล" rowValue="สมชาย จงเจริญ" />
         <Divider />
         <ProfileRow rowKey="ชั้นปี" rowValue="2" />
