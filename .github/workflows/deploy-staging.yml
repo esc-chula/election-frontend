@@ -18,6 +18,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: Set env for staging build
+        run: |
+          rm .env.production -rf
+          cp .env.development .env.production
+
       - uses: whoan/docker-build-with-cache-action@v5
         name: Build Docker image
         with:
