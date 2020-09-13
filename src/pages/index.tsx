@@ -61,6 +61,7 @@ const Landing = () => {
         variantColor="intaniaRed"
         onChange={onCheckBoxChange}
         defaultIsChecked={checked}
+        p="15px"
       >
         <Text>
           ข้าพเจ้ายินดีเปิดเผยข้อมูลส่วนตัวในระบบ CUNET เพื่อใช้ในการเข้าสู่ระบบ
@@ -74,7 +75,7 @@ const Landing = () => {
       <Button
         size="md"
         variant="solid"
-        mt="30px"
+        my="30px"
         variantColor="intaniaRed"
         bg="intaniaRed.600"
         isDisabled={!checked}
