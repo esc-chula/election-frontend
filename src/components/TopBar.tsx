@@ -6,7 +6,6 @@ import escLogo from '../images/esc-logo.svg'
 const TopBar = () => {
   return (
     <Flex
-      // position="fixed"
       bg="white"
       w="100%"
       h="75px"
