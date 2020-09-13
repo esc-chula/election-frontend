@@ -36,16 +36,17 @@ const Landing = () => {
   const TextCard = () => {
     return (
       <Flex
-        w={['100vw', '375px']}
         h="120px"
         justify="center"
         align="center"
         boxShadow="2px 2px 2px rgba(0, 0, 0, 0.15)"
-        p="30px"
+        p="20px"
         textAlign="center"
         my="30px"
+        mx="10px"
+        maxW="400px"
       >
-        <Text color="black" fontWeight="light" fontSize="md">
+        <Text color="black" fontWeight="light" fontSize={['sm', 'md']}>
           การเข้าสู่ระบบเลือกตั้งออนไลน์ คณะวิศวกรรมศาสตร์
           จำเป็นต้องมีการยืนยันตัวตนผู้ใช้ระบบด้วยรหัส CUNET
           โปรดยอมรับข้อตกลงด้านล่างเพื่อเข้าสู่ระบบ
