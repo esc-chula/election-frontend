@@ -1,11 +1,7 @@
 import { Box, BoxProps } from '@chakra-ui/core'
-import React, { ReactNode } from 'react'
+import React from 'react'
 
-interface Props extends BoxProps {
-  children: ReactNode
-}
-
-const Container = ({ children, ...rest }: Props) => {
+const Container = ({ children, ...rest }: BoxProps) => {
   return (
     <Box margin="0 auto" {...rest}>
       {children}

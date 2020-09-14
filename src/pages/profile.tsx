@@ -45,11 +45,7 @@ const ProfileCard = () => {
 
   return (
     <Stack spacing="20px">
-      <Card
-        padding="12px"
-        width={['335px', '335px', '500px']}
-        maxWidth={`${width - 40}px`}
-      >
+      <Card width={['335px', '335px', '500px']} maxWidth={`${width - 40}px`}>
         <ProfileRow rowKey="ชื่อ - นามสกุล" rowValue="สมชาย จงเจริญ" />
         <Divider />
         <ProfileRow rowKey="ชั้นปี" rowValue="2" />

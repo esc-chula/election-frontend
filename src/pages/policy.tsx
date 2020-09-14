@@ -34,11 +34,7 @@ const PolicyCard = () => {
 
   return (
     <Stack spacing="20px">
-      <Card
-        padding="12px"
-        width={['335px', '335px', '500px']}
-        maxWidth={`${width - 40}px`}
-      >
+      <Card width={['335px', '335px', '500px']} maxWidth={`${width - 40}px`}>
         <Text {...textStyles.header}>กฎและเงื่อนไขการใช้งาน</Text>
         <Divider />
         <Text {...textStyles.normal}>

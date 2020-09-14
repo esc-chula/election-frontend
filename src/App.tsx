@@ -10,19 +10,11 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import IndexPage from 'pages'
 import ProfilePage from 'pages/profile'
 import PolicyPage from 'pages/policy'
-import { css, Global } from '@emotion/core'
 import { BASENAME } from 'config/env'
 
 function App() {
   return (
     <Router basename={BASENAME}>
-      <Global
-        styles={css`
-          body {
-            font-family: 'Kanit';
-          }
-        `}
-      />
       <Providers>
         <CSSReset />
         <TopBar />

@@ -1,14 +1,28 @@
 import React, { useState } from 'react'
-import { Box, Flex, Text, Checkbox, Button } from '@chakra-ui/core'
+import {
+  Box,
+  Flex,
+  Text,
+  Checkbox,
+  Button,
+  Stack,
+  BoxProps,
+  CheckboxProps,
+  ButtonProps,
+  FlexProps,
+} from '@chakra-ui/core'
+import Card from 'components/Card'
+import { useWindowDimensions } from 'components/PageWrapper'
 
 const Landing = () => {
   const [checked, setChecked] = useState(false)
+  const { width } = useWindowDimensions()
 
   const onCheckBoxChange = () => {
     setChecked(!checked)
   }
 
-  const SSOBar = () => {
+  const SSOBar = (props: FlexProps) => {
     //TODO: add image
     return (
       <Flex
@@ -18,6 +32,7 @@ const Landing = () => {
         justifyContent="center"
         align="center"
         opacity={20}
+        {...props}
       >
         <Box textAlign="center">
           <Text
@@ -26,59 +41,53 @@ const Landing = () => {
             color="white"
             whiteSpace="break-spaces"
           >
-            ระบบเลือกตั้งออนไลน์ คณะวิศวกรรมศาสตร์
+            ระบบเลือกตั้งออนไลน์ {width < 768 ? <br /> : ''} คณะวิศวกรรมศาสตร์
           </Text>
         </Box>
       </Flex>
     )
   }
 
-  const TextCard = () => {
+  const TextCard = (props: BoxProps) => {
     return (
-      <Flex
-        h="120px"
-        justify="center"
-        align="center"
-        boxShadow="2px 2px 2px rgba(0, 0, 0, 0.15)"
-        p="20px"
-        textAlign="center"
-        my="30px"
-        mx="10px"
-        maxW="400px"
-      >
-        <Text color="black" fontWeight="light" fontSize={['sm', 'md']}>
+      <Card width={['340px', '388px']} {...props}>
+        <Text color="mono.4" fontWeight="light" fontSize={['sm', 'md']}>
           การเข้าสู่ระบบเลือกตั้งออนไลน์ คณะวิศวกรรมศาสตร์
           จำเป็นต้องมีการยืนยันตัวตนผู้ใช้ระบบด้วยรหัส CUNET
           โปรดยอมรับข้อตกลงด้านล่างเพื่อเข้าสู่ระบบ
         </Text>
-      </Flex>
+      </Card>
     )
   }
 
-  const TOSCheckBox = () => {
+  const TOSCheckBox = (props: CheckboxProps) => {
     return (
       <Checkbox
         variantColor="intaniaRed"
         onChange={onCheckBoxChange}
         defaultIsChecked={checked}
-        p="15px"
+        width={['340px', '388px']}
+        {...props}
       >
-        <Text>
+        <Text fontWeight="regular" fontSize={['sm', 'md']} color="mono.6">
           ข้าพเจ้ายินดีเปิดเผยข้อมูลส่วนตัวในระบบ CUNET เพื่อใช้ในการเข้าสู่ระบบ
         </Text>
       </Checkbox>
     )
   }
 
-  const LoginButton = () => {
+  const LoginButton = (props: Partial<ButtonProps>) => {
     return (
       <Button
         size="md"
         variant="solid"
-        my="30px"
         variantColor="intaniaRed"
         bg="intaniaRed.600"
         isDisabled={!checked}
+        width={['105px', '130px']}
+        fontSize={['lg', 'xl']}
+        fontWeight="regular"
+        {...props}
       >
         <Text>เข้าสู่ระบบ</Text>
       </Button>
@@ -88,9 +97,15 @@ const Landing = () => {
   return (
     <Flex flexDirection="column" alignItems="center">
       <SSOBar />
-      <TextCard />
-      <TOSCheckBox />
-      <LoginButton />
+      <Stack
+        spacing={['20px', '28px']}
+        alignItems="center"
+        marginTop={['18px', '40px']}
+      >
+        <TextCard />
+        <TOSCheckBox />
+        <LoginButton />
+      </Stack>
     </Flex>
   )
 }
