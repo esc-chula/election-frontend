@@ -12,7 +12,8 @@ import {
   FlexProps,
 } from '@chakra-ui/core'
 import Card from 'components/Card'
-import { useWindowDimensions } from 'components/PageWrapper'
+import { useWindowDimensions } from 'util/hooks'
+import { SSO_URL } from 'config/env'
 
 const Landing = () => {
   const [checked, setChecked] = useState(false)
@@ -78,19 +79,21 @@ const Landing = () => {
 
   const LoginButton = (props: Partial<ButtonProps>) => {
     return (
-      <Button
-        size="md"
-        variant="solid"
-        variantColor="intaniaRed"
-        bg="intaniaRed.600"
-        isDisabled={!checked}
-        width={['105px', '130px']}
-        fontSize={['lg', 'xl']}
-        fontWeight="regular"
-        {...props}
-      >
-        <Text>เข้าสู่ระบบ</Text>
-      </Button>
+      <a href={SSO_URL}>
+        <Button
+          size="md"
+          variant="solid"
+          variantColor="intaniaRed"
+          bg="intaniaRed.600"
+          isDisabled={!checked}
+          width={['105px', '130px']}
+          fontSize={['lg', 'xl']}
+          fontWeight="regular"
+          {...props}
+        >
+          <Text>เข้าสู่ระบบ</Text>
+        </Button>
+      </a>
     )
   }
 

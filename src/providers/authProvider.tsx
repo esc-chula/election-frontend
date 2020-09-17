@@ -1,8 +1,8 @@
 import React, { useContext, createContext, useState, useCallback } from 'react'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { API_HOST } from 'config/env'
 import { ExchangeTokenDTO } from 'types/dto'
-import { handleAxiosError } from 'config/util'
+import { handleAxiosError } from 'util/functions'
 
 export interface AuthUser {
   username: string
@@ -12,7 +12,7 @@ export interface AuthConstruct {
   accessToken: string | null
   authUser: AuthUser | null
   logout: () => void
-  exchangeTicket: (token: string) => void
+  exchangeToken: (token: string) => Promise<void>
 }
 
 export const AuthContext = createContext({} as AuthConstruct)
@@ -31,15 +31,16 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     setAuthUser(null)
   }, [])
 
-  const exchangeTicket = useCallback(async (token: string) => {
+  const exchangeToken = useCallback(async (token: string) => {
     try {
-      const data: ExchangeTokenDTO = await axios.post(
+      const { data } = (await axios.get(
         `${API_HOST}/auth/exchangetoken?token=${token}`,
-      )
+      )) as AxiosResponse<ExchangeTokenDTO>
       setAccessToken(data.jwt)
       setAuthUser({ username: data.user.username } as AuthUser)
     } catch (e) {
       handleAxiosError(e)
+      return Promise.reject()
     }
   }, [])
 
@@ -47,7 +48,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     accessToken,
     authUser,
     logout,
-    exchangeTicket,
+    exchangeToken,
   }
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

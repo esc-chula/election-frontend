@@ -2,7 +2,7 @@ import { Button, Checkbox, Divider, Stack, Text } from '@chakra-ui/core'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
-import { useWindowDimensions } from 'components/PageWrapper'
+import { useWindowDimensions } from 'util/hooks'
 import React, { useCallback, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 

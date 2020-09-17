@@ -11,6 +11,7 @@ import IndexPage from 'pages'
 import ProfilePage from 'pages/profile'
 import PolicyPage from 'pages/policy'
 import { BASENAME } from 'config/env'
+import CallbackPage from 'pages/callback'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <PageWrapper>
           <TopBar />
           <Switch>
+            <Route path="/callback" component={CallbackPage} />
             <Route path="/profile" component={ProfilePage} />
             <Route path="/policy" component={PolicyPage} />
             <Route path="/" component={IndexPage} />
