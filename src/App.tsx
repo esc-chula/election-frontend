@@ -17,8 +17,8 @@ function App() {
     <Router basename={BASENAME}>
       <Providers>
         <CSSReset />
-        <TopBar />
         <PageWrapper>
+          <TopBar />
           <Switch>
             <Route path="/profile" component={ProfilePage} />
             <Route path="/policy" component={PolicyPage} />

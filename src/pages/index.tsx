@@ -41,7 +41,7 @@ const Landing = () => {
             color="white"
             whiteSpace="break-spaces"
           >
-            ระบบเลือกตั้งออนไลน์ {width < 768 ? <br /> : ''} คณะวิศวกรรมศาสตร์
+            ระบบเลือกตั้งออนไลน์{width < 768 ? <br /> : '  '}คณะวิศวกรรมศาสตร์
           </Text>
         </Box>
       </Flex>

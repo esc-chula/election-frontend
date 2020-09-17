@@ -31,14 +31,10 @@ interface Props {
 }
 
 const PageWrapper = ({ children }: Props) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { height, width } = useWindowDimensions()
-
   return (
     <Flex
       justifyContent="space-between"
-      minH={height + 'px'}
-      // minH="100vh"
+      minH="100vh"
       flexDirection="column"
       pt="75px"
     >
