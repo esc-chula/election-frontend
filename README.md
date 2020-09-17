@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+DON'T FORGET TO RENAME `.env.development.local.template` to `.env.development.local`
+
 ## Available Scripts
 
 In the project directory, you can run:
