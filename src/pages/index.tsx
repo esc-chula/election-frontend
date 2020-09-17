@@ -103,7 +103,7 @@ const Landing = () => {
       <Stack
         spacing={['20px', '28px']}
         alignItems="center"
-        marginTop={['18px', '40px']}
+        marginY={['18px', '40px']}
       >
         <TextCard />
         <TOSCheckBox />
