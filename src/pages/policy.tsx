@@ -5,6 +5,7 @@ import PageProgress from 'components/PageProgress'
 import React, { useState } from 'react'
 import { ButtonLink } from 'components/ButtonLink'
 import { ResponsiveStack } from 'components/ResponsiveStack'
+import { withAuth } from 'providers/authProvider'
 
 const textStyles = {
   header: {
@@ -89,4 +90,4 @@ const PolicyPage = () => {
   )
 }
 
-export default PolicyPage
+export default withAuth(PolicyPage)

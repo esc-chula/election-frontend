@@ -18,6 +18,8 @@ export function useLocalStorageState(
   useEffect(() => {
     if (value) {
       localStorage.setItem(actualKey, value)
+    } else {
+      localStorage.removeItem(actualKey)
     }
   }, [actualKey, value])
 
