@@ -1,11 +1,27 @@
 import React, { Dispatch, SetStateAction, useCallback, useState } from 'react'
 import Container from 'components/Container'
 import { useElectionContext } from 'providers/electionProvider'
-import { useRouteMatch } from 'react-router-dom'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 import NotFound from './404'
-import { Text } from '@chakra-ui/core'
+import {
+  Box,
+  Button,
+  Flex,
+  Icon,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  useDisclosure,
+  useToast,
+} from '@chakra-ui/core'
 import CandidateList from 'components/CandidateList'
 import { Position } from 'types/election'
+import { CustomModal } from 'components/CustomModal'
+import { academicYear } from 'util/constants'
+import { useHttpContext } from 'providers/httpProvider'
+import { SubmitVoteDTO } from 'types/dto'
 
 type SelectedMap = Record<number, number>
 
@@ -16,10 +32,109 @@ export default function ElectionDetail() {
   )
   const election = electionMap[match?.params.electionName || '']
   const [selected, setSelected] = useState<SelectedMap>({})
+  const allPositionsSelected = election.positions.every(
+    (position) => selected[position.id] !== undefined,
+  )
+  const firstPosition = election.positions[0]
+  const selectedCandidate = firstPosition.candidates.find(
+    (candidate) => candidate.id === selected[firstPosition.id],
+  )
+  const { isOpen: modalOpen, onOpen, onClose } = useDisclosure()
+  const [loading, setLoading] = useState(false)
+
+  const toast = useToast()
+  const { push } = useHistory()
+  const { client } = useHttpContext()
+  const submitVote = useCallback(async () => {
+    setLoading(true)
+    try {
+      const body: SubmitVoteDTO = {
+        electionID: election.id,
+        positions: election.positions.map((position) => ({
+          positionID: position.id,
+          candidateID: selected[position.id],
+        })),
+      }
+      await client.post('/vote', body)
+      toast({
+        title: 'ลงคะแนนสำเร็จ',
+        status: 'success',
+      })
+      push('/election')
+    } catch (error) {
+      if (error.response?.status === 409) {
+        toast({
+          title: 'ไม่สามารถลงคะแนนได้',
+          description: 'ท่านเคยลงคะแนนในการเลือกตั้งนี้ไปแล้ว',
+          status: 'error',
+        })
+        onClose()
+      } else {
+        toast({
+          title: 'การลงคะแนนไม่สำเร็จ',
+          status: 'error',
+        })
+      }
+    } finally {
+      setLoading(false)
+    }
+  }, [client, selected, election, push, toast, onClose])
 
   if (!election) {
     return <NotFound />
   }
+
+  const modal = (
+    <CustomModal isOpen={modalOpen} onClose={loading ? undefined : onClose}>
+      <ModalOverlay />
+      <ModalContent rounded="md">
+        <ModalHeader>โปรดตรวจสอบการลงคะแนน</ModalHeader>
+        <ModalBody pt={0}>
+          <hr />
+          <Text py="16px" fontWeight={500} fontSize="18px" textAlign="center">
+            {election.name}
+          </Text>
+          <hr />
+          {selectedCandidate ? (
+            <Box mt="16px">
+              <Text mt="16px" color="intaniaRed.600">
+                หมายเลข {selectedCandidate.id}
+              </Text>
+              <Text color="mono.4" fontWeight={300} fontSize="14px">
+                {selectedCandidate.name}
+                <br />
+                วิศวกรรม{selectedCandidate.department} ปี{' '}
+                {academicYear - selectedCandidate.year + 1}
+              </Text>
+            </Box>
+          ) : (
+            <Text mt="16px" color="intaniaRed.600" textAlign="center">
+              งดออกเสียง
+            </Text>
+          )}
+          <Flex mt="20px" mb="16px" justifyContent="space-between">
+            <Button
+              fontWeight={400}
+              variant="outline"
+              onClick={onClose}
+              isDisabled={loading}
+            >
+              กลับไปแก้ไข
+            </Button>
+            <Button
+              isLoading={loading}
+              onClick={submitVote}
+              variantColor="intaniaRed"
+              backgroundColor="intaniaRed.600"
+              _hover={{ backgroundColor: 'intaniaRed.700' }}
+            >
+              ยืนยันการลงคะแนน
+            </Button>
+          </Flex>
+        </ModalBody>
+      </ModalContent>
+    </CustomModal>
+  )
 
   return (
     <Container>
@@ -32,8 +147,21 @@ export default function ElectionDetail() {
           position={position}
           selected={selected}
           setSelected={setSelected}
+          disabled={loading}
         />
       ))}
+      <Button
+        width="100%"
+        mt="8px"
+        mb="20px"
+        variantColor="green"
+        fontWeight={400}
+        isDisabled={!allPositionsSelected || loading}
+        onClick={onOpen}
+      >
+        สิ้นสุดการเลือกตั้ง <Icon ml="8px" name="check" />
+      </Button>
+      {modal}
     </Container>
   )
 }
@@ -42,12 +170,14 @@ interface PositionAdapterProps {
   position: Position
   selected: SelectedMap
   setSelected: Dispatch<SetStateAction<SelectedMap>>
+  disabled: boolean
 }
 
 function PositionAdapter({
   position,
   selected: selectedMap,
   setSelected: setSelectedMap,
+  disabled,
 }: PositionAdapterProps) {
   const positionId = position.id
   const selected = selectedMap[positionId]
@@ -65,6 +195,7 @@ function PositionAdapter({
       position={position}
       selected={selected}
       setSelected={setSelected}
+      disabled={disabled}
     />
   )
 }

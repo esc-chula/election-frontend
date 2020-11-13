@@ -23,6 +23,7 @@ export function CandidateCard({
   candidate,
   selected,
   setSelected,
+  disabled,
   ...rest
 }: CandidateCardProps) {
   return (
@@ -40,6 +41,7 @@ export function CandidateCard({
               index={candidate.id}
               selected={selected}
               setSelected={setSelected}
+              disabled={disabled}
             />
           </Stack>
         </Stack>
@@ -65,6 +67,7 @@ export function CandidateCard({
             fontSize={['xs', 'sm', 'md']}
             fontWeight={['extraLight', 'light']}
             alignSelf="flex-start"
+            textAlign="start"
           >
             {candidate.policy}
           </Text>
@@ -78,17 +81,23 @@ interface CheckboxProps {
   index: number
   selected: number
   setSelected: (selected: number) => void
+  disabled: boolean
 }
 
-export function Checkbox({ index, selected, setSelected }: CheckboxProps) {
+export function Checkbox({
+  index,
+  selected,
+  setSelected,
+  disabled,
+}: CheckboxProps) {
   const checked = selected === index
   const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
     (e) => {
-      if (e.target.value) {
+      if (!disabled && e.target.value) {
         setSelected(index)
       }
     },
-    [index, setSelected],
+    [index, setSelected, disabled],
   )
   return (
     <label>
@@ -97,7 +106,7 @@ export function Checkbox({ index, selected, setSelected }: CheckboxProps) {
       <ControlBox
         borderWidth="1.5px"
         size="24px"
-        cursor="pointer"
+        cursor={!disabled ? 'pointer' : undefined}
         rounded="sm"
         borderColor="intaniaRed.600"
         _checked={{

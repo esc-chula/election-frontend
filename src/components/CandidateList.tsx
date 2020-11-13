@@ -8,12 +8,14 @@ interface CandidateListProps {
   position: Position
   selected: number
   setSelected: (candidateNo: number) => void
+  disabled: boolean
 }
 
 export default function CandidateList({
   position,
   selected,
   setSelected,
+  disabled,
 }: CandidateListProps) {
   return (
     <Box pt="16px">
@@ -37,6 +39,7 @@ export default function CandidateList({
             candidate={candidate}
             selected={selected}
             setSelected={setSelected}
+            disabled={disabled}
             mt="12px"
           />
         ))}
@@ -46,7 +49,12 @@ export default function CandidateList({
           <Text fontSize="md" fontWeight="medium" mr="5px">
             งดออกเสียง
           </Text>
-          <Checkbox index={-1} selected={selected} setSelected={setSelected} />
+          <Checkbox
+            index={-1}
+            selected={selected}
+            setSelected={setSelected}
+            disabled={disabled}
+          />
         </Flex>
       </Card>
     </Box>
