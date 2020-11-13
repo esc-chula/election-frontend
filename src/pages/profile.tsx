@@ -51,7 +51,7 @@ const ProfileCard = () => {
   return (
     <Stack spacing="20px">
       <Card width={['100%', '335px', '500px']}>
-        <ProfileRow rowKey="ชื่อ - นามสกุล" rowValue="สมชาย จงเจริญ" />
+        <ProfileRow rowKey="ชื่อ - นามสกุล" rowValue={authUser.name_th} />
         <Divider />
         <ProfileRow rowKey="ชั้นปี" rowValue={`${year}`} />
         <Divider />

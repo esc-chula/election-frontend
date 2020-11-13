@@ -10,6 +10,7 @@ import PageLoading from 'components/PageLoading'
 
 export interface AuthUser {
   username: string
+  name_th: string
 }
 
 export interface AuthConstruct {
@@ -58,7 +59,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
           `${API_HOST}/auth/exchangetoken?token=${token}`,
         )
         setAccessToken(data.jwt)
-        mutateAuthUser({ username: data.user.username }, false)
+        mutateAuthUser(
+          { username: data.user.username, name_th: data.user.name_th },
+          false,
+        )
       } catch (e) {
         handleAxiosError(e)
         return Promise.reject()
