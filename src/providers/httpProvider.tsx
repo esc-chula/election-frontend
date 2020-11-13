@@ -39,6 +39,7 @@ const HttpProvider = ({ children }: HttpProviderProps) => {
         if (error?.response?.status === 403) {
           logout()
         }
+        return Promise.reject(error)
       },
     )
 
