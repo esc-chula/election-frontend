@@ -6,13 +6,13 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Icon,
   Box,
-} from '@chakra-ui/core'
+} from '@chakra-ui/react'
 
 import { ReactComponent as ESCLogo } from '../images/esc-logo.svg'
 import Container from './Container'
 import { useAuthContext } from 'providers/authProvider'
+import { ChevronDownIcon } from '@chakra-ui/icons'
 const TopBar = () => {
   const { isAuthenticated, authUser, logout } = useAuthContext()
   return (
@@ -36,10 +36,11 @@ const TopBar = () => {
               <MenuButton
                 as={Button}
                 fontWeight="medium"
-                {...{ variant: 'link', variantColor: 'intaniaRed' }}
+                variant="link"
+                colorScheme="intaniaRed"
+                rightIcon={<ChevronDownIcon boxSize="24px" />}
               >
                 {authUser.username}
-                <Icon name="chevron-down" size="24px"></Icon>
               </MenuButton>
               <MenuList>
                 <MenuItem

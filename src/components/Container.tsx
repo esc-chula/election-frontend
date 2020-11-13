@@ -1,8 +1,8 @@
-import { Box } from '@chakra-ui/core'
-import styled, { WithTheme } from '@emotion/styled'
-import appTheme, { AppTheme } from 'config/theme'
+import { Box } from '@chakra-ui/react'
+import styled from '@emotion/styled'
+import appTheme from 'config/theme'
 
-const Container = styled(Box)<WithTheme<unknown, AppTheme>>`
+const Container = styled(Box)`
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
   margin: 0 10px;
@@ -11,12 +11,12 @@ const Container = styled(Box)<WithTheme<unknown, AppTheme>>`
     margin: 0 24px;
   }
 
-  @media screen and (min-width: ${appTheme.breakpoints[0]}) {
+  @media screen and (min-width: ${appTheme.breakpoints.sm}) {
     margin: 0 auto;
     width: 768px;
   }
 
-  @media screen and (min-width: ${appTheme.breakpoints[1]}) {
+  @media screen and (min-width: ${appTheme.breakpoints.sm}) {
     width: 960px;
   }
 `

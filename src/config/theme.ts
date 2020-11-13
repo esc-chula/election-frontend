@@ -1,8 +1,14 @@
-import { theme } from '@chakra-ui/core'
+import { extendTheme, theme } from '@chakra-ui/react'
+import { createBreakpoints } from '@chakra-ui/theme-tools'
 
-// Let's say you want to add custom colors
-const appTheme = {
-  ...theme,
+const breakpoints = createBreakpoints({
+  sm: '768px',
+  md: '1280px',
+  lg: '1280px',
+  xl: '1280px',
+})
+
+const appTheme = extendTheme({
   colors: {
     ...theme.colors,
     intaniaRed: {
@@ -27,7 +33,7 @@ const appTheme = {
       6: '#2A282A',
     },
   },
-  breakpoints: ['768px', '1280px'],
+  breakpoints,
   fonts: {
     body: 'Kanit, sans-serif',
     heading: 'Kanit, sans-serif',
@@ -59,7 +65,7 @@ const appTheme = {
     extrabold: 800,
     black: 900,
   },
-}
+})
 
 export type AppTheme = typeof appTheme
 

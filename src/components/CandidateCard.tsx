@@ -1,18 +1,18 @@
 import {
   BoxProps,
   ControlBox,
-  Icon,
   Image,
   Text,
   VisuallyHidden,
   Stack,
-  AspectRatioBox,
-} from '@chakra-ui/core'
+  AspectRatio,
+} from '@chakra-ui/react'
 import { API_HOST } from 'config/env'
 import React, { ChangeEventHandler, useCallback } from 'react'
 import { Candidate } from 'types/election'
 import { academicYear } from 'util/constants'
 import Card from './Card'
+import { CloseIcon } from '@chakra-ui/icons'
 
 type CandidateCardProps = BoxProps &
   Omit<CheckboxProps, 'index'> & {
@@ -30,9 +30,15 @@ export function CandidateCard({
     <Card {...rest}>
       <Stack direction="row" spacing="15px">
         <Stack spacing="5px">
-          <AspectRatioBox minW="100px" ratio={3 / 4}>
-            <Image src={`${API_HOST}${candidate.avatar?.url}`} />
-          </AspectRatioBox>
+          <AspectRatio minW="100px" ratio={3 / 4}>
+            <Image
+              src={
+                candidate.avatar
+                  ? `${API_HOST}${candidate.avatar.url}`
+                  : undefined
+              }
+            />
+          </AspectRatio>
           <Stack direction="row" alignSelf="center">
             <Text fontSize="small" fontWeight="medium">
               หมายเลข {candidate.id}
@@ -105,7 +111,7 @@ export function Checkbox({
 
       <ControlBox
         borderWidth="1.5px"
-        size="24px"
+        boxSize="24px"
         cursor={!disabled ? 'pointer' : undefined}
         rounded="sm"
         borderColor="intaniaRed.600"
@@ -116,7 +122,7 @@ export function Checkbox({
         }}
         _focus={{ borderColor: 'intaniaRed.700', boxShadow: 'outline' }}
       >
-        <Icon name="close" size="16px" />
+        <CloseIcon boxSize="16px" />
       </ControlBox>
     </label>
   )

@@ -1,4 +1,4 @@
-import { Checkbox, Divider, Stack, Text } from '@chakra-ui/core'
+import { Checkbox, Divider, Stack, Text } from '@chakra-ui/react'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
@@ -27,7 +27,7 @@ const PolicyCard = () => {
     <Stack spacing="20px">
       <Card width={['100%', '335px', '500px']}>
         <Text {...textStyles.header}>กฎและเงื่อนไขการใช้งาน</Text>
-        <Divider />
+        <Divider my="8px" />
         <Text {...textStyles.normal}>
           เราอาจทำการเปลี่ยนแปลงข้อตกลงตามเหตุอันสมควร เป็นครั้งคราว เช่น
           การปรับปรุงฟังก์ชันหรือคุณลักษณะ
@@ -36,7 +36,7 @@ const PolicyCard = () => {
         </Text>
       </Card>
       <Checkbox
-        variantColor="intaniaRed"
+        colorScheme="intaniaRed"
         onChange={(e) => setChecked(e.target.checked)}
         alignSelf="flex-start"
         fontSize="md"
@@ -53,7 +53,7 @@ const PolicyCard = () => {
         <ButtonLink
           to="/profile"
           variant="link"
-          variantColor="intaniaRed"
+          colorScheme="intaniaRed"
           fontSize="md"
           fontWeight="regular"
         >
@@ -62,7 +62,7 @@ const PolicyCard = () => {
         <ButtonLink
           to="/rules"
           isDisabled={!checked}
-          variantColor="intaniaRed"
+          colorScheme="intaniaRed"
           bg="intaniaRed.600"
           width="130px"
           fontSize="md"
@@ -78,11 +78,7 @@ const PolicyCard = () => {
 const PolicyPage = () => {
   return (
     <Container padding={['20px', '48px']}>
-      <ResponsiveStack
-        mobileDirection="column"
-        desktopDirection="row"
-        spacing={['20px', '80px']}
-      >
+      <ResponsiveStack spacing={['20px', '0px']}>
         <PageProgress page="policy" />
         <PolicyCard />
       </ResponsiveStack>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { CSSReset } from '@chakra-ui/core'
+import { CSSReset } from '@chakra-ui/react'
 import Providers from 'providers'
 import './App.css'
 import './components/TopBar'

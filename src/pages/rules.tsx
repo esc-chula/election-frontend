@@ -1,4 +1,4 @@
-import { Checkbox, Divider, Stack, Text } from '@chakra-ui/core'
+import { Checkbox, Divider, Stack, Text } from '@chakra-ui/react'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
@@ -58,7 +58,7 @@ const PolicyCard = () => {
         </Text>
       </Card>
       <Checkbox
-        variantColor="intaniaRed"
+        colorScheme="intaniaRed"
         onChange={(e) => setChecked(e.target.checked)}
         alignSelf="flex-start"
         fontSize="md"
@@ -75,7 +75,7 @@ const PolicyCard = () => {
         <ButtonLink
           to="/policy"
           variant="link"
-          variantColor="intaniaRed"
+          colorScheme="intaniaRed"
           fontSize="md"
           fontWeight="regular"
         >
@@ -84,7 +84,7 @@ const PolicyCard = () => {
         <ButtonLink
           to="/election"
           isDisabled={!checked}
-          variantColor="intaniaRed"
+          colorScheme="intaniaRed"
           bg="intaniaRed.600"
           width="130px"
           fontSize="md"
@@ -100,11 +100,7 @@ const PolicyCard = () => {
 const Rulepage = () => {
   return (
     <Container padding={['20px', '48px']}>
-      <ResponsiveStack
-        mobileDirection="column"
-        desktopDirection="row"
-        spacing={['20px', '80px']}
-      >
+      <ResponsiveStack spacing={['20px', '0px']}>
         <PageProgress page="rule" />
         <PolicyCard />
       </ResponsiveStack>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Stack, StackProps, Text } from '@chakra-ui/core'
+import { Stack, StackProps, Text } from '@chakra-ui/react'
 
 export type CurrentPage = 'profile' | 'policy' | 'rule'
 

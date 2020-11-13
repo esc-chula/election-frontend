@@ -1,5 +1,5 @@
-import { Flex, Spinner } from '@chakra-ui/core'
-import { keyframes } from '@emotion/core'
+import { Flex, Spinner } from '@chakra-ui/react'
+import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import React from 'react'
 import { usePageLoadingContext } from './PageLoadingProvider'

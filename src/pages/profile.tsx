@@ -1,4 +1,4 @@
-import { Divider, Stack, Text } from '@chakra-ui/core'
+import { Divider, Stack, Text } from '@chakra-ui/react'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
@@ -29,7 +29,7 @@ interface RowProps {
 
 const ProfileRow = ({ rowKey, rowValue }: RowProps) => {
   return (
-    <Stack direction="row">
+    <Stack direction="row" textAlign="start">
       <Text {...textStyles.header} width={['100px', '100px', '125px']}>
         {rowKey}
       </Text>
@@ -52,15 +52,15 @@ const ProfileCard = () => {
     <Stack spacing="20px">
       <Card width={['100%', '335px', '500px']}>
         <ProfileRow rowKey="ชื่อ - นามสกุล" rowValue={authUser.name_th} />
-        <Divider />
+        <Divider my="8px" />
         <ProfileRow rowKey="ชั้นปี" rowValue={`${year}`} />
-        <Divider />
+        <Divider my="8px" />
         <ProfileRow rowKey="รหัสนิสิต" rowValue={authUser.username} />
       </Card>
       <ButtonLink
         to="/policy"
         alignSelf="flex-end"
-        variantColor="intaniaRed"
+        colorScheme="intaniaRed"
         bg="intaniaRed.600"
         size="md"
         width="130px"
@@ -77,11 +77,7 @@ const ProfileCard = () => {
 const ProfilePage = () => {
   return (
     <Container padding={['20px', '48px']}>
-      <ResponsiveStack
-        mobileDirection="column"
-        desktopDirection="row"
-        spacing={['20px', '80px']}
-      >
+      <ResponsiveStack spacing={['20px', '0px']}>
         <PageProgress page="profile" />
         <ProfileCard />
       </ResponsiveStack>

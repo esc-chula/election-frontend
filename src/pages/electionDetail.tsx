@@ -7,7 +7,7 @@ import {
   Box,
   Button,
   Flex,
-  Icon,
+  Modal,
   ModalBody,
   ModalContent,
   ModalHeader,
@@ -15,13 +15,13 @@ import {
   Text,
   useDisclosure,
   useToast,
-} from '@chakra-ui/core'
+} from '@chakra-ui/react'
 import CandidateList from 'components/CandidateList'
 import { Position } from 'types/election'
-import { CustomModal } from 'components/CustomModal'
 import { academicYear } from 'util/constants'
 import { useHttpContext } from 'providers/httpProvider'
 import { SubmitVoteDTO } from 'types/dto'
+import { CheckIcon } from '@chakra-ui/icons'
 
 type SelectedMap = Record<number, number>
 
@@ -85,7 +85,7 @@ export default function ElectionDetail() {
   }
 
   const modal = (
-    <CustomModal isOpen={modalOpen} onClose={loading ? undefined : onClose}>
+    <Modal isOpen={modalOpen} onClose={loading ? undefined : onClose}>
       <ModalOverlay />
       <ModalContent rounded="md">
         <ModalHeader>โปรดตรวจสอบการลงคะแนน</ModalHeader>
@@ -124,7 +124,7 @@ export default function ElectionDetail() {
             <Button
               isLoading={loading}
               onClick={submitVote}
-              variantColor="intaniaRed"
+              colorScheme="intaniaRed"
               backgroundColor="intaniaRed.600"
               _hover={{ backgroundColor: 'intaniaRed.700' }}
             >
@@ -133,7 +133,7 @@ export default function ElectionDetail() {
           </Flex>
         </ModalBody>
       </ModalContent>
-    </CustomModal>
+    </Modal>
   )
 
   return (
@@ -154,12 +154,12 @@ export default function ElectionDetail() {
         width="100%"
         mt="8px"
         mb="20px"
-        variantColor="green"
+        colorScheme="green"
         fontWeight={400}
         isDisabled={!allPositionsSelected || loading}
         onClick={onOpen}
       >
-        สิ้นสุดการเลือกตั้ง <Icon ml="8px" name="check" />
+        สิ้นสุดการเลือกตั้ง <CheckIcon ml="8px" />
       </Button>
       {modal}
     </Container>

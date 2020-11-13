@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, ButtonProps } from '@chakra-ui/core'
+import { Button, ButtonProps } from '@chakra-ui/react'
 import { Link, LinkProps } from 'react-router-dom'
 
 export function ButtonLink(props: ButtonProps & LinkProps) {

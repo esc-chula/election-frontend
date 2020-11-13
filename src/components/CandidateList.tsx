@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, Text } from '@chakra-ui/core'
+import { Box, Flex, Text } from '@chakra-ui/react'
 import { Position } from 'types/election'
 import Card from './Card'
 import { CandidateCard, Checkbox } from './CandidateCard'
@@ -25,7 +25,7 @@ export default function CandidateList({
           display="inline-block"
           borderWidth="1.5px"
           borderColor="intaniaRed.600"
-          size="20px"
+          boxSize="20px"
           rounded="sm"
           transform="translateY(4px)"
         />

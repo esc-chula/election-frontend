@@ -10,7 +10,7 @@ import {
   CheckboxProps,
   ButtonProps,
   FlexProps,
-} from '@chakra-ui/core'
+} from '@chakra-ui/react'
 import Card from 'components/Card'
 import { useRedirectPath } from 'util/hooks'
 import { APP_HOST, SSO_URL } from 'config/env'
@@ -64,7 +64,7 @@ const Login = () => {
   const TOSCheckBox = (props: CheckboxProps) => {
     return (
       <Checkbox
-        variantColor="intaniaRed"
+        colorScheme="intaniaRed"
         onChange={onCheckBoxChange}
         defaultIsChecked={checked}
         width={['340px', '388px']}
@@ -86,7 +86,7 @@ const Login = () => {
         <Button
           size="md"
           variant="solid"
-          variantColor="intaniaRed"
+          colorScheme="intaniaRed"
           bg="intaniaRed.600"
           isDisabled={!checked}
           width={['105px', '130px']}

@@ -1,4 +1,4 @@
-import { Spinner } from '@chakra-ui/core'
+import { Spinner } from '@chakra-ui/react'
 import { useAuthContext } from 'providers/authProvider'
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'

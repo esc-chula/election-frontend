@@ -35,4 +35,5 @@ export interface Election {
   positions: Position[]
   startDate: string
   endDate: string
+  voted: boolean
 }
