@@ -62,5 +62,6 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  }
+  },
+  "proxy": "https://esc.eng.chula.ac.th/staging/election"
 }
