@@ -17,6 +17,8 @@ import ProfilePage from 'pages/profile'
 import PolicyPage from 'pages/policy'
 import { BASENAME } from 'config/env'
 import CallbackPage from 'pages/callback'
+import ElectionRouter from 'pages/electionRouter'
+import PageLoadingComponent from 'components/PageLoadingComponent'
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
         <CSSReset />
         <PageWrapper>
           <TopBar />
+          <PageLoadingComponent />
           <Switch>
             <Route path="/" exact>
               <Redirect to="/profile" />
@@ -33,6 +36,7 @@ function App() {
             <Route path="/callback" component={CallbackPage} />
             <Route path="/profile" component={ProfilePage} />
             <Route path="/policy" component={PolicyPage} />
+            <Route path="/election" component={ElectionRouter} />
           </Switch>
           <Footer />
         </PageWrapper>

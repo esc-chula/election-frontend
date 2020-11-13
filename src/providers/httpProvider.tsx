@@ -2,6 +2,7 @@ import React, { createContext, useContext, useMemo } from 'react'
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { API_HOST } from 'config/env'
 import { useAuthContext } from './authProvider'
+import { SWRConfig } from 'swr'
 
 export interface HttpConstruct {
   client: AxiosInstance
@@ -44,11 +45,18 @@ const HttpProvider = ({ children }: HttpProviderProps) => {
     return client
   }, [accessToken, logout])
 
-  const value = {
-    client,
-  }
+  const fetcher = useMemo(() => {
+    return async function fetch<T>(key: string): Promise<T> {
+      const response = await client.get(key)
+      return response.data
+    }
+  }, [client])
 
-  return <HttpContext.Provider value={value}>{children}</HttpContext.Provider>
+  return (
+    <HttpContext.Provider value={{ client }}>
+      <SWRConfig value={{ fetcher }}>{children}</SWRConfig>
+    </HttpContext.Provider>
+  )
 }
 
 export default HttpProvider

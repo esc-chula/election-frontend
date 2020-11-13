@@ -60,7 +60,7 @@ const PolicyCard = () => {
           ย้อนกลับ
         </ButtonLink>
         <ButtonLink
-          to="/election/dashboard"
+          to="/election"
           isDisabled={!checked}
           variantColor="intaniaRed"
           bg="intaniaRed.600"
