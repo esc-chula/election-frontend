@@ -13,7 +13,7 @@ const Container = styled(Box)<WithTheme<unknown, AppTheme>>`
 
   @media screen and (min-width: ${appTheme.breakpoints[0]}) {
     margin: 0 auto;
-    width: 700px;
+    width: 768px;
   }
 
   @media screen and (min-width: ${appTheme.breakpoints[1]}) {

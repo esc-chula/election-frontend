@@ -22,7 +22,7 @@ const textStyles = {
 
 const PageProgress = ({ page, ...rest }: PageProgressProps) => {
   return (
-    <Stack spacing="8px" {...rest} width={['100%', '270px', '310px']}>
+    <Stack spacing="8px" {...rest} width={['100%', '300px', '500px']}>
       <Text {...textStyles[page === 'profile' ? 'active' : 'inactive']}>
         1. ข้อมูลผู้ใช้สิทธิ
       </Text>

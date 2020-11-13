@@ -1,10 +1,13 @@
 import {
+  Box,
   BoxProps,
   ControlBox,
   Icon,
   Image,
   Text,
   VisuallyHidden,
+  Stack,
+  AspectRatioBox,
 } from '@chakra-ui/core'
 import { API_HOST } from 'config/env'
 import React, { ChangeEventHandler, useCallback } from 'react'
@@ -25,19 +28,36 @@ export function CandidateCard({
 }: CandidateCardProps) {
   return (
     <Card {...rest}>
-      <Image src={`${API_HOST}${candidate.avatar?.url}`} />
-      <Text>{candidate.name}</Text>
-      <br />
-      <Text fontWeight={200}>
-        วิศวกรรม{candidate.department} ปี {academicYear - candidate.year + 1}
-      </Text>
-      <hr />
-      <Text>{candidate.policy}</Text>
-      <Checkbox
-        index={candidate.id}
-        selected={selected}
-        setSelected={setSelected}
-      />
+      <Stack direction="row" spacing="15px">
+        <Stack spacing="5px">
+          <AspectRatioBox size="100px" ratio={3 / 4}>
+            <Image src={`${API_HOST}${candidate.avatar?.url}`} />
+          </AspectRatioBox>
+          <Stack direction="row" alignSelf="center">
+            <Text fontSize="small" fontWeight="medium">
+              หมายเลข {candidate.id}
+            </Text>
+            <Checkbox
+              index={candidate.id}
+              selected={selected}
+              setSelected={setSelected}
+            />
+          </Stack>
+        </Stack>
+        <Stack spacing="2px" width="100%">
+          <Text fontSize="sm" fontWeight="regular" alignSelf="flex-start">
+            {candidate.name}
+          </Text>
+          <Text fontWeight="extraLight" fontSize="2xs" alignSelf="flex-start">
+            วิศวกรรม{candidate.department} ปี{' '}
+            {academicYear - candidate.year + 1}
+          </Text>
+          <hr />
+          <Text fontSize="xs" fontWeight="extraLight" alignSelf="flex-start">
+            {candidate.policy}
+          </Text>
+        </Stack>
+      </Stack>
     </Card>
   )
 }

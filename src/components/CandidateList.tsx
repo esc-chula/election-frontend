@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex } from '@chakra-ui/core'
+import { Box, Flex, Text } from '@chakra-ui/core'
 import { Position } from 'types/election'
 import Card from './Card'
 import { CandidateCard, Checkbox } from './CandidateCard'
@@ -41,9 +41,13 @@ export default function CandidateList({
           />
         ))}
       </Flex>
-      <Card mt="12px">
-        งดออกเสียง
-        <Checkbox index={-1} selected={selected} setSelected={setSelected} />
+      <Card my="12px">
+        <Flex justify="center">
+          <Text fontSize="md" fontWeight="medium" mr="5px">
+            งดออกเสียง
+          </Text>
+          <Checkbox index={-1} selected={selected} setSelected={setSelected} />
+        </Flex>
       </Card>
     </Box>
   )
