@@ -6,8 +6,13 @@ import './components/TopBar'
 import TopBar from './components/TopBar'
 import Footer from './components/Footer'
 import PageWrapper from './components/PageWrapper'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import IndexPage from 'pages'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
+import Login from 'pages/login'
 import ProfilePage from 'pages/profile'
 import PolicyPage from 'pages/policy'
 import { BASENAME } from 'config/env'
@@ -21,10 +26,13 @@ function App() {
         <PageWrapper>
           <TopBar />
           <Switch>
+            <Route path="/" exact>
+              <Redirect to="/profile" />
+            </Route>
+            <Route path="/login" component={Login} />
             <Route path="/callback" component={CallbackPage} />
             <Route path="/profile" component={ProfilePage} />
             <Route path="/policy" component={PolicyPage} />
-            <Route path="/" component={IndexPage} />
           </Switch>
           <Footer />
         </PageWrapper>

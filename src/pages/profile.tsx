@@ -5,6 +5,8 @@ import PageProgress from 'components/PageProgress'
 import { useWindowDimensions } from 'util/hooks'
 import React, { useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useAuthContext, withAuth } from 'providers/authProvider'
+import { academicYear } from 'util/constants'
 
 const textStyles = {
   header: {
@@ -38,19 +40,22 @@ const ProfileRow = ({ rowKey, rowValue }: RowProps) => {
 const ProfileCard = () => {
   const { width } = useWindowDimensions()
   const history = useHistory()
+  const { authUser } = useAuthContext()
 
   const nextPage = useCallback(() => {
     history.push('/policy')
   }, [history])
+
+  const year = academicYear - parseInt(authUser.username.substring(0, 2)) + 1
 
   return (
     <Stack spacing="20px">
       <Card width={['335px', '335px', '500px']} maxWidth={`${width - 40}px`}>
         <ProfileRow rowKey="ชื่อ - นามสกุล" rowValue="สมชาย จงเจริญ" />
         <Divider />
-        <ProfileRow rowKey="ชั้นปี" rowValue="2" />
+        <ProfileRow rowKey="ชั้นปี" rowValue={`${year}`} />
         <Divider />
-        <ProfileRow rowKey="รหัสนิสิต" rowValue="6232008821" />
+        <ProfileRow rowKey="รหัสนิสิต" rowValue={authUser.username} />
       </Card>
       <Button
         alignSelf="flex-end"
@@ -83,4 +88,4 @@ const ProfilePage = () => {
   )
 }
 
-export default ProfilePage
+export default withAuth(ProfilePage)

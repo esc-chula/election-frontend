@@ -12,10 +12,10 @@ import {
   FlexProps,
 } from '@chakra-ui/core'
 import Card from 'components/Card'
-import { useWindowDimensions } from 'util/hooks'
-import { SSO_URL } from 'config/env'
+import { useRedirectPath, useWindowDimensions } from 'util/hooks'
+import { APP_HOST, SSO_URL } from 'config/env'
 
-const Landing = () => {
+const Login = () => {
   const [checked, setChecked] = useState(false)
   const { width } = useWindowDimensions()
 
@@ -78,8 +78,11 @@ const Landing = () => {
   }
 
   const LoginButton = (props: Partial<ButtonProps>) => {
+    const redirect = useRedirectPath('')
+    const redirectURL = `${SSO_URL}?r=${APP_HOST}/callback?r=${redirect}`
+
     return (
-      <a href={SSO_URL}>
+      <a href={redirectURL}>
         <Button
           size="md"
           variant="solid"
@@ -113,4 +116,4 @@ const Landing = () => {
   )
 }
 
-export default Landing
+export default Login
