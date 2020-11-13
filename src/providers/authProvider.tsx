@@ -5,19 +5,19 @@ import { ExchangeTokenDTO } from 'types/dto'
 import { handleAxiosError } from 'util/functions'
 import { useLocalStorageState, useNewRedirect } from 'util/hooks'
 import useSWR from 'swr'
-import { useHistory } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import PageLoading from 'components/PageLoading'
-
-export interface AuthUser {
-  username: string
-  name_th: string
-}
+import { StrapiUser } from 'types/strapi'
 
 export interface AuthConstruct {
   isPending: boolean
   isAuthenticated: boolean
   accessToken: string | null
-  authUser: AuthUser
+  authUser: StrapiUser
+  mutateUser: (
+    cmd: string,
+    partialUser: Partial<StrapiUser>,
+  ) => Promise<StrapiUser>
   logout: () => void
   exchangeToken: (token: string) => Promise<void>
 }
@@ -29,8 +29,8 @@ interface AuthProviderProps {
   children: React.ReactNode
 }
 
-async function fetchAuthUser(accessToken: string): Promise<AuthUser | null> {
-  const response = await axios.get<AuthUser>(`${API_HOST}/users/me`, {
+async function fetchAuthUser(accessToken: string): Promise<StrapiUser | null> {
+  const response = await axios.get<StrapiUser>(`${API_HOST}/users/me`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -59,16 +59,23 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
           `${API_HOST}/auth/exchangetoken?token=${token}`,
         )
         setAccessToken(data.jwt)
-        mutateAuthUser(
-          { username: data.user.username, name_th: data.user.name_th },
-          false,
-        )
+        mutateAuthUser(data.user, false)
       } catch (e) {
         handleAxiosError(e)
         return Promise.reject()
       }
     },
     [setAccessToken, mutateAuthUser],
+  )
+
+  const mutateUser = useCallback(
+    async (cmd: string, partialUser: Partial<StrapiUser>) => {
+      await axios.put(`${API_HOST}/users/${cmd}`, partialUser, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      return mutateAuthUser((user) => ({ ...user, ...partialUser }), false)
+    },
+    [accessToken, authUser, mutateAuthUser],
   )
 
   const value = {
@@ -78,6 +85,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     // authUser is only used in pages with a guarded check
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     authUser: authUser!,
+    mutateUser,
     logout,
     exchangeToken,
   }
@@ -106,4 +114,18 @@ export function withAuth<P>(
 
     return <PageLoading />
   }
+}
+
+export function withAccepted<P>(
+  ComposedComponent: React.ComponentType<P>,
+): React.ComponentType<P> {
+  return withAuth(function WithAccepted(props: P) {
+    const { authUser } = useAuthContext()
+
+    if (!authUser.policyAccepted || !authUser.ruleAccepted) {
+      return <Redirect to="/profile" />
+    }
+
+    return <ComposedComponent {...props} />
+  })
 }

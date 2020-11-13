@@ -1,4 +1,4 @@
-import { Checkbox, Divider, Stack, Text } from '@chakra-ui/react'
+import { Button, Checkbox, Divider, Stack, Text } from '@chakra-ui/react'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
@@ -6,6 +6,7 @@ import React, { useState } from 'react'
 import { ButtonLink } from 'components/ButtonLink'
 import { ResponsiveStack } from 'components/ResponsiveStack'
 import { withAuth } from 'providers/authProvider'
+import { usePatchUser } from 'util/hooks'
 
 const textStyles = {
   header: {
@@ -22,6 +23,12 @@ const textStyles = {
 
 const PolicyCard = () => {
   const [checked, setChecked] = useState(false)
+
+  const [loading, onAcceptPolicy] = usePatchUser(
+    'updatepolicy',
+    { policyAccepted: true },
+    '/rules',
+  )
 
   return (
     <Stack spacing="20px">
@@ -59,17 +66,18 @@ const PolicyCard = () => {
         >
           ย้อนกลับ
         </ButtonLink>
-        <ButtonLink
-          to="/rules"
+        <Button
           isDisabled={!checked}
           colorScheme="intaniaRed"
           bg="intaniaRed.600"
           width="130px"
           fontSize="md"
           fontWeight="regular"
+          onClick={onAcceptPolicy}
+          isLoading={loading}
         >
           ขั้นตอนถัดไป
-        </ButtonLink>
+        </Button>
       </Stack>
     </Stack>
   )

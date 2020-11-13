@@ -39,12 +39,8 @@ const ProfileRow = ({ rowKey, rowValue }: RowProps) => {
 }
 
 const ProfileCard = () => {
-  const history = useHistory()
   const { authUser } = useAuthContext()
-
-  const nextPage = useCallback(() => {
-    history.push('/policy')
-  }, [history])
+  const accepted = authUser.policyAccepted && authUser.ruleAccepted
 
   const year = academicYear - parseInt(authUser.username.substring(0, 2)) + 1
 
@@ -58,7 +54,7 @@ const ProfileCard = () => {
         <ProfileRow rowKey="รหัสนิสิต" rowValue={authUser.username} />
       </Card>
       <ButtonLink
-        to="/policy"
+        to={accepted ? '/election/' : '/policy'}
         alignSelf="flex-end"
         colorScheme="intaniaRed"
         bg="intaniaRed.600"
@@ -66,7 +62,6 @@ const ProfileCard = () => {
         width="130px"
         fontSize="md"
         fontWeight="regular"
-        onClick={nextPage}
       >
         ขั้นตอนถัดไป
       </ButtonLink>

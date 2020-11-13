@@ -6,6 +6,7 @@ import React, { useState } from 'react'
 import { ButtonLink } from 'components/ButtonLink'
 import { ResponsiveStack } from 'components/ResponsiveStack'
 import { withAuth } from 'providers/authProvider'
+import { usePatchUser } from 'util/hooks'
 
 const textStyles = {
   header: {
@@ -22,6 +23,12 @@ const textStyles = {
 
 const PolicyCard = () => {
   const [checked, setChecked] = useState(false)
+
+  const [loading, onAcceptRule] = usePatchUser(
+    'updaterule',
+    { ruleAccepted: true },
+    '/election',
+  )
 
   return (
     <Stack spacing="20px">
@@ -89,6 +96,8 @@ const PolicyCard = () => {
           width="130px"
           fontSize="md"
           fontWeight="regular"
+          onClick={onAcceptRule}
+          isLoading={loading}
         >
           ขั้นตอนถัดไป
         </ButtonLink>

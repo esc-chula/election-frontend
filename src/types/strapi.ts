@@ -11,7 +11,7 @@ export interface StrapiUser {
   created_at: Date
   updated_at: Date
   policyAccepted: boolean
-  ruleAccepted: string
+  ruleAccepted: boolean
 }
 
 export interface StrapiRole {

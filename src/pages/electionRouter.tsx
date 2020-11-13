@@ -1,5 +1,5 @@
 import React from 'react'
-import { withAuth } from 'providers/authProvider'
+import { withAccepted } from 'providers/authProvider'
 import { Route, Switch } from 'react-router-dom'
 import ElectionProvider from 'providers/electionProvider'
 import RedirectFirstElection from 'components/RedirectFirstElection'
@@ -16,4 +16,4 @@ function ElectionRouter() {
   )
 }
 
-export default withAuth(ElectionRouter)
+export default withAccepted(ElectionRouter)

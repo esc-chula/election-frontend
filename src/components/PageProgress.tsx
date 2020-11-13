@@ -1,5 +1,6 @@
 import React from 'react'
 import { Stack, StackProps, Text } from '@chakra-ui/react'
+import { useAuthContext } from 'providers/authProvider'
 
 export type CurrentPage = 'profile' | 'policy' | 'rule'
 
@@ -21,17 +22,24 @@ const textStyles = {
 }
 
 const PageProgress = ({ page, ...rest }: PageProgressProps) => {
+  const { authUser } = useAuthContext()
+  const accepted = authUser.policyAccepted && authUser.ruleAccepted
+
   return (
     <Stack spacing="8px" {...rest} width={['100%', '300px', '500px']}>
       <Text {...textStyles[page === 'profile' ? 'active' : 'inactive']}>
-        1. ข้อมูลผู้ใช้สิทธิ
+        {!accepted && '1. '}ข้อมูลผู้ใช้สิทธิ
       </Text>
-      <Text {...textStyles[page === 'policy' ? 'active' : 'inactive']}>
-        2. นโยบายการเก็บข้อมูล
-      </Text>
-      <Text {...textStyles[page === 'rule' ? 'active' : 'inactive']}>
-        3. กฎและกติกาการเลือกตั้ง
-      </Text>
+      {!accepted && (
+        <>
+          <Text {...textStyles[page === 'policy' ? 'active' : 'inactive']}>
+            2. นโยบายการเก็บข้อมูล
+          </Text>
+          <Text {...textStyles[page === 'rule' ? 'active' : 'inactive']}>
+            3. กฎและกติกาการเลือกตั้ง
+          </Text>
+        </>
+      )}
     </Stack>
   )
 }

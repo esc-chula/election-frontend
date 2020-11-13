@@ -1,6 +1,14 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import qs from 'query-string'
+import { StrapiUser } from 'types/strapi'
+import { useAuthContext } from 'providers/authProvider'
 
 export const useQueryString = () => {
   const { search } = useLocation()
@@ -37,4 +45,27 @@ export function useNewRedirect() {
 export function useRedirectPath(defaultPath: string) {
   const query = useQueryString()
   return query.r || defaultPath
+}
+
+export function usePatchUser(
+  cmd: string,
+  partialUser: Partial<StrapiUser>,
+  redirect: string,
+): [boolean, () => Promise<void>] {
+  const [loading, setLoading] = useState(false)
+  const { mutateUser } = useAuthContext()
+  const { push } = useHistory()
+
+  return [
+    loading,
+    useCallback(async () => {
+      setLoading(true)
+      try {
+        await mutateUser(cmd, partialUser)
+        push(redirect)
+      } finally {
+        setLoading(false)
+      }
+    }, [mutateUser, push, redirect]),
+  ]
 }
