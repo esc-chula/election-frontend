@@ -27,10 +27,10 @@ const PageProgress = ({ page, ...rest }: PageProgressProps) => {
         1. ข้อมูลผู้ใช้สิทธิ
       </Text>
       <Text {...textStyles[page === 'policy' ? 'active' : 'inactive']}>
-        2. กฎการเลือกตั้ง
+        2. นโยบายการเก็บข้อมูล
       </Text>
       <Text {...textStyles[page === 'dashboard' ? 'active' : 'inactive']}>
-        3. การเลือกตั้งในตอนนี้
+        3. กฎและกติกาการเลือกตั้ง
       </Text>
     </Stack>
   )
