@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useCallback, useState } from 'react'
 import Container from 'components/Container'
 import { useElectionContext } from 'providers/electionProvider'
-import { useHistory, useRouteMatch } from 'react-router-dom'
+import { Redirect, useHistory, useRouteMatch } from 'react-router-dom'
 import NotFound from './404'
 import {
   Box,
@@ -82,6 +82,10 @@ export default function ElectionDetail() {
 
   if (!election) {
     return <NotFound />
+  }
+
+  if (election.voted) {
+    return <Redirect to="/election" />
   }
 
   const modal = (
