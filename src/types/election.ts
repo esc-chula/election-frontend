@@ -21,6 +21,7 @@ export interface Candidate {
   department: string
   policy: string
   avatar: ImageInfo & ImageAsset
+  candidateID: number
 }
 
 export interface Position {

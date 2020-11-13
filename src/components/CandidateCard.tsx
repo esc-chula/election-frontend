@@ -41,7 +41,7 @@ export function CandidateCard({
           </AspectRatio>
           <Stack direction="row" alignSelf="center">
             <Text fontSize="small" fontWeight="medium">
-              หมายเลข {candidate.id}
+              หมายเลข {candidate.candidateID}
             </Text>
             <Checkbox
               index={candidate.id}

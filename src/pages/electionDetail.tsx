@@ -102,7 +102,7 @@ export default function ElectionDetail() {
           {selectedCandidate ? (
             <Box mt="16px">
               <Text mt="16px" color="intaniaRed.600">
-                หมายเลข {selectedCandidate.id}
+                หมายเลข {selectedCandidate.candidateID}
               </Text>
               <Text color="mono.4" fontWeight={300} fontSize="14px">
                 {selectedCandidate.name}
