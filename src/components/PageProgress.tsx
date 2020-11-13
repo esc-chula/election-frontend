@@ -1,7 +1,7 @@
 import React from 'react'
 import { Stack, StackProps, Text } from '@chakra-ui/core'
 
-export type CurrentPage = 'profile' | 'policy' | 'dashboard'
+export type CurrentPage = 'profile' | 'policy' | 'rule'
 
 interface PageProgressProps extends StackProps {
   page: CurrentPage
@@ -29,7 +29,7 @@ const PageProgress = ({ page, ...rest }: PageProgressProps) => {
       <Text {...textStyles[page === 'policy' ? 'active' : 'inactive']}>
         2. นโยบายการเก็บข้อมูล
       </Text>
-      <Text {...textStyles[page === 'dashboard' ? 'active' : 'inactive']}>
+      <Text {...textStyles[page === 'rule' ? 'active' : 'inactive']}>
         3. กฎและกติกาการเลือกตั้ง
       </Text>
     </Stack>
