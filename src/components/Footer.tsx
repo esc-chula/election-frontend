@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <Flex
       bg="intaniaRed.700"
-      w="100vw"
+      w="100%"
       h="50px"
       alignItems="center"
       justifyContent="center"
