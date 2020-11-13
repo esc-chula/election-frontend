@@ -1,4 +1,4 @@
-import { Button, Divider, Stack, Text } from '@chakra-ui/core'
+import { Divider, Stack, Text } from '@chakra-ui/core'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
@@ -7,6 +7,7 @@ import React, { useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useAuthContext, withAuth } from 'providers/authProvider'
 import { academicYear } from 'util/constants'
+import { ButtonLink } from 'components/ButtonLink'
 
 const textStyles = {
   header: {
@@ -57,7 +58,8 @@ const ProfileCard = () => {
         <Divider />
         <ProfileRow rowKey="รหัสนิสิต" rowValue={authUser.username} />
       </Card>
-      <Button
+      <ButtonLink
+        to="/policy"
         alignSelf="flex-end"
         variantColor="intaniaRed"
         bg="intaniaRed.600"
@@ -68,7 +70,7 @@ const ProfileCard = () => {
         onClick={nextPage}
       >
         ขั้นตอนถัดไป
-      </Button>
+      </ButtonLink>
     </Stack>
   )
 }

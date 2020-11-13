@@ -1,10 +1,10 @@
-import { Button, Checkbox, Divider, Stack, Text } from '@chakra-ui/core'
+import { Checkbox, Divider, Stack, Text } from '@chakra-ui/core'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
 import { useWindowDimensions } from 'util/hooks'
-import React, { useCallback, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useState } from 'react'
+import { ButtonLink } from 'components/ButtonLink'
 
 const textStyles = {
   header: {
@@ -22,15 +22,6 @@ const textStyles = {
 const PolicyCard = () => {
   const { width } = useWindowDimensions()
   const [checked, setChecked] = useState(false)
-  const history = useHistory()
-
-  const nextPage = useCallback(() => {
-    history.push('/dashboard')
-  }, [history])
-
-  const prevPage = useCallback(() => {
-    history.push('/profile')
-  }, [history])
 
   return (
     <Stack spacing="20px">
@@ -59,26 +50,26 @@ const PolicyCard = () => {
         alignItems="center"
         spacing="16px"
       >
-        <Button
+        <ButtonLink
+          to="/profile"
           variant="link"
           variantColor="intaniaRed"
           fontSize="md"
           fontWeight="regular"
-          onClick={prevPage}
         >
           ย้อนกลับ
-        </Button>
-        <Button
+        </ButtonLink>
+        <ButtonLink
+          to="/election/dashboard"
           isDisabled={!checked}
           variantColor="intaniaRed"
           bg="intaniaRed.600"
           width="130px"
           fontSize="md"
           fontWeight="regular"
-          onClick={nextPage}
         >
           ขั้นตอนถัดไป
-        </Button>
+        </ButtonLink>
       </Stack>
     </Stack>
   )
