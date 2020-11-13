@@ -18,6 +18,7 @@ const TopBar = () => {
   return (
     <Flex
       bg="white"
+      zIndex={100}
       w="100%"
       h="75px"
       alignItems="center"
