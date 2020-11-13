@@ -35,6 +35,7 @@ const TopBar = () => {
             <Menu>
               <MenuButton
                 as={Button}
+                fontWeight="medium"
                 {...{ variant: 'link', variantColor: 'intaniaRed' }}
               >
                 {authUser.username}
