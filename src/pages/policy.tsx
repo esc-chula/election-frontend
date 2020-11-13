@@ -2,9 +2,9 @@ import { Checkbox, Divider, Stack, Text } from '@chakra-ui/core'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
-import { useWindowDimensions } from 'util/hooks'
 import React, { useState } from 'react'
 import { ButtonLink } from 'components/ButtonLink'
+import { ResponsiveStack } from 'components/ResponsiveStack'
 
 const textStyles = {
   header: {
@@ -20,12 +20,11 @@ const textStyles = {
 }
 
 const PolicyCard = () => {
-  const { width } = useWindowDimensions()
   const [checked, setChecked] = useState(false)
 
   return (
     <Stack spacing="20px">
-      <Card width={['335px', '335px', '500px']} maxWidth={`${width - 40}px`}>
+      <Card width={['335px', '335px', '500px']}>
         <Text {...textStyles.header}>กฎและเงื่อนไขการใช้งาน</Text>
         <Divider />
         <Text {...textStyles.normal}>
@@ -60,7 +59,7 @@ const PolicyCard = () => {
           ย้อนกลับ
         </ButtonLink>
         <ButtonLink
-          to="/election"
+          to="/rules"
           isDisabled={!checked}
           variantColor="intaniaRed"
           bg="intaniaRed.600"
@@ -76,16 +75,16 @@ const PolicyCard = () => {
 }
 
 const PolicyPage = () => {
-  const { width } = useWindowDimensions()
   return (
     <Container padding={['20px', '48px']}>
-      <Stack
-        direction={width >= 768 ? 'row' : 'column'}
+      <ResponsiveStack
+        mobileDirection="column"
+        desktopDirection="row"
         spacing={['20px', '80px']}
       >
         <PageProgress page="policy" />
         <PolicyCard />
-      </Stack>
+      </ResponsiveStack>
     </Container>
   )
 }

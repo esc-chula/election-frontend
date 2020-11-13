@@ -12,12 +12,11 @@ import {
   FlexProps,
 } from '@chakra-ui/core'
 import Card from 'components/Card'
-import { useRedirectPath, useWindowDimensions } from 'util/hooks'
+import { useRedirectPath } from 'util/hooks'
 import { APP_HOST, SSO_URL } from 'config/env'
 
 const Login = () => {
   const [checked, setChecked] = useState(false)
-  const { width } = useWindowDimensions()
 
   const onCheckBoxChange = () => {
     setChecked(!checked)
@@ -42,7 +41,8 @@ const Login = () => {
             color="white"
             whiteSpace="break-spaces"
           >
-            ระบบเลือกตั้งออนไลน์{width < 768 ? <br /> : '  '}คณะวิศวกรรมศาสตร์
+            ระบบเลือกตั้งออนไลน์
+            <Box display={['block', 'none']} /> คณะวิศวกรรมศาสตร์
           </Text>
         </Box>
       </Flex>

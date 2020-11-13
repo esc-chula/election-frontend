@@ -40,6 +40,7 @@ function App() {
             <Route path="/election" component={ElectionRouter} />
             <Route path="/rules" component={Rulepage} />
           </Switch>
+          <div />
           <Footer />
         </PageWrapper>
       </Providers>

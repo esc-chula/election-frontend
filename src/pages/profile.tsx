@@ -2,12 +2,12 @@ import { Divider, Stack, Text } from '@chakra-ui/core'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
-import { useWindowDimensions } from 'util/hooks'
 import React, { useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useAuthContext, withAuth } from 'providers/authProvider'
 import { academicYear } from 'util/constants'
 import { ButtonLink } from 'components/ButtonLink'
+import { ResponsiveStack } from 'components/ResponsiveStack'
 
 const textStyles = {
   header: {
@@ -39,7 +39,6 @@ const ProfileRow = ({ rowKey, rowValue }: RowProps) => {
 }
 
 const ProfileCard = () => {
-  const { width } = useWindowDimensions()
   const history = useHistory()
   const { authUser } = useAuthContext()
 
@@ -51,7 +50,7 @@ const ProfileCard = () => {
 
   return (
     <Stack spacing="20px">
-      <Card width={['335px', '335px', '500px']} maxWidth={`${width - 40}px`}>
+      <Card width={['335px', '335px', '500px']}>
         <ProfileRow rowKey="ชื่อ - นามสกุล" rowValue="สมชาย จงเจริญ" />
         <Divider />
         <ProfileRow rowKey="ชั้นปี" rowValue={`${year}`} />
@@ -76,16 +75,16 @@ const ProfileCard = () => {
 }
 
 const ProfilePage = () => {
-  const { width } = useWindowDimensions()
   return (
     <Container padding={['20px', '48px']}>
-      <Stack
-        direction={width >= 768 ? 'row' : 'column'}
+      <ResponsiveStack
+        mobileDirection="column"
+        desktopDirection="row"
         spacing={['20px', '80px']}
       >
         <PageProgress page="profile" />
         <ProfileCard />
-      </Stack>
+      </ResponsiveStack>
     </Container>
   )
 }

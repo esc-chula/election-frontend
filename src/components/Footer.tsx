@@ -2,7 +2,6 @@ import React from 'react'
 import { Flex, Text } from '@chakra-ui/core'
 
 const Footer = () => {
-  // const { width } = useWindowDimensions()
   return (
     <Flex
       bg="intaniaRed.700"
