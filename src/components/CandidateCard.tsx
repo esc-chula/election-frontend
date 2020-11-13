@@ -1,5 +1,4 @@
 import {
-  Box,
   BoxProps,
   ControlBox,
   Icon,
@@ -30,7 +29,7 @@ export function CandidateCard({
     <Card {...rest}>
       <Stack direction="row" spacing="15px">
         <Stack spacing="5px">
-          <AspectRatioBox size="100px" ratio={3 / 4}>
+          <AspectRatioBox minW="100px" ratio={3 / 4}>
             <Image src={`${API_HOST}${candidate.avatar?.url}`} />
           </AspectRatioBox>
           <Stack direction="row" alignSelf="center">
@@ -44,16 +43,29 @@ export function CandidateCard({
             />
           </Stack>
         </Stack>
+
         <Stack spacing="2px" width="100%">
-          <Text fontSize="sm" fontWeight="regular" alignSelf="flex-start">
+          <Text
+            fontSize={['sm', 'lg', 'xl']}
+            fontWeight="regular"
+            alignSelf="flex-start"
+          >
             {candidate.name}
           </Text>
-          <Text fontWeight="extraLight" fontSize="2xs" alignSelf="flex-start">
+          <Text
+            fontSize={['2xs', 'xs', 'xs']}
+            fontWeight="extraLight"
+            alignSelf="flex-start"
+          >
             วิศวกรรม{candidate.department} ปี{' '}
             {academicYear - candidate.year + 1}
           </Text>
           <hr />
-          <Text fontSize="xs" fontWeight="extraLight" alignSelf="flex-start">
+          <Text
+            fontSize={['xs', 'sm', 'md']}
+            fontWeight={['extraLight', 'light']}
+            alignSelf="flex-start"
+          >
             {candidate.policy}
           </Text>
         </Stack>
