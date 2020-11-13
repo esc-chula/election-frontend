@@ -11,8 +11,9 @@ import {
 } from '@chakra-ui/core'
 
 import escLogo from '../images/esc-logo.svg'
-
+import { useAuthContext } from 'providers/authProvider'
 const TopBar = () => {
+  const { isAuthenticated, authUser, logout } = useAuthContext()
   return (
     <Flex
       bg="white"
@@ -25,23 +26,29 @@ const TopBar = () => {
       justifyContent="space-between"
     >
       <Image src={escLogo} ml={[0, '16.67%']}></Image>
-      <Menu>
-        <MenuButton
-          as={Button}
-          color="intaniaRed.600"
-          backgroundColor="white"
-          mr={[0, '16.67%']}
-          _hover={{ bg: 'intaniaRed.50' }}
-        >
-          623xxxxx21
-          <Icon name="chevron-down" size="24px"></Icon>
-        </MenuButton>
-        <MenuList>
-          <MenuItem backgroundColor="white" _hover={{ bg: 'white' }}>
-            ออกจากระบบ
-          </MenuItem>
-        </MenuList>
-      </Menu>
+      {isAuthenticated && (
+        <Menu>
+          <MenuButton
+            as={Button}
+            color="intaniaRed.600"
+            backgroundColor="white"
+            mr={[0, '16.67%']}
+            _hover={{ bg: 'intaniaRed.50' }}
+          >
+            {authUser.username}
+            <Icon name="chevron-down" size="24px"></Icon>
+          </MenuButton>
+          <MenuList>
+            <MenuItem
+              backgroundColor="white"
+              _hover={{ bg: 'white' }}
+              onClick={logout}
+            >
+              ออกจากระบบ
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      )}
     </Flex>
   )
 }
