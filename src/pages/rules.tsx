@@ -24,7 +24,7 @@ const PolicyCard = () => {
 
   return (
     <Stack spacing="20px">
-      <Card width={['335px', '335px', '500px']}>
+      <Card width={['100%', '335px', '500px']}>
         <Text {...textStyles.header}>กฎและกติกาการเลือกตั้ง</Text>
         <Divider />
         <Text {...textStyles.normal}>

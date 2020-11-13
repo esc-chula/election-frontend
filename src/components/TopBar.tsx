@@ -2,15 +2,16 @@ import React from 'react'
 import {
   Button,
   Flex,
-  Image,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
   Icon,
+  Box,
 } from '@chakra-ui/core'
 
-import escLogo from '../images/esc-logo.svg'
+import { ReactComponent as ESCLogo } from '../images/esc-logo.svg'
+import Container from './Container'
 import { useAuthContext } from 'providers/authProvider'
 const TopBar = () => {
   const { isAuthenticated, authUser, logout } = useAuthContext()
@@ -25,30 +26,32 @@ const TopBar = () => {
       position="fixed"
       justifyContent="space-between"
     >
-      <Image src={escLogo} ml={[0, '16.67%']}></Image>
-      {isAuthenticated && (
-        <Menu>
-          <MenuButton
-            as={Button}
-            color="intaniaRed.600"
-            backgroundColor="white"
-            mr={[0, '16.67%']}
-            _hover={{ bg: 'intaniaRed.50' }}
-          >
-            {authUser.username}
-            <Icon name="chevron-down" size="24px"></Icon>
-          </MenuButton>
-          <MenuList>
-            <MenuItem
-              backgroundColor="white"
-              _hover={{ bg: 'white' }}
-              onClick={logout}
-            >
-              ออกจากระบบ
-            </MenuItem>
-          </MenuList>
-        </Menu>
-      )}
+      <Container w="100%">
+        <Flex w="100%" alignItems="center">
+          <ESCLogo />
+          <Box flex={1} />
+          {isAuthenticated && (
+            <Menu>
+              <MenuButton
+                as={Button}
+                {...{ variant: 'link', variantColor: 'intaniaRed' }}
+              >
+                {authUser.username}
+                <Icon name="chevron-down" size="24px"></Icon>
+              </MenuButton>
+              <MenuList>
+                <MenuItem
+                  backgroundColor="white"
+                  _hover={{ bg: 'white' }}
+                  onClick={logout}
+                >
+                  ออกจากระบบ
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          )}
+        </Flex>
+      </Container>
     </Flex>
   )
 }

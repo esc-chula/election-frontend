@@ -1,3 +1,4 @@
+import Container from 'components/Container'
 import { useElectionContext } from 'providers/electionProvider'
 import React from 'react'
 import { useRouteMatch } from 'react-router-dom'
@@ -12,5 +13,9 @@ export default function ElectionDetail() {
   if (!election) {
     return <NotFound />
   }
-  return <pre>{JSON.stringify(election, null, 2)}</pre>
+  return (
+    <Container>
+      <pre>{JSON.stringify(election, null, 2)}</pre>
+    </Container>
+  )
 }

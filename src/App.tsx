@@ -4,7 +4,6 @@ import Providers from 'providers'
 import './App.css'
 import './components/TopBar'
 import TopBar from './components/TopBar'
-import Footer from './components/Footer'
 import PageWrapper from './components/PageWrapper'
 import {
   BrowserRouter as Router,
@@ -40,8 +39,6 @@ function App() {
             <Route path="/election" component={ElectionRouter} />
             <Route path="/rules" component={Rulepage} />
           </Switch>
-          <div />
-          <Footer />
         </PageWrapper>
       </Providers>
     </Router>

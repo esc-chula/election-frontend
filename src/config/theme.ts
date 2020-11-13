@@ -1,7 +1,7 @@
 import { theme } from '@chakra-ui/core'
 
 // Let's say you want to add custom colors
-export default {
+const appTheme = {
   ...theme,
   colors: {
     ...theme.colors,
@@ -60,3 +60,7 @@ export default {
     black: 900,
   },
 }
+
+export type AppTheme = typeof appTheme
+
+export default appTheme
