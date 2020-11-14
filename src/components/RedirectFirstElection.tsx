@@ -39,7 +39,7 @@ export default function RedirectFirstElection() {
                 </Flex>
                 <Text fontSize="20px">บันทึกการลงคะแนนสำเร็จ</Text>
                 <Divider my="8px" />
-                <Text fontWeight={300}>
+                <Text fontWeight={300} textAlign="center">
                   ระบบได้ทำการบันทึกผลการลงคะแนน
                   <br />
                   {elections.map((election, idx) => (

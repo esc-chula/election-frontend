@@ -28,11 +28,11 @@ export default function CandidateList({
           boxSize="20px"
           rounded="sm"
           transform="translateY(4px)"
-        />
-        <br />
+        />{' '}
+        <Box display={['block', 'none']} />
         ของหมายเลขที่คุณต้องการเลือก
       </Card>
-      <Flex flexDirection="column">
+      <Flex flexDirection={['column', 'row']} flexWrap="wrap" mx={[0, '-12px']}>
         {position.candidates.map((candidate) => (
           <CandidateCard
             key={candidate.id}
@@ -40,6 +40,8 @@ export default function CandidateList({
             selected={selected}
             setSelected={setSelected}
             disabled={disabled}
+            w={['100%', '348px', '304px']}
+            mx={[0, '12px']}
             mt="12px"
           />
         ))}

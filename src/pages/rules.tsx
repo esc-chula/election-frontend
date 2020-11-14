@@ -34,7 +34,7 @@ const PolicyCard = () => {
     <Stack spacing="20px">
       <Card width={['100%', '335px', '500px']}>
         <Text {...textStyles.header}>กฎและกติกาการเลือกตั้ง</Text>
-        <Divider />
+        <Divider my="8px" />
         <Text {...textStyles.normal}>
           เพรียวบางไลท์ อุปนายิกาเคลม อะอะเป่ายิ้งฉุบราชบัณฑิตยสถานบรรพชน
           คอร์ปอเรชั่นสไปเดอร์ ชัตเตอร์ ภูมิทัศน์เอสเพรสโซโดมิโนพาร์ทเนอร์

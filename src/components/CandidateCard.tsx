@@ -6,6 +6,8 @@ import {
   VisuallyHidden,
   Stack,
   AspectRatio,
+  StackProps,
+  Divider,
 } from '@chakra-ui/react'
 import { API_HOST } from 'config/env'
 import React, { ChangeEventHandler, useCallback } from 'react'
@@ -28,6 +30,7 @@ export function CandidateCard({
 }: CandidateCardProps) {
   return (
     <Card {...rest}>
+      <CardHeader candidate={candidate} display={['none', 'block']} />
       <Stack direction="row" spacing="15px">
         <Stack spacing="5px">
           <AspectRatio minW="100px" ratio={3 / 4}>
@@ -52,23 +55,8 @@ export function CandidateCard({
           </Stack>
         </Stack>
 
-        <Stack spacing="2px" width="100%">
-          <Text
-            fontSize={['sm', 'lg', 'xl']}
-            fontWeight="regular"
-            alignSelf="flex-start"
-          >
-            {candidate.name}
-          </Text>
-          <Text
-            fontSize={['2xs', 'xs', 'xs']}
-            fontWeight="extraLight"
-            alignSelf="flex-start"
-          >
-            วิศวกรรม{candidate.department} ปี{' '}
-            {academicYear - candidate.year + 1}
-          </Text>
-          <hr />
+        <Stack spacing="2px">
+          <CardHeader candidate={candidate} display={['block', 'none']} />
           <Text
             fontSize={['xs', 'sm', 'md']}
             fontWeight={['extraLight', 'light']}
@@ -80,6 +68,23 @@ export function CandidateCard({
         </Stack>
       </Stack>
     </Card>
+  )
+}
+
+function CardHeader({
+  candidate,
+  ...props
+}: { candidate: Candidate } & StackProps) {
+  return (
+    <Stack spacing="2px" {...props}>
+      <Text fontSize={['sm', 'lg', 'xl']} fontWeight="regular">
+        {candidate.name}
+      </Text>
+      <Text fontSize={['2xs', 'xs', 'xs']} fontWeight="extraLight">
+        วิศวกรรม{candidate.department} ปี {academicYear - candidate.year + 1}
+      </Text>
+      <Divider mb={['0', '8px']} />
+    </Stack>
   )
 }
 

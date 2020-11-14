@@ -52,10 +52,12 @@ const Login = () => {
 
   const TextCard = (props: BoxProps) => {
     return (
-      <Card {...props}>
+      <Card {...props} width="100%">
         <Text color="mono.4" fontWeight="light" fontSize={['sm', 'md']}>
           การเข้าสู่ระบบเลือกตั้งออนไลน์ คณะวิศวกรรมศาสตร์
+          <Box as="br" display={['block', 'none']} />
           จำเป็นต้องมีการยืนยันตัวตนผู้ใช้ระบบด้วยรหัส CUNET
+          <br />
           โปรดยอมรับข้อตกลงด้านล่างเพื่อเข้าสู่ระบบ
         </Text>
       </Card>
