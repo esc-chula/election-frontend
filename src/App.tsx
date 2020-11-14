@@ -26,7 +26,6 @@ function App() {
   return (
     <Router basename={BASENAME}>
       <Providers>
-        <CSSReset />
         <ScrollToTop />
         <PageWrapper>
           <TopBar />
