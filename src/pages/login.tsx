@@ -6,7 +6,6 @@ import {
   Checkbox,
   Button,
   Stack,
-  FlexProps,
   useColorModeValue,
 } from '@chakra-ui/react'
 import Card from 'components/Card'
@@ -80,19 +79,19 @@ const Login = () => {
   const redirectURL = `${SSO_URL}?r=${APP_HOST}/callback?r=${redirect}`
 
   const loginButton = (
-    <a href={redirectURL}>
-      <Button
-        size="md"
-        variant="solid"
-        colorScheme="intaniaRed"
-        isDisabled={!checked}
-        width={['105px', '130px']}
-        fontSize={['lg', 'xl']}
-        fontWeight="regular"
-      >
-        <Text>เข้าสู่ระบบ</Text>
-      </Button>
-    </a>
+    <Button
+      as="a"
+      href={checked ? redirectURL : undefined}
+      size="md"
+      variant="solid"
+      colorScheme="intaniaRed"
+      isDisabled={!checked}
+      width={['105px', '130px']}
+      fontSize={['lg', 'xl']}
+      fontWeight="regular"
+    >
+      <Text>เข้าสู่ระบบ</Text>
+    </Button>
   )
 
   return (
