@@ -1,4 +1,10 @@
-import { Checkbox, Divider, Stack } from '@chakra-ui/react'
+import {
+  Checkbox,
+  Divider,
+  LightMode,
+  Stack,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
@@ -20,10 +26,12 @@ const PolicyCard = () => {
     '/rules',
   )
 
+  const colorScheme = useColorModeValue('intaniaRed', 'intaniaRedSecondary')
+
   return (
     <Stack spacing="20px">
       <Card width={['100%', '335px', '500px']}>
-        <Header>กฎและเงื่อนไขการใช้งาน</Header>
+        <Header textAlign="center">กฎและเงื่อนไขการใช้งาน</Header>
         <Divider my="8px" />
         <Content>
           เราอาจทำการเปลี่ยนแปลงข้อตกลงตามเหตุอันสมควร เป็นครั้งคราว เช่น
@@ -32,15 +40,17 @@ const PolicyCard = () => {
           และการปรับตั้งค่าทางเทคนิคอันมีเหตุสมควรแก่การ ให้บริการ
         </Content>
       </Card>
-      <Checkbox
-        colorScheme="intaniaRed"
-        onChange={(e) => setChecked(e.target.checked)}
-        alignSelf="flex-start"
-        fontSize="md"
-        fontWeight="light"
-      >
-        ข้าพเจ้ายอมรับกฎและเงื่อนไขการใช้งาน
-      </Checkbox>
+      <LightMode>
+        <Checkbox
+          colorScheme={colorScheme}
+          onChange={(e) => setChecked(e.target.checked)}
+          alignSelf="flex-start"
+          fontSize="md"
+          fontWeight="light"
+        >
+          ข้าพเจ้ายอมรับกฎและเงื่อนไขการใช้งาน
+        </Checkbox>
+      </LightMode>
       <Stack
         direction="row"
         alignSelf="flex-end"

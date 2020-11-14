@@ -1,4 +1,12 @@
-import { Button, Checkbox, Divider, Stack } from '@chakra-ui/react'
+import {
+  Button,
+  Checkbox,
+  Divider,
+  LightMode,
+  Stack,
+  useColorMode,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
@@ -9,6 +17,7 @@ import { withAuth } from 'providers/authProvider'
 import { usePatchUser } from 'util/hooks'
 import { Header } from 'components/Header'
 import { Content } from 'components/Content'
+import { PrimaryButton } from 'components/PrimaryButton'
 
 const RulesCard = () => {
   const [checked, setChecked] = useState(false)
@@ -19,10 +28,12 @@ const RulesCard = () => {
     '/election',
   )
 
+  const colorScheme = useColorModeValue('intaniaRed', 'intaniaRedSecondary')
+
   return (
     <Stack spacing="20px">
       <Card width={['100%', '335px', '500px']}>
-        <Header>กฎและกติกาการเลือกตั้ง</Header>
+        <Header textAlign="center">กฎและกติกาการเลือกตั้ง</Header>
         <Divider my="8px" />
         <Content>
           เพรียวบางไลท์ อุปนายิกาเคลม อะอะเป่ายิ้งฉุบราชบัณฑิตยสถานบรรพชน
@@ -53,15 +64,17 @@ const RulesCard = () => {
           เทรลเลอร์คาแร็คเตอร์ มิลค์โบ้ยวันเวย์ติ่มซำลอร์ด
         </Content>
       </Card>
-      <Checkbox
-        colorScheme="intaniaRed"
-        onChange={(e) => setChecked(e.target.checked)}
-        alignSelf="flex-start"
-        fontSize="md"
-        fontWeight="light"
-      >
-        ข้าพเจ้ายอมรับกฎและเงื่อนไขการใช้งาน
-      </Checkbox>
+      <LightMode>
+        <Checkbox
+          colorScheme={colorScheme}
+          onChange={(e) => setChecked(e.target.checked)}
+          alignSelf="flex-start"
+          fontSize="md"
+          fontWeight="light"
+        >
+          ข้าพเจ้ายอมรับกฎและเงื่อนไขการใช้งาน
+        </Checkbox>
+      </LightMode>
       <Stack
         direction="row"
         alignSelf="flex-end"
@@ -77,9 +90,8 @@ const RulesCard = () => {
         >
           ย้อนกลับ
         </ButtonLink>
-        <Button
+        <PrimaryButton
           isDisabled={!checked}
-          colorScheme="intaniaRed"
           width="130px"
           fontSize="md"
           fontWeight="regular"
@@ -87,7 +99,7 @@ const RulesCard = () => {
           isLoading={loading}
         >
           ขั้นตอนถัดไป
-        </Button>
+        </PrimaryButton>
       </Stack>
     </Stack>
   )

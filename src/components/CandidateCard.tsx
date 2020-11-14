@@ -80,7 +80,7 @@ function CardHeader({
       <Text fontSize={['sm', 'lg', 'xl']} fontWeight="regular">
         {candidate.name}
       </Text>
-      <Text fontSize={['2xs', 'sm', 'sm']} fontWeight="extraLight">
+      <Text fontSize={['2xs', 'sm', 'md']} fontWeight="extraLight">
         {candidate.department} ปี {candidate.year}
       </Text>
       <Divider mb={['0', '8px']} />

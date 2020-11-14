@@ -21,7 +21,7 @@ import { BsMoon, BsSun } from 'react-icons/bs'
 const TopBar = () => {
   const { isAuthenticated, authUser, logout } = useAuthContext()
   const bg = useColorModeValue('white', 'gray.900')
-  const color = useColorModeValue('intaniaRed.500', 'intaniaRedSecondary.500')
+  const color = useColorModeValue('intaniaRed.500', 'intaniaRedSecondary.400')
   const activeColor = useColorModeValue('intaniaRed.700', 'intaniaRed.500')
   const { colorMode, toggleColorMode } = useColorMode()
 
