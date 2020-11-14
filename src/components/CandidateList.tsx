@@ -20,16 +20,17 @@ export default function CandidateList({
 }: CandidateListProps) {
   return (
     <Box pt="16px">
-      <Card fontWeight="300">
-        กาลงในช่อง{' '}
+      <Card fontWeight="300" textAlign="center">
+        กาลงในช่อง
         <Box
           display="inline-block"
+          mx="8px"
           borderWidth="1.5px"
           borderColor={useIntaniaRed()}
           boxSize="20px"
           rounded="sm"
           transform="translateY(4px)"
-        />{' '}
+        />
         <Box display={['block', 'none']} />
         ของหมายเลขที่คุณต้องการเลือก
       </Card>
