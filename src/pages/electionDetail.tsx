@@ -7,6 +7,7 @@ import {
   Box,
   Button,
   Flex,
+  Icon,
   Modal,
   ModalBody,
   ModalContent,
@@ -24,6 +25,7 @@ import { SubmitVoteDTO } from 'types/dto'
 import { CheckIcon } from '@chakra-ui/icons'
 import { useIntaniaRed } from 'util/hooks'
 import { PrimaryButton } from 'components/PrimaryButton'
+import { AiFillExclamationCircle } from 'react-icons/ai'
 
 type SelectedMap = Record<number, number>
 
@@ -83,7 +85,10 @@ export default function ElectionDetail() {
     }
   }, [client, selected, election, push, toast, onClose, setVoted])
 
-  const intaniaRed = useIntaniaRed()
+  const intaniaRed = useColorModeValue(
+    'intaniaRed.500',
+    'intaniaRedSecondary.400',
+  )
   const selectedCandidateColor = useColorModeValue('mono.4', 'whiteAlpha.800')
 
   if (!election) {
@@ -98,7 +103,27 @@ export default function ElectionDetail() {
     <Modal isOpen={modalOpen} onClose={loading ? undefined : onClose}>
       <ModalOverlay />
       <ModalContent rounded="md">
-        <ModalHeader>โปรดตรวจสอบการลงคะแนน</ModalHeader>
+        <ModalHeader>
+          <Flex direction="column" alignItems="center">
+            {/* <Flex
+              backgroundColor={yellow}
+              boxSize="30px"
+              rounded="100%"
+              alignItems="center"
+              justifyContent="center"
+              my="8px"
+            >
+              <CheckIcon color={markColor} />
+            </Flex> */}
+            <Icon
+              as={AiFillExclamationCircle}
+              color="yellow.500"
+              boxSize="40px"
+              mb="8px"
+            />
+            โปรดตรวจสอบการลงคะแนน
+          </Flex>
+        </ModalHeader>
         <ModalBody pt={0}>
           <hr />
           <Text py="16px" fontWeight={500} fontSize="18px" textAlign="center">
@@ -106,7 +131,7 @@ export default function ElectionDetail() {
           </Text>
           <hr />
           {selectedCandidate ? (
-            <Box mt="16px">
+            <Box mt="16px" ml="32px">
               <Text mt="16px" color={intaniaRed}>
                 หมายเลข {selectedCandidate.candidateID}
               </Text>
@@ -121,7 +146,12 @@ export default function ElectionDetail() {
               </Text>
             </Box>
           ) : (
-            <Text mt="16px" color={intaniaRed} textAlign="center">
+            <Text
+              mt="16px"
+              color={intaniaRed}
+              textAlign="center"
+              fontSize="2xl"
+            >
               งดออกเสียง
             </Text>
           )}
