@@ -20,12 +20,14 @@ import ElectionRouter from 'pages/electionRouter'
 import PageLoadingComponent from 'components/PageLoadingComponent'
 import Rulepage from 'pages/rules'
 import NotFound from 'pages/404'
+import { ScrollToTop } from 'components/ScrollToTop'
 
 function App() {
   return (
     <Router basename={BASENAME}>
       <Providers>
         <CSSReset />
+        <ScrollToTop />
         <PageWrapper>
           <TopBar />
           <PageLoadingComponent />
