@@ -42,7 +42,7 @@ export default function CandidateList({
             selected={selected}
             setSelected={setSelected}
             disabled={disabled}
-            w={['100%', '348px', '304px']}
+            w={['100%', '348px', '468px']}
             mx={[0, '12px']}
             mt="12px"
           />

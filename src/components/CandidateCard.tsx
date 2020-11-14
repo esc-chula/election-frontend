@@ -32,7 +32,7 @@ export function CandidateCard({
     <Card {...rest}>
       <CardHeader candidate={candidate} display={['none', 'block']} />
       <Stack direction="row" spacing="15px">
-        <Stack spacing="5px">
+        <Stack spacing="8px">
           <AspectRatio minW="100px" ratio={3 / 4}>
             <Image
               src={
@@ -42,7 +42,7 @@ export function CandidateCard({
               }
             />
           </AspectRatio>
-          <Stack direction="row" alignSelf="center">
+          <Stack direction="row" alignSelf="center" alignItems="center">
             <Text fontSize="small" fontWeight="medium">
               หมายเลข {candidate.candidateID}
             </Text>
@@ -116,7 +116,7 @@ export function Checkbox({
       <VisuallyHidden as="input" {...{ type: 'checkbox', checked, onChange }} />
 
       <ControlBox
-        borderWidth="1.5px"
+        borderWidth="2px"
         boxSize="24px"
         cursor={!disabled ? 'pointer' : undefined}
         rounded="sm"
@@ -126,7 +126,7 @@ export function Checkbox({
           color: 'white',
           borderColor: intaniaRed,
         }}
-        _focus={{ borderColor: 'intaniaRed.600', boxShadow: 'outline' }}
+        _focus={{ borderColor: 'intaniaRed.600', boxShadow: 'none' }}
       >
         <CloseIcon boxSize="16px" />
       </ControlBox>
