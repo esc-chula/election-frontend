@@ -3,9 +3,10 @@ import { useElectionContext } from 'providers/electionProvider'
 import { Redirect } from 'react-router-dom'
 import Container from './Container'
 import Card from './Card'
-import { Button, Divider, Flex, Text } from '@chakra-ui/react'
+import { Button, Divider, Flex, Icon, Stack, Text } from '@chakra-ui/react'
 import { CheckIcon } from '@chakra-ui/icons'
 import { useAuthContext } from 'providers/authProvider'
+import { GrFacebook } from 'react-icons/gr'
 
 export default function RedirectFirstElection() {
   const { elections } = useElectionContext()
@@ -21,49 +22,66 @@ export default function RedirectFirstElection() {
   if (noVotable) {
     return (
       <Container>
-        <Card mt="24px">
-          <Flex flexDirection="column" alignItems="center">
-            {noElections ? (
-              <Text fontSize="20px">ไม่มีการเลือกตั้งในขณะนี้</Text>
-            ) : (
-              <>
-                <Flex
-                  backgroundColor="green.500"
-                  boxSize="30px"
-                  rounded="100%"
-                  alignItems="center"
-                  justifyContent="center"
-                  my="8px"
-                >
-                  <CheckIcon color="white" />
-                </Flex>
-                <Text fontSize="20px">บันทึกการลงคะแนนสำเร็จ</Text>
-                <Divider my="8px" />
-                <Text fontWeight={300} textAlign="center">
-                  ระบบได้ทำการบันทึกผลการลงคะแนน
-                  <br />
-                  {elections.map((election, idx) => (
-                    <Text key={election.id} as="span" fontWeight={500}>
-                      {idx ? ', ' : ''}
-                      {election.name}
+        <Stack mx="auto" maxW="470px" spacing="40px" direction="column">
+          <Card mt="24px">
+            <Flex flexDirection="column" alignItems="center">
+              {noElections ? (
+                <Text fontSize="20px">ไม่มีการเลือกตั้งในขณะนี้</Text>
+              ) : (
+                <>
+                  <Flex
+                    backgroundColor="green.500"
+                    boxSize="30px"
+                    rounded="100%"
+                    alignItems="center"
+                    justifyContent="center"
+                    my="8px"
+                  >
+                    <CheckIcon color="white" />
+                  </Flex>
+                  <Text fontSize="20px">บันทึกการลงคะแนนสำเร็จ</Text>
+                  <Divider my="8px" />
+                  <Text fontWeight={300} textAlign="center">
+                    ระบบได้ทำการบันทึกผลการลงคะแนน
+                    <br />
+                    {elections.map((election, idx) => (
+                      <Text key={election.id} as="span" fontWeight={500}>
+                        {idx ? ', ' : ''}
+                        {election.name}
+                      </Text>
+                    ))}{' '}
+                    เรียบร้อยแล้ว
+                  </Text>
+                  <Text mt="20px" fontWeight={300} textAlign="center">
+                    สามารถติดตามรายละเอียดเพิ่มเติมได้ที่ :
+                  </Text>
+                  <a
+                    href="https://facebook.com/escchula"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Text fontWeight={400} textAlign="center">
+                      <Icon as={GrFacebook} color="#4267B2" mr="10px" />
+                      กรรมการนิสิตคณะวิศวกรรมศาสตร์ กวศ.
                     </Text>
-                  ))}{' '}
-                  เรียบร้อยแล้ว
-                </Text>
-              </>
-            )}
-          </Flex>
-        </Card>
-        <Button
-          colorScheme="intaniaRed"
-          mt="40px"
-          onClick={logout}
-          isFullWidth
-          backgroundColor="intaniaRed.500"
-          _hover={{ backgroundColor: 'intaniaRed.600' }}
-        >
-          ออกจากระบบ
-        </Button>
+                  </a>
+                </>
+              )}
+            </Flex>
+          </Card>
+          <Button
+            colorScheme="intaniaRed"
+            mt="40px"
+            maxW="470px"
+            mx="auto"
+            onClick={logout}
+            isFullWidth
+            backgroundColor="intaniaRed.500"
+            _hover={{ backgroundColor: 'intaniaRed.600' }}
+          >
+            ออกจากระบบ
+          </Button>
+        </Stack>
       </Container>
     )
   }
