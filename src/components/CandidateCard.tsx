@@ -12,7 +12,6 @@ import {
 import { API_HOST } from 'config/env'
 import React, { ChangeEventHandler, useCallback } from 'react'
 import { Candidate } from 'types/election'
-import { academicYear } from 'util/constants'
 import Card from './Card'
 import { CloseIcon } from '@chakra-ui/icons'
 

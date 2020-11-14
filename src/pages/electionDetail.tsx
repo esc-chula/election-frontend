@@ -18,7 +18,6 @@ import {
 } from '@chakra-ui/react'
 import CandidateList from 'components/CandidateList'
 import { Position } from 'types/election'
-import { academicYear } from 'util/constants'
 import { useHttpContext } from 'providers/httpProvider'
 import { SubmitVoteDTO } from 'types/dto'
 import { CheckIcon } from '@chakra-ui/icons'
