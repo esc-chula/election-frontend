@@ -27,7 +27,7 @@ const Login = () => {
     //TODO: add image
     return (
       <Flex
-        bg="intaniaRed.700"
+        bg="intaniaRed.600"
         w="100%"
         h="130px"
         justifyContent="center"
@@ -89,7 +89,7 @@ const Login = () => {
           size="md"
           variant="solid"
           colorScheme="intaniaRed"
-          bg="intaniaRed.600"
+          bg="intaniaRed.500"
           isDisabled={!checked}
           width={['105px', '130px']}
           fontSize={['lg', 'xl']}

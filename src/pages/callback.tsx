@@ -25,7 +25,7 @@ const CallbackPage = () => {
 
   return (
     <Spinner
-      color="intaniaRed.700"
+      color="intaniaRed.600"
       size="xl"
       margin="auto"
       emptyColor="mono.1"

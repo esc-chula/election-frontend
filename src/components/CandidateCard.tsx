@@ -118,13 +118,13 @@ export function Checkbox({
         boxSize="24px"
         cursor={!disabled ? 'pointer' : undefined}
         rounded="sm"
-        borderColor="intaniaRed.600"
+        borderColor="intaniaRed.500"
         _checked={{
-          bg: 'intaniaRed.600',
+          bg: 'intaniaRed.500',
           color: 'white',
-          borderColor: 'intaniaRed.600',
+          borderColor: 'intaniaRed.500',
         }}
-        _focus={{ borderColor: 'intaniaRed.700', boxShadow: 'outline' }}
+        _focus={{ borderColor: 'intaniaRed.600', boxShadow: 'outline' }}
       >
         <CloseIcon boxSize="16px" />
       </ControlBox>

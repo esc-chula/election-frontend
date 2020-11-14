@@ -101,7 +101,7 @@ export default function ElectionDetail() {
           <hr />
           {selectedCandidate ? (
             <Box mt="16px">
-              <Text mt="16px" color="intaniaRed.600">
+              <Text mt="16px" color="intaniaRed.500">
                 หมายเลข {selectedCandidate.candidateID}
               </Text>
               <Text color="mono.4" fontWeight={300} fontSize="14px">
@@ -111,7 +111,7 @@ export default function ElectionDetail() {
               </Text>
             </Box>
           ) : (
-            <Text mt="16px" color="intaniaRed.600" textAlign="center">
+            <Text mt="16px" color="intaniaRed.500" textAlign="center">
               งดออกเสียง
             </Text>
           )}
@@ -128,8 +128,8 @@ export default function ElectionDetail() {
               isLoading={loading}
               onClick={submitVote}
               colorScheme="intaniaRed"
-              backgroundColor="intaniaRed.600"
-              _hover={{ backgroundColor: 'intaniaRed.700' }}
+              backgroundColor="intaniaRed.500"
+              _hover={{ backgroundColor: 'intaniaRed.600' }}
             >
               ยืนยันการลงคะแนน
             </Button>

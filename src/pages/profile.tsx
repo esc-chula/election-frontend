@@ -56,7 +56,7 @@ const ProfileCard = () => {
         to={accepted ? '/election/' : '/policy'}
         alignSelf="flex-end"
         colorScheme="intaniaRed"
-        bg="intaniaRed.600"
+        bg="intaniaRed.500"
         size="md"
         width="130px"
         fontSize="md"

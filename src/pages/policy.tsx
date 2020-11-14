@@ -69,7 +69,7 @@ const PolicyCard = () => {
         <Button
           isDisabled={!checked}
           colorScheme="intaniaRed"
-          bg="intaniaRed.600"
+          bg="intaniaRed.500"
           width="130px"
           fontSize="md"
           fontWeight="regular"

@@ -24,7 +24,7 @@ export default function CandidateList({
         <Box
           display="inline-block"
           borderWidth="1.5px"
-          borderColor="intaniaRed.600"
+          borderColor="intaniaRed.500"
           boxSize="20px"
           rounded="sm"
           transform="translateY(4px)"

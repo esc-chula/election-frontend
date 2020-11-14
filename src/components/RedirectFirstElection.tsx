@@ -59,8 +59,8 @@ export default function RedirectFirstElection() {
           mt="40px"
           onClick={logout}
           isFullWidth
-          backgroundColor="intaniaRed.600"
-          _hover={{ backgroundColor: 'intaniaRed.700' }}
+          backgroundColor="intaniaRed.500"
+          _hover={{ backgroundColor: 'intaniaRed.600' }}
         >
           ออกจากระบบ
         </Button>

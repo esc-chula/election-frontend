@@ -4,7 +4,7 @@ import { Flex, Text } from '@chakra-ui/react'
 const Footer = () => {
   return (
     <Flex
-      bg="intaniaRed.700"
+      bg="intaniaRed.600"
       w="100%"
       h="50px"
       alignItems="center"
