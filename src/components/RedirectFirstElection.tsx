@@ -42,7 +42,7 @@ export default function RedirectFirstElection() {
                   <Text fontSize="20px">บันทึกการลงคะแนนสำเร็จ</Text>
                   <Divider my="8px" />
                   <Text fontWeight={300} textAlign="center">
-                    ระบบได้ทำการบันทึกผลการลงคะแนน
+                    ระบบได้ทำการบันทึกการลงคะแนน
                     <br />
                     {elections.map((election, idx) => (
                       <Text key={election.id} as="span" fontWeight={500}>
