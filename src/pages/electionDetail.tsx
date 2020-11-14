@@ -108,8 +108,7 @@ export default function ElectionDetail() {
               <Text color="mono.4" fontWeight={300} fontSize="14px">
                 {selectedCandidate.name}
                 <br />
-                วิศวกรรม{selectedCandidate.department} ปี{' '}
-                {academicYear - selectedCandidate.year + 1}
+                {selectedCandidate.department} ปี {selectedCandidate.year}
               </Text>
             </Box>
           ) : (
@@ -164,7 +163,7 @@ export default function ElectionDetail() {
         isDisabled={!allPositionsSelected || loading}
         onClick={onOpen}
       >
-        สิ้นสุดการเลือกตั้ง <CheckIcon ml="8px" />
+        ลงคะแนนเสียง <CheckIcon ml="8px" />
       </Button>
       {modal}
     </Container>
