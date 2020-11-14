@@ -81,7 +81,7 @@ function CardHeader({
         {candidate.name}
       </Text>
       <Text fontSize={['2xs', 'xs', 'xs']} fontWeight="extraLight">
-        วิศวกรรม{candidate.department} ปี {academicYear - candidate.year + 1}
+        {candidate.department} ปี {candidate.year}
       </Text>
       <Divider mb={['0', '8px']} />
     </Stack>
