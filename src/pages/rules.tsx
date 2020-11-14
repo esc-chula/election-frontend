@@ -1,4 +1,4 @@
-import { Checkbox, Divider, Stack, Text } from '@chakra-ui/react'
+import { Button, Checkbox, Divider, Stack, Text } from '@chakra-ui/react'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
@@ -88,8 +88,7 @@ const PolicyCard = () => {
         >
           ย้อนกลับ
         </ButtonLink>
-        <ButtonLink
-          to="/election"
+        <Button
           isDisabled={!checked}
           colorScheme="intaniaRed"
           bg="intaniaRed.600"
@@ -100,7 +99,7 @@ const PolicyCard = () => {
           isLoading={loading}
         >
           ขั้นตอนถัดไป
-        </ButtonLink>
+        </Button>
       </Stack>
     </Stack>
   )
