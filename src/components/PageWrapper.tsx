@@ -7,7 +7,12 @@ interface Props {
 
 const PageWrapper = ({ children }: Props) => {
   return (
-    <Flex flex={1} flexDirection="column" pt="75px">
+    <Flex
+      flex={1}
+      flexDirection="column"
+      pt="75px"
+      mb="env(safe-area-inset-bottom)"
+    >
       {children}
     </Flex>
   )
