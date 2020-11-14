@@ -23,7 +23,6 @@ import { Position } from 'types/election'
 import { useHttpContext } from 'providers/httpProvider'
 import { SubmitVoteDTO } from 'types/dto'
 import { CheckIcon } from '@chakra-ui/icons'
-import { useIntaniaRed } from 'util/hooks'
 import { PrimaryButton } from 'components/PrimaryButton'
 import { AiFillExclamationCircle } from 'react-icons/ai'
 
