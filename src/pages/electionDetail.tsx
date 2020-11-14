@@ -26,7 +26,7 @@ import { CheckIcon } from '@chakra-ui/icons'
 type SelectedMap = Record<number, number>
 
 export default function ElectionDetail() {
-  const { electionMap } = useElectionContext()
+  const { electionMap, setVoted } = useElectionContext()
   const match = useRouteMatch<{ electionName: string }>(
     '/election/:electionName',
   )
@@ -56,6 +56,7 @@ export default function ElectionDetail() {
         })),
       }
       await client.post('/vote', body)
+      setVoted(election.id)
       toast({
         title: 'ลงคะแนนสำเร็จ',
         status: 'success',
@@ -78,7 +79,7 @@ export default function ElectionDetail() {
     } finally {
       setLoading(false)
     }
-  }, [client, selected, election, push, toast, onClose])
+  }, [client, selected, election, push, toast, onClose, setVoted])
 
   if (!election) {
     return <NotFound />

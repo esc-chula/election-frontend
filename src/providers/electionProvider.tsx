@@ -1,5 +1,5 @@
+import React, { useCallback, useContext, useMemo } from 'react'
 import PageLoading from 'components/PageLoading'
-import React, { useContext, useMemo } from 'react'
 import { createContext, PropsWithChildren } from 'react'
 import useSWR from 'swr'
 import { Election } from 'types/election'
@@ -11,6 +11,7 @@ interface ElectionMap {
 export interface ElectionConstruct {
   elections: Election[]
   electionMap: ElectionMap
+  setVoted: (electionId: number) => void
 }
 
 const ElectionContext = createContext({} as ElectionConstruct)
@@ -22,7 +23,7 @@ export function useElectionContext() {
 export default function ElectionProvider({
   children,
 }: PropsWithChildren<unknown>) {
-  const { data: elections } = useSWR<Election[]>('/elections')
+  const { data: elections, mutate } = useSWR<Election[]>('/elections')
   const electionMap = useMemo(() => {
     const electionMap = {} as ElectionMap
     elections?.forEach((election) => {
@@ -31,12 +32,29 @@ export default function ElectionProvider({
     return electionMap
   }, [elections])
 
+  const setVoted = useCallback(
+    (electionId: number) => {
+      mutate(
+        (elections) =>
+          elections.map((election) => {
+            if (election.id === electionId) {
+              return { ...election, voted: true }
+            } else {
+              return election
+            }
+          }),
+        false,
+      )
+    },
+    [mutate],
+  )
+
   if (elections === undefined) {
     return <PageLoading />
   }
 
   return (
-    <ElectionContext.Provider value={{ elections, electionMap }}>
+    <ElectionContext.Provider value={{ elections, electionMap, setVoted }}>
       {children}
     </ElectionContext.Provider>
   )
