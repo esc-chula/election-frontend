@@ -13,6 +13,7 @@ import { ReactComponent as ESCLogo } from '../images/esc-logo.svg'
 import Container from './Container'
 import { useAuthContext } from 'providers/authProvider'
 import { ChevronDownIcon } from '@chakra-ui/icons'
+import { Link } from 'react-router-dom'
 const TopBar = () => {
   const { isAuthenticated, authUser, logout } = useAuthContext()
   return (
@@ -29,7 +30,9 @@ const TopBar = () => {
     >
       <Container w="100%">
         <Flex w="100%" alignItems="center">
-          <ESCLogo />
+          <Link to="/profile">
+            <ESCLogo />
+          </Link>
           <Box flex={1} />
           {isAuthenticated && (
             <Menu>
