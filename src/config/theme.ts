@@ -17,7 +17,9 @@ const styles: Theme['styles'] = {
   global: (props) => ({
     'html, body': {
       bg: mode('#fcfcfc', 'gray.800')(props),
-      transition: 'none',
+    },
+    '*': {
+      transition: 'background-color 0.20s ease',
     },
   }),
 }

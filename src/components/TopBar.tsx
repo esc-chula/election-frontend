@@ -8,18 +8,22 @@ import {
   MenuList,
   Box,
   useColorModeValue,
+  useColorMode,
+  IconButton,
 } from '@chakra-ui/react'
-
 import { ReactComponent as ESCLogo } from '../images/esc-logo.svg'
 import Container from './Container'
 import { useAuthContext } from 'providers/authProvider'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { Link } from 'react-router-dom'
+import { BsMoon, BsSun } from 'react-icons/bs'
+
 const TopBar = () => {
   const { isAuthenticated, authUser, logout } = useAuthContext()
   const bg = useColorModeValue('white', 'gray.900')
-  const color = useColorModeValue('intaniaRed.500', 'intaniaRed.400')
+  const color = useColorModeValue('intaniaRed.500', 'intaniaRedSecondary.500')
   const activeColor = useColorModeValue('intaniaRed.700', 'intaniaRed.500')
+  const { colorMode, toggleColorMode } = useColorMode()
 
   return (
     <Flex
@@ -39,13 +43,19 @@ const TopBar = () => {
             <ESCLogo />
           </Link>
           <Box flex={1} />
+          <IconButton
+            icon={colorMode === 'dark' ? <BsSun /> : <BsMoon />}
+            isRound
+            onClick={toggleColorMode}
+            aria-label="night mode"
+          />
           {isAuthenticated && (
             <Menu>
               <MenuButton
                 as={Button}
                 fontWeight="medium"
                 variant="link"
-                colorScheme="intaniaRed"
+                ml="16px"
                 color={color}
                 _active={{
                   color: activeColor,
