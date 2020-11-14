@@ -13,10 +13,10 @@ const Container = styled(Box)`
 
   @media screen and (min-width: ${appTheme.breakpoints.sm}) {
     margin: 0 auto;
-    width: 768px;
+    width: 720px;
   }
 
-  @media screen and (min-width: ${appTheme.breakpoints.sm}) {
+  @media screen and (min-width: ${appTheme.breakpoints.md}) {
     width: 960px;
   }
 `
