@@ -6,9 +6,6 @@ import {
   Checkbox,
   Button,
   Stack,
-  BoxProps,
-  CheckboxProps,
-  ButtonProps,
   FlexProps,
   useColorModeValue,
 } from '@chakra-ui/react'
@@ -24,104 +21,92 @@ const Login = () => {
     setChecked(!checked)
   }
 
-  const SSOBar = (props: FlexProps) => {
-    //TODO: add image
-    return (
-      <Flex
-        bg="intaniaRed.600"
-        w="100%"
-        h="130px"
-        justifyContent="center"
-        align="center"
-        opacity={20}
-        {...props}
-      >
-        <Box textAlign="center">
-          <Text
-            fontSize={['3xl', '3xl', '4xl']}
-            fontWeight="regular"
-            color="white"
-            whiteSpace="break-spaces"
-          >
-            ระบบเลือกตั้งออนไลน์
-            <Box as="br" display={['block', 'none']} /> คณะวิศวกรรมศาสตร์
-          </Text>
-        </Box>
-      </Flex>
-    )
-  }
-
-  const TextCard = (props: BoxProps) => {
-    return (
-      <Card {...props} width="100%">
+  const ssoBar = (
+    <Flex
+      bg="intaniaRed.600"
+      w="100%"
+      h="130px"
+      justifyContent="center"
+      align="center"
+      opacity={20}
+    >
+      <Box textAlign="center">
         <Text
-          color={useColorModeValue('mono.4', 'whiteAlpha.800')}
-          fontWeight="light"
-          fontSize={['sm', 'md']}
+          fontSize={['3xl', '3xl', '4xl']}
+          fontWeight="regular"
+          color="white"
+          whiteSpace="break-spaces"
         >
-          การเข้าสู่ระบบเลือกตั้งออนไลน์ คณะวิศวกรรมศาสตร์
-          <Box as="br" display={['block', 'none']} />
-          จำเป็นต้องมีการยืนยันตัวตนผู้ใช้ระบบด้วยรหัส CUNET
-          <br />
-          โปรดยอมรับข้อตกลงด้านล่างเพื่อเข้าสู่ระบบ
+          ระบบเลือกตั้งออนไลน์
+          <Box as="br" display={['block', 'none']} /> คณะวิศวกรรมศาสตร์
         </Text>
-      </Card>
-    )
-  }
+      </Box>
+    </Flex>
+  )
 
-  const TOSCheckBox = (props: CheckboxProps) => {
-    return (
-      <Checkbox
+  const textCard = (
+    <Card width="100%">
+      <Text
+        color={useColorModeValue('mono.4', 'whiteAlpha.800')}
+        fontWeight="light"
+        fontSize={['sm', 'md']}
+      >
+        การเข้าสู่ระบบเลือกตั้งออนไลน์ คณะวิศวกรรมศาสตร์
+        <Box as="br" display={['block', 'none']} />
+        จำเป็นต้องมีการยืนยันตัวตนผู้ใช้ระบบด้วยรหัส CUNET
+        <br />
+        โปรดยอมรับข้อตกลงด้านล่างเพื่อเข้าสู่ระบบ
+      </Text>
+    </Card>
+  )
+
+  const tosCheckBox = (
+    <Checkbox
+      colorScheme="intaniaRed"
+      onChange={onCheckBoxChange}
+      isChecked={checked}
+    >
+      <Text
+        fontWeight="regular"
+        fontSize={['sm', 'md']}
+        color={useColorModeValue('mono.6', 'whiteAlpha.900')}
+      >
+        ข้าพเจ้ายินดีเปิดเผยข้อมูลส่วนตัวในระบบ CUNET เพื่อใช้ในการเข้าสู่ระบบ
+      </Text>
+    </Checkbox>
+  )
+
+  const redirect = useRedirectPath('')
+  const redirectURL = `${SSO_URL}?r=${APP_HOST}/callback?r=${redirect}`
+
+  const loginButton = (
+    <a href={redirectURL}>
+      <Button
+        size="md"
+        variant="solid"
         colorScheme="intaniaRed"
-        onChange={onCheckBoxChange}
-        isChecked={checked}
-        {...props}
+        isDisabled={!checked}
+        width={['105px', '130px']}
+        fontSize={['lg', 'xl']}
+        fontWeight="regular"
       >
-        <Text
-          fontWeight="regular"
-          fontSize={['sm', 'md']}
-          color={useColorModeValue('mono.6', 'whiteAlpha.900')}
-        >
-          ข้าพเจ้ายินดีเปิดเผยข้อมูลส่วนตัวในระบบ CUNET เพื่อใช้ในการเข้าสู่ระบบ
-        </Text>
-      </Checkbox>
-    )
-  }
-
-  const LoginButton = (props: Partial<ButtonProps>) => {
-    const redirect = useRedirectPath('')
-    const redirectURL = `${SSO_URL}?r=${APP_HOST}/callback?r=${redirect}`
-
-    return (
-      <a href={redirectURL}>
-        <Button
-          size="md"
-          variant="solid"
-          colorScheme="intaniaRed"
-          isDisabled={!checked}
-          width={['105px', '130px']}
-          fontSize={['lg', 'xl']}
-          fontWeight="regular"
-          {...props}
-        >
-          <Text>เข้าสู่ระบบ</Text>
-        </Button>
-      </a>
-    )
-  }
+        <Text>เข้าสู่ระบบ</Text>
+      </Button>
+    </a>
+  )
 
   return (
     <Flex flexDirection="column" alignItems="center">
-      <SSOBar />
+      {ssoBar}
       <Container>
         <Stack
           spacing={['20px', '28px']}
           alignItems="center"
           marginY={['18px', '40px']}
         >
-          <TextCard />
-          <TOSCheckBox />
-          <LoginButton />
+          {textCard}
+          {tosCheckBox}
+          {loginButton}
         </Stack>
       </Container>
     </Flex>
