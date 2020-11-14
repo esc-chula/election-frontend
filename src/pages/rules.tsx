@@ -1,4 +1,4 @@
-import { Button, Checkbox, Divider, Stack, Text } from '@chakra-ui/react'
+import { Button, Checkbox, Divider, Stack } from '@chakra-ui/react'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
@@ -7,21 +7,10 @@ import { ButtonLink } from 'components/ButtonLink'
 import { ResponsiveStack } from 'components/ResponsiveStack'
 import { withAuth } from 'providers/authProvider'
 import { usePatchUser } from 'util/hooks'
+import { Header } from 'components/Header'
+import { Content } from 'components/Content'
 
-const textStyles = {
-  header: {
-    fontSize: ['xl', '2xl'],
-    fontWeight: 'regular',
-    color: 'mono.6',
-  },
-  normal: {
-    fontSize: ['sm', 'md'],
-    fontWeight: 'light',
-    color: 'mono.4',
-  },
-}
-
-const PolicyCard = () => {
+const RulesCard = () => {
   const [checked, setChecked] = useState(false)
 
   const [loading, onAcceptRule] = usePatchUser(
@@ -33,9 +22,9 @@ const PolicyCard = () => {
   return (
     <Stack spacing="20px">
       <Card width={['100%', '335px', '500px']}>
-        <Text {...textStyles.header}>กฎและกติกาการเลือกตั้ง</Text>
+        <Header>กฎและกติกาการเลือกตั้ง</Header>
         <Divider my="8px" />
-        <Text {...textStyles.normal}>
+        <Content>
           เพรียวบางไลท์ อุปนายิกาเคลม อะอะเป่ายิ้งฉุบราชบัณฑิตยสถานบรรพชน
           คอร์ปอเรชั่นสไปเดอร์ ชัตเตอร์ ภูมิทัศน์เอสเพรสโซโดมิโนพาร์ทเนอร์
           วอเตอร์สกายมาม่าทอมตอกย้ำ ซะคอลัมนิสต์ พุดดิ้ง
@@ -62,7 +51,7 @@ const PolicyCard = () => {
           แหม็บอริยสงฆ์ อพาร์ทเมนต์ โปรโมชั่นแดนเซอร์เช็กภารตะ
           ไฮเวย์มอบตัวบัสซินโดรม แคร็กเกอร์บาร์บี้ฮีโร่แม่ค้าเอ็นเตอร์เทน
           เทรลเลอร์คาแร็คเตอร์ มิลค์โบ้ยวันเวย์ติ่มซำลอร์ด
-        </Text>
+        </Content>
       </Card>
       <Checkbox
         colorScheme="intaniaRed"
@@ -91,7 +80,6 @@ const PolicyCard = () => {
         <Button
           isDisabled={!checked}
           colorScheme="intaniaRed"
-          bg="intaniaRed.500"
           width="130px"
           fontSize="md"
           fontWeight="regular"
@@ -105,15 +93,15 @@ const PolicyCard = () => {
   )
 }
 
-const Rulepage = () => {
+const RulePage = () => {
   return (
     <Container padding={['20px', '48px']}>
       <ResponsiveStack spacing={['20px', '0px']}>
         <PageProgress page="rule" />
-        <PolicyCard />
+        <RulesCard />
       </ResponsiveStack>
     </Container>
   )
 }
 
-export default withAuth(Rulepage)
+export default withAuth(RulePage)

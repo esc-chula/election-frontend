@@ -1,4 +1,4 @@
-import { Button, Checkbox, Divider, Stack, Text } from '@chakra-ui/react'
+import { Button, Checkbox, Divider, Stack } from '@chakra-ui/react'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
@@ -7,19 +7,8 @@ import { ButtonLink } from 'components/ButtonLink'
 import { ResponsiveStack } from 'components/ResponsiveStack'
 import { withAuth } from 'providers/authProvider'
 import { usePatchUser } from 'util/hooks'
-
-const textStyles = {
-  header: {
-    fontSize: ['xl', '2xl'],
-    fontWeight: 'regular',
-    color: 'mono.6',
-  },
-  normal: {
-    fontSize: ['sm', 'md'],
-    fontWeight: 'light',
-    color: 'mono.4',
-  },
-}
+import { Header } from 'components/Header'
+import { Content } from 'components/Content'
 
 const PolicyCard = () => {
   const [checked, setChecked] = useState(false)
@@ -33,14 +22,14 @@ const PolicyCard = () => {
   return (
     <Stack spacing="20px">
       <Card width={['100%', '335px', '500px']}>
-        <Text {...textStyles.header}>กฎและเงื่อนไขการใช้งาน</Text>
+        <Header>กฎและเงื่อนไขการใช้งาน</Header>
         <Divider my="8px" />
-        <Text {...textStyles.normal}>
+        <Content>
           เราอาจทำการเปลี่ยนแปลงข้อตกลงตามเหตุอันสมควร เป็นครั้งคราว เช่น
           การปรับปรุงฟังก์ชันหรือคุณลักษณะ
           ที่มีอยู่แล้วหรือเพิ่มฟังก์ชันหรือคุณลักษณะของบริการการนำความก้าวหน้าทางวิทยาศาสตร์และเทคโนโลยีมาปรับใช้
           และการปรับตั้งค่าทางเทคนิคอันมีเหตุสมควรแก่การ ให้บริการ
-        </Text>
+        </Content>
       </Card>
       <Checkbox
         colorScheme="intaniaRed"
@@ -69,7 +58,6 @@ const PolicyCard = () => {
         <Button
           isDisabled={!checked}
           colorScheme="intaniaRed"
-          bg="intaniaRed.500"
           width="130px"
           fontSize="md"
           fontWeight="regular"

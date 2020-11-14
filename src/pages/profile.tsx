@@ -1,5 +1,5 @@
 import React from 'react'
-import { Divider, Stack, Text } from '@chakra-ui/react'
+import { Divider, Stack, Text, useColorModeValue } from '@chakra-ui/react'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
@@ -7,19 +7,6 @@ import { useAuthContext, withAuth } from 'providers/authProvider'
 import { academicYear } from 'util/constants'
 import { ButtonLink } from 'components/ButtonLink'
 import { ResponsiveStack } from 'components/ResponsiveStack'
-
-const textStyles = {
-  header: {
-    fontSize: ['md', 'md', 'lg'],
-    fontWeight: 'regular',
-    color: 'mono.6',
-  },
-  normal: {
-    fontSize: ['md', 'md', 'lg'],
-    fontWeight: 'light',
-    color: 'mono.4',
-  },
-}
 
 interface RowProps {
   rowKey: string
@@ -29,10 +16,21 @@ interface RowProps {
 const ProfileRow = ({ rowKey, rowValue }: RowProps) => {
   return (
     <Stack direction="row" textAlign="start">
-      <Text {...textStyles.header} width={['100px', '100px', '125px']}>
+      <Text
+        fontSize={['md', 'md', 'lg']}
+        fontWeight="regular"
+        color={useColorModeValue('mono.6', 'whiteAlpha.900')}
+        width={['100px', '100px', '125px']}
+      >
         {rowKey}
       </Text>
-      <Text {...textStyles.normal}>{rowValue}</Text>
+      <Text
+        fontSize={['md', 'md', 'lg']}
+        fontWeight="light"
+        color={useColorModeValue('mono.4', 'whiteAlpha.700')}
+      >
+        {rowValue}
+      </Text>
     </Stack>
   )
 }
@@ -56,7 +54,6 @@ const ProfileCard = () => {
         to={accepted ? '/election/' : '/policy'}
         alignSelf="flex-end"
         colorScheme="intaniaRed"
-        bg="intaniaRed.500"
         size="md"
         width="130px"
         fontSize="md"

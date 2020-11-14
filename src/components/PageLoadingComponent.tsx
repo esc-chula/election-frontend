@@ -27,7 +27,7 @@ export default function PageLoadingComponent() {
   }
   return (
     <Container flex="1" justifyContent="center" alignItems="center">
-      <Spinner thickness="4px" color="intaniaRed.500" size="xl" />
+      <Spinner thickness="4px" colorScheme="intaniaRed" size="xl" />
     </Container>
   )
 }

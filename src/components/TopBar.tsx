@@ -7,6 +7,7 @@ import {
   MenuItem,
   MenuList,
   Box,
+  useColorModeValue,
 } from '@chakra-ui/react'
 
 import { ReactComponent as ESCLogo } from '../images/esc-logo.svg'
@@ -16,9 +17,12 @@ import { ChevronDownIcon } from '@chakra-ui/icons'
 import { Link } from 'react-router-dom'
 const TopBar = () => {
   const { isAuthenticated, authUser, logout } = useAuthContext()
+  const bg = useColorModeValue('white', 'gray.900')
+  const activeColor = useColorModeValue('intaniaRed.700', 'intaniaRed.400')
+
   return (
     <Flex
-      bg="white"
+      bg={bg}
       zIndex={100}
       w="100%"
       h="75px"
@@ -41,18 +45,15 @@ const TopBar = () => {
                 fontWeight="medium"
                 variant="link"
                 colorScheme="intaniaRed"
+                _active={{
+                  color: activeColor,
+                }}
                 rightIcon={<ChevronDownIcon boxSize="24px" />}
               >
                 {authUser.username}
               </MenuButton>
               <MenuList>
-                <MenuItem
-                  backgroundColor="white"
-                  _hover={{ bg: 'white' }}
-                  onClick={logout}
-                >
-                  ออกจากระบบ
-                </MenuItem>
+                <MenuItem onClick={logout}>ออกจากระบบ</MenuItem>
               </MenuList>
             </Menu>
           )}

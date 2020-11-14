@@ -3,7 +3,15 @@ import { useElectionContext } from 'providers/electionProvider'
 import { Redirect } from 'react-router-dom'
 import Container from './Container'
 import Card from './Card'
-import { Button, Divider, Flex, Icon, Stack, Text } from '@chakra-ui/react'
+import {
+  Button,
+  Divider,
+  Flex,
+  Text,
+  Icon,
+  Stack,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import { CheckIcon } from '@chakra-ui/icons'
 import { useAuthContext } from 'providers/authProvider'
 import { GrFacebook } from 'react-icons/gr'
@@ -18,6 +26,8 @@ export default function RedirectFirstElection() {
 
   const noElections = elections.length === 0
   const noVotable = filtered.length === 0
+  const green = useColorModeValue('green.500', 'green.200')
+  const checkColor = useColorModeValue('white', 'gray.800')
 
   if (noVotable) {
     return (
@@ -30,14 +40,14 @@ export default function RedirectFirstElection() {
               ) : (
                 <>
                   <Flex
-                    backgroundColor="green.500"
+                    backgroundColor={green}
                     boxSize="30px"
                     rounded="100%"
                     alignItems="center"
                     justifyContent="center"
                     my="8px"
                   >
-                    <CheckIcon color="white" />
+                    <CheckIcon color={checkColor} />
                   </Flex>
                   <Text fontSize="20px">บันทึกการลงคะแนนสำเร็จ</Text>
                   <Divider my="8px" />
@@ -61,7 +71,12 @@ export default function RedirectFirstElection() {
                     rel="noreferrer"
                   >
                     <Text fontWeight={400} textAlign="center">
-                      <Icon as={GrFacebook} color="#4267B2" mr="10px" />
+                      <Icon
+                        as={GrFacebook}
+                        color="#4267B2"
+                        mr="10px"
+                        transform="translateY(-2px)"
+                      />
                       กรรมการนิสิตคณะวิศวกรรมศาสตร์ กวศ.
                     </Text>
                   </a>
@@ -76,8 +91,6 @@ export default function RedirectFirstElection() {
             mx="auto"
             onClick={logout}
             isFullWidth
-            backgroundColor="intaniaRed.500"
-            _hover={{ backgroundColor: 'intaniaRed.600' }}
           >
             ออกจากระบบ
           </Button>

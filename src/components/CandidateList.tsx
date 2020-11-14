@@ -3,6 +3,7 @@ import { Box, Flex, Text } from '@chakra-ui/react'
 import { Position } from 'types/election'
 import Card from './Card'
 import { CandidateCard, Checkbox } from './CandidateCard'
+import { useIntaniaRed } from 'util/hooks'
 
 interface CandidateListProps {
   position: Position
@@ -24,7 +25,7 @@ export default function CandidateList({
         <Box
           display="inline-block"
           borderWidth="1.5px"
-          borderColor="intaniaRed.500"
+          borderColor={useIntaniaRed()}
           boxSize="20px"
           rounded="sm"
           transform="translateY(4px)"

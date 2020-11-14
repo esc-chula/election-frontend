@@ -14,6 +14,7 @@ import React, { ChangeEventHandler, useCallback } from 'react'
 import { Candidate } from 'types/election'
 import Card from './Card'
 import { CloseIcon } from '@chakra-ui/icons'
+import { useIntaniaRed } from 'util/hooks'
 
 type CandidateCardProps = BoxProps &
   Omit<CheckboxProps, 'index'> & {
@@ -109,6 +110,7 @@ export function Checkbox({
     },
     [index, setSelected, disabled],
   )
+  const intaniaRed = useIntaniaRed()
   return (
     <label>
       <VisuallyHidden as="input" {...{ type: 'checkbox', checked, onChange }} />
@@ -118,11 +120,11 @@ export function Checkbox({
         boxSize="24px"
         cursor={!disabled ? 'pointer' : undefined}
         rounded="sm"
-        borderColor="intaniaRed.500"
+        borderColor={intaniaRed}
         _checked={{
-          bg: 'intaniaRed.500',
+          bg: intaniaRed,
           color: 'white',
-          borderColor: 'intaniaRed.500',
+          borderColor: intaniaRed,
         }}
         _focus={{ borderColor: 'intaniaRed.600', boxShadow: 'outline' }}
       >

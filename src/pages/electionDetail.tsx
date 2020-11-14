@@ -13,6 +13,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  useColorModeValue,
   useDisclosure,
   useToast,
 } from '@chakra-ui/react'
@@ -21,6 +22,7 @@ import { Position } from 'types/election'
 import { useHttpContext } from 'providers/httpProvider'
 import { SubmitVoteDTO } from 'types/dto'
 import { CheckIcon } from '@chakra-ui/icons'
+import { useIntaniaRed } from 'util/hooks'
 
 type SelectedMap = Record<number, number>
 
@@ -80,6 +82,9 @@ export default function ElectionDetail() {
     }
   }, [client, selected, election, push, toast, onClose, setVoted])
 
+  const intaniaRed = useIntaniaRed()
+  const selectedCandidateColor = useColorModeValue('mono.4', 'whiteAlpha.800')
+
   if (!election) {
     return <NotFound />
   }
@@ -101,17 +106,21 @@ export default function ElectionDetail() {
           <hr />
           {selectedCandidate ? (
             <Box mt="16px">
-              <Text mt="16px" color="intaniaRed.500">
+              <Text mt="16px" color={intaniaRed}>
                 หมายเลข {selectedCandidate.candidateID}
               </Text>
-              <Text color="mono.4" fontWeight={300} fontSize="14px">
+              <Text
+                color={selectedCandidateColor}
+                fontWeight={300}
+                fontSize="14px"
+              >
                 {selectedCandidate.name}
                 <br />
                 {selectedCandidate.department} ปี {selectedCandidate.year}
               </Text>
             </Box>
           ) : (
-            <Text mt="16px" color="intaniaRed.500" textAlign="center">
+            <Text mt="16px" color={intaniaRed} textAlign="center">
               งดออกเสียง
             </Text>
           )}
@@ -128,8 +137,6 @@ export default function ElectionDetail() {
               isLoading={loading}
               onClick={submitVote}
               colorScheme="intaniaRed"
-              backgroundColor="intaniaRed.500"
-              _hover={{ backgroundColor: 'intaniaRed.600' }}
             >
               ยืนยันการลงคะแนน
             </Button>

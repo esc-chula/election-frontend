@@ -9,6 +9,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 import qs from 'query-string'
 import { StrapiUser } from 'types/strapi'
 import { useAuthContext } from 'providers/authProvider'
+import { useColorModeValue } from '@chakra-ui/react'
 
 export const useQueryString = () => {
   const { search } = useLocation()
@@ -68,4 +69,8 @@ export function usePatchUser(
       }
     }, [mutateUser, push, redirect]),
   ]
+}
+
+export function useIntaniaRed() {
+  return useColorModeValue('intaniaRed.500', 'intaniaRed.200')
 }

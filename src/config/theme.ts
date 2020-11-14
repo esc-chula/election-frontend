@@ -1,5 +1,6 @@
-import { extendTheme, theme } from '@chakra-ui/react'
+import { extendTheme, Theme, theme } from '@chakra-ui/react'
 import { createBreakpoints } from '@chakra-ui/theme-tools'
+import { GlobalStyleProps } from '@chakra-ui/theme-tools'
 
 const breakpoints = createBreakpoints({
   sm: '768px',
@@ -8,7 +9,25 @@ const breakpoints = createBreakpoints({
   xl: '1280px',
 })
 
+function mode<T>(lightMode: T, darkMode: T): (props: GlobalStyleProps) => T {
+  return (props) => (props.colorMode === 'dark' ? darkMode : lightMode)
+}
+
+const styles: Theme['styles'] = {
+  global: (props) => ({
+    'html, body': {
+      bg: mode('#fcfcfc', 'gray.800')(props),
+      transition: 'none',
+    },
+  }),
+}
+
 const appTheme = extendTheme({
+  config: {
+    useSystemColorMode: true,
+    initialColorMode: 'light',
+  },
+  styles,
   colors: {
     ...theme.colors,
     intaniaRed: {

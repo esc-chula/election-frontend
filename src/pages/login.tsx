@@ -10,6 +10,7 @@ import {
   CheckboxProps,
   ButtonProps,
   FlexProps,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import Card from 'components/Card'
 import { useRedirectPath } from 'util/hooks'
@@ -43,7 +44,7 @@ const Login = () => {
             whiteSpace="break-spaces"
           >
             ระบบเลือกตั้งออนไลน์
-            <Box display={['block', 'none']} /> คณะวิศวกรรมศาสตร์
+            <Box as="br" display={['block', 'none']} /> คณะวิศวกรรมศาสตร์
           </Text>
         </Box>
       </Flex>
@@ -53,7 +54,11 @@ const Login = () => {
   const TextCard = (props: BoxProps) => {
     return (
       <Card {...props} width="100%">
-        <Text color="mono.4" fontWeight="light" fontSize={['sm', 'md']}>
+        <Text
+          color={useColorModeValue('mono.4', 'whiteAlpha.800')}
+          fontWeight="light"
+          fontSize={['sm', 'md']}
+        >
           การเข้าสู่ระบบเลือกตั้งออนไลน์ คณะวิศวกรรมศาสตร์
           <Box as="br" display={['block', 'none']} />
           จำเป็นต้องมีการยืนยันตัวตนผู้ใช้ระบบด้วยรหัส CUNET
@@ -69,10 +74,14 @@ const Login = () => {
       <Checkbox
         colorScheme="intaniaRed"
         onChange={onCheckBoxChange}
-        defaultIsChecked={checked}
+        isChecked={checked}
         {...props}
       >
-        <Text fontWeight="regular" fontSize={['sm', 'md']} color="mono.6">
+        <Text
+          fontWeight="regular"
+          fontSize={['sm', 'md']}
+          color={useColorModeValue('mono.6', 'whiteAlpha.900')}
+        >
           ข้าพเจ้ายินดีเปิดเผยข้อมูลส่วนตัวในระบบ CUNET เพื่อใช้ในการเข้าสู่ระบบ
         </Text>
       </Checkbox>
@@ -89,7 +98,6 @@ const Login = () => {
           size="md"
           variant="solid"
           colorScheme="intaniaRed"
-          bg="intaniaRed.500"
           isDisabled={!checked}
           width={['105px', '130px']}
           fontSize={['lg', 'xl']}
