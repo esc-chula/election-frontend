@@ -14,6 +14,7 @@ import {
 import Card from 'components/Card'
 import { useRedirectPath } from 'util/hooks'
 import { APP_HOST, SSO_URL } from 'config/env'
+import Container from 'components/Container'
 
 const Login = () => {
   const [checked, setChecked] = useState(false)
@@ -51,7 +52,7 @@ const Login = () => {
 
   const TextCard = (props: BoxProps) => {
     return (
-      <Card width={['340px', '388px']} {...props}>
+      <Card {...props}>
         <Text color="mono.4" fontWeight="light" fontSize={['sm', 'md']}>
           การเข้าสู่ระบบเลือกตั้งออนไลน์ คณะวิศวกรรมศาสตร์
           จำเป็นต้องมีการยืนยันตัวตนผู้ใช้ระบบด้วยรหัส CUNET
@@ -67,7 +68,6 @@ const Login = () => {
         colorScheme="intaniaRed"
         onChange={onCheckBoxChange}
         defaultIsChecked={checked}
-        width={['340px', '388px']}
         {...props}
       >
         <Text fontWeight="regular" fontSize={['sm', 'md']} color="mono.6">
@@ -103,15 +103,17 @@ const Login = () => {
   return (
     <Flex flexDirection="column" alignItems="center">
       <SSOBar />
-      <Stack
-        spacing={['20px', '28px']}
-        alignItems="center"
-        marginY={['18px', '40px']}
-      >
-        <TextCard />
-        <TOSCheckBox />
-        <LoginButton />
-      </Stack>
+      <Container>
+        <Stack
+          spacing={['20px', '28px']}
+          alignItems="center"
+          marginY={['18px', '40px']}
+        >
+          <TextCard />
+          <TOSCheckBox />
+          <LoginButton />
+        </Stack>
+      </Container>
     </Flex>
   )
 }
