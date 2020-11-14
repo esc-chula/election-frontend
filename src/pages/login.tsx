@@ -22,7 +22,7 @@ const Login = () => {
 
   const ssoBar = (
     <Flex
-      bg="intaniaRed.600"
+      bg={useColorModeValue('intaniaRed.600', 'intaniaRedSecondary.600')}
       w="100%"
       h="130px"
       justifyContent="center"
@@ -44,11 +44,12 @@ const Login = () => {
   )
 
   const textCard = (
-    <Card width="100%">
+    <Card>
       <Text
         color={useColorModeValue('mono.4', 'whiteAlpha.800')}
         fontWeight="light"
         fontSize={['sm', 'md']}
+        textAlign="center"
       >
         การเข้าสู่ระบบเลือกตั้งออนไลน์ คณะวิศวกรรมศาสตร์
         <Box as="br" display={['block', 'none']} />
