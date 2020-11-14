@@ -20,21 +20,21 @@ export default function CandidateList({
 }: CandidateListProps) {
   return (
     <Box pt="16px">
-      <Card fontWeight="300" textAlign="center">
+      <Card fontWeight="300" textAlign="center" fontSize={['sm', 'md', 'lg']}>
         กาลงในช่อง
         <Box
           display="inline-block"
           mx="8px"
-          borderWidth="1.5px"
+          borderWidth="2px"
           borderColor={useIntaniaRed()}
           boxSize="20px"
           rounded="sm"
           transform="translateY(4px)"
         />
-        <Box display={['block', 'none']} />
+        <Box display={['none', 'none']} />
         ของหมายเลขที่คุณต้องการเลือก
       </Card>
-      <Flex flexDirection={['column', 'row']} flexWrap="wrap" mx={[0, '-12px']}>
+      <Flex flexDirection={['column', 'row']} flexWrap="wrap" mx={[0, '-6px']}>
         {position.candidates.map((candidate) => (
           <CandidateCard
             key={candidate.id}
@@ -42,15 +42,15 @@ export default function CandidateList({
             selected={selected}
             setSelected={setSelected}
             disabled={disabled}
-            w={['100%', '348px', '468px']}
-            mx={[0, '12px']}
+            w={['100%', '348px', '474px']}
+            mx={[0, '6px']}
             mt="12px"
           />
         ))}
       </Flex>
       <Card my="12px">
-        <Flex justify="center">
-          <Text fontSize="md" fontWeight="medium" mr="5px">
+        <Flex justify="center" alignItems="center">
+          <Text fontSize={['sm', 'md', 'lg']} fontWeight="medium" mr="8px">
             งดออกเสียง
           </Text>
           <Checkbox

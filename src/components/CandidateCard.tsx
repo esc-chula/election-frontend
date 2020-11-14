@@ -33,7 +33,7 @@ export function CandidateCard({
       <CardHeader candidate={candidate} display={['none', 'block']} />
       <Stack direction="row" spacing="15px">
         <Stack spacing="8px">
-          <AspectRatio minW="100px" ratio={3 / 4}>
+          <AspectRatio minW={['100px', '100px', '130px']} ratio={3 / 4}>
             <Image
               src={
                 candidate.avatar
@@ -43,7 +43,7 @@ export function CandidateCard({
             />
           </AspectRatio>
           <Stack direction="row" alignSelf="center" alignItems="center">
-            <Text fontSize="small" fontWeight="medium">
+            <Text fontSize={['sm', 'sm', 'md']} fontWeight="medium">
               หมายเลข {candidate.candidateID}
             </Text>
             <Checkbox
@@ -80,7 +80,7 @@ function CardHeader({
       <Text fontSize={['sm', 'lg', 'xl']} fontWeight="regular">
         {candidate.name}
       </Text>
-      <Text fontSize={['2xs', 'xs', 'xs']} fontWeight="extraLight">
+      <Text fontSize={['2xs', 'sm', 'sm']} fontWeight="extraLight">
         {candidate.department} ปี {candidate.year}
       </Text>
       <Divider mb={['0', '8px']} />
@@ -117,7 +117,7 @@ export function Checkbox({
 
       <ControlBox
         borderWidth="2px"
-        boxSize="24px"
+        boxSize={['24px', '24px', '32px']}
         cursor={!disabled ? 'pointer' : undefined}
         rounded="sm"
         borderColor={intaniaRed}
@@ -128,7 +128,7 @@ export function Checkbox({
         }}
         _focus={{ borderColor: 'intaniaRed.600', boxShadow: 'none' }}
       >
-        <CloseIcon boxSize="16px" />
+        <CloseIcon boxSize={['16px', '16px', '20px']} />
       </ControlBox>
     </label>
   )
