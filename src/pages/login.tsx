@@ -4,7 +4,6 @@ import {
   Flex,
   Text,
   Checkbox,
-  Button,
   Stack,
   useColorModeValue,
 } from '@chakra-ui/react'
@@ -12,6 +11,7 @@ import Card from 'components/Card'
 import { useRedirectPath } from 'util/hooks'
 import { APP_HOST, SSO_URL } from 'config/env'
 import Container from 'components/Container'
+import { PrimaryButton } from 'components/PrimaryButton'
 
 const Login = () => {
   const [checked, setChecked] = useState(false)
@@ -80,19 +80,18 @@ const Login = () => {
   const redirectURL = `${SSO_URL}?r=${APP_HOST}/callback?r=${redirect}`
 
   const loginButton = (
-    <Button
+    <PrimaryButton
       as="a"
       href={checked ? redirectURL : undefined}
       size="md"
       variant="solid"
-      colorScheme="intaniaRed"
       isDisabled={!checked}
       width={['105px', '130px']}
       fontSize={['lg', 'xl']}
       fontWeight="regular"
     >
       <Text>เข้าสู่ระบบ</Text>
-    </Button>
+    </PrimaryButton>
   )
 
   return (

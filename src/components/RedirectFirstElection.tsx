@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom'
 import Container from './Container'
 import Card from './Card'
 import {
-  Button,
   Divider,
   Flex,
   Text,
@@ -15,6 +14,7 @@ import {
 import { CheckIcon } from '@chakra-ui/icons'
 import { useAuthContext } from 'providers/authProvider'
 import { GrFacebook } from 'react-icons/gr'
+import { PrimaryButton } from './PrimaryButton'
 
 export default function RedirectFirstElection() {
   const { elections } = useElectionContext()
@@ -84,8 +84,7 @@ export default function RedirectFirstElection() {
               )}
             </Flex>
           </Card>
-          <Button
-            colorScheme="intaniaRed"
+          <PrimaryButton
             mt="40px"
             maxW="470px"
             mx="auto"
@@ -93,7 +92,7 @@ export default function RedirectFirstElection() {
             isFullWidth
           >
             ออกจากระบบ
-          </Button>
+          </PrimaryButton>
         </Stack>
       </Container>
     )

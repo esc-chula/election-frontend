@@ -33,7 +33,7 @@ const appTheme = extendTheme({
     intaniaRed: {
       50: '#f4e7e8',
       100: '#eacfd0',
-      200: '#96262c',
+      200: '#d49fa1',
       300: '#bf7072',
       400: '#a94043',
       500: '#941014',

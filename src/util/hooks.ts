@@ -72,5 +72,5 @@ export function usePatchUser(
 }
 
 export function useIntaniaRed() {
-  return useColorModeValue('intaniaRed.500', 'intaniaRed.200')
+  return useColorModeValue('intaniaRed.500', 'intaniaRed.400')
 }

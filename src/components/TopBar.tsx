@@ -18,7 +18,8 @@ import { Link } from 'react-router-dom'
 const TopBar = () => {
   const { isAuthenticated, authUser, logout } = useAuthContext()
   const bg = useColorModeValue('white', 'gray.900')
-  const activeColor = useColorModeValue('intaniaRed.700', 'intaniaRed.400')
+  const color = useColorModeValue('intaniaRed.500', 'intaniaRed.400')
+  const activeColor = useColorModeValue('intaniaRed.700', 'intaniaRed.500')
 
   return (
     <Flex
@@ -45,6 +46,7 @@ const TopBar = () => {
                 fontWeight="medium"
                 variant="link"
                 colorScheme="intaniaRed"
+                color={color}
                 _active={{
                   color: activeColor,
                 }}

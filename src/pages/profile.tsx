@@ -1,5 +1,11 @@
 import React from 'react'
-import { Divider, Stack, Text, useColorModeValue } from '@chakra-ui/react'
+import {
+  Divider,
+  LightMode,
+  Stack,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
@@ -50,17 +56,19 @@ const ProfileCard = () => {
         <Divider my="8px" />
         <ProfileRow rowKey="รหัสนิสิต" rowValue={authUser.username} />
       </Card>
-      <ButtonLink
-        to={accepted ? '/election/' : '/policy'}
-        alignSelf="flex-end"
-        colorScheme="intaniaRed"
-        size="md"
-        width="130px"
-        fontSize="md"
-        fontWeight="regular"
-      >
-        ขั้นตอนถัดไป
-      </ButtonLink>
+      <LightMode>
+        <ButtonLink
+          to={accepted ? '/election/' : '/policy'}
+          alignSelf="flex-end"
+          colorScheme="intaniaRed"
+          size="md"
+          width="130px"
+          fontSize="md"
+          fontWeight="regular"
+        >
+          ขั้นตอนถัดไป
+        </ButtonLink>
+      </LightMode>
     </Stack>
   )
 }

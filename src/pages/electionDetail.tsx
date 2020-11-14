@@ -23,6 +23,7 @@ import { useHttpContext } from 'providers/httpProvider'
 import { SubmitVoteDTO } from 'types/dto'
 import { CheckIcon } from '@chakra-ui/icons'
 import { useIntaniaRed } from 'util/hooks'
+import { PrimaryButton } from 'components/PrimaryButton'
 
 type SelectedMap = Record<number, number>
 
@@ -133,13 +134,9 @@ export default function ElectionDetail() {
             >
               กลับไปแก้ไข
             </Button>
-            <Button
-              isLoading={loading}
-              onClick={submitVote}
-              colorScheme="intaniaRed"
-            >
+            <PrimaryButton isLoading={loading} onClick={submitVote}>
               ยืนยันการลงคะแนน
-            </Button>
+            </PrimaryButton>
           </Flex>
         </ModalBody>
       </ModalContent>

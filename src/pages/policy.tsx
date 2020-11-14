@@ -1,4 +1,4 @@
-import { Button, Checkbox, Divider, Stack } from '@chakra-ui/react'
+import { Checkbox, Divider, Stack } from '@chakra-ui/react'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
@@ -9,6 +9,7 @@ import { withAuth } from 'providers/authProvider'
 import { usePatchUser } from 'util/hooks'
 import { Header } from 'components/Header'
 import { Content } from 'components/Content'
+import { PrimaryButton } from 'components/PrimaryButton'
 
 const PolicyCard = () => {
   const [checked, setChecked] = useState(false)
@@ -55,9 +56,8 @@ const PolicyCard = () => {
         >
           ย้อนกลับ
         </ButtonLink>
-        <Button
+        <PrimaryButton
           isDisabled={!checked}
-          colorScheme="intaniaRed"
           width="130px"
           fontSize="md"
           fontWeight="regular"
@@ -65,7 +65,7 @@ const PolicyCard = () => {
           isLoading={loading}
         >
           ขั้นตอนถัดไป
-        </Button>
+        </PrimaryButton>
       </Stack>
     </Stack>
   )
