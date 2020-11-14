@@ -1,10 +1,8 @@
 import {
-  Button,
   Checkbox,
   Divider,
   LightMode,
   Stack,
-  useColorMode,
   useColorModeValue,
 } from '@chakra-ui/react'
 import Card from 'components/Card'
