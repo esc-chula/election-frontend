@@ -29,12 +29,13 @@ const Container = styled(Flex)`
 
 export default function PageLoadingComponent() {
   const [count] = usePageLoadingContext()
+  const intaniaRed = useIntaniaRed()
   if (count === 0) {
     return null
   }
   return (
     <Container justifyContent="center" alignItems="center">
-      <Spinner thickness="4px" color={useIntaniaRed()} size="xl" />
+      <Spinner thickness="4px" color={intaniaRed} size="xl" />
     </Container>
   )
 }
