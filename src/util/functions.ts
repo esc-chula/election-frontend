@@ -12,3 +12,11 @@ export const handleAxiosError = (error: AxiosError) => {
     console.log(error.message)
   }
 }
+
+export function isDarkMode() {
+  const systemIsDark =
+    window.matchMedia &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches
+  const config = localStorage.getItem('colorMode')
+  return (systemIsDark && config !== 'light') || config === 'dark'
+}
