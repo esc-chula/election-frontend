@@ -70,7 +70,7 @@ const RulesCard = () => {
           fontSize="md"
           fontWeight="light"
         >
-          ข้าพเจ้ายอมรับกฎและเงื่อนไขการใช้งาน
+          ข้าพเจ้ายอมรับกฎและกติกาการเลือกตั้ง
         </Checkbox>
       </LightMode>
       <Stack
