@@ -10,6 +10,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import { ReactComponent as ESCLogo } from '../images/esc-logo.svg'
+import { ReactComponent as ESCLogoMono } from '../images/esc-logo-mono.svg'
 import Container from './Container'
 import { useAuthContext } from 'providers/authProvider'
 import { ChevronDownIcon } from '@chakra-ui/icons'
@@ -37,7 +38,7 @@ const TopBar = () => {
       <Container w="100%">
         <Flex w="100%" alignItems="center">
           <Link to="/profile">
-            <ESCLogo />
+            {useColorModeValue(<ESCLogo />, <ESCLogoMono />)}
           </Link>
           <Box flex={1} />
           <DarkModeController />
