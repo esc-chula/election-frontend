@@ -38,7 +38,7 @@ const PageProgress = ({ page, ...rest }: PageProgressProps) => {
       {!accepted && (
         <>
           <Text {...(page === 'policy' ? activeStyle : inactiveStyle)}>
-            2. นโยบายการเก็บข้อมูล
+            2. นโยบายการจัดเก็บข้อมูล
           </Text>
           <Text {...(page === 'rule' ? activeStyle : inactiveStyle)}>
             3. กฎและกติกาการเลือกตั้ง
