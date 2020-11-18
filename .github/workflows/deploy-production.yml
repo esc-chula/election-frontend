@@ -1,0 +1,56 @@
+name: deploy-production
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the dev branch
+on:
+  push:
+    branches: [master]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - uses: whoan/docker-build-with-cache-action@v5
+        name: Build Docker image
+        with:
+          username: paphonb
+          password: '${{ github.token }}'
+          registry: docker.pkg.github.com
+          image_name: 'esc-chula/election-frontend/election-frontend-production'
+          build_extra_args: '--build-arg=path_prefix='
+
+      - uses: appleboy/ssh-action@master
+        name: Deploy to VM
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          host: ${{ secrets.PROD_VM_HOST }}
+          username: ${{ secrets.PROD_VM_USER }}
+          password: ${{ secrets.PROD_VM_PASS }}
+          port: ${{ secrets.PROD_VM_PORT }}
+          envs: GITHUB_TOKEN
+          script: |
+            set -e
+
+            PROJECT_NAME=election-frontend-production
+            rm -rf $PROJECT_NAME
+
+            git clone -b dev https://.:$GITHUB_TOKEN@github.com/esc-chula/election-frontend $PROJECT_NAME
+            cd $PROJECT_NAME
+
+            docker login docker.pkg.github.com -u "bombnp" -p "$GITHUB_TOKEN"
+            docker pull docker.pkg.github.com/esc-chula/election-frontend/election-frontend-production:latest
+
+            docker-compose --project-name=$PROJECT_NAME -f docker-compose.production.yml stop
+            docker-compose --project-name=$PROJECT_NAME -f docker-compose.production.yml up -d
+
+            cd ..
+            rm -rf $PROJECT_NAME
