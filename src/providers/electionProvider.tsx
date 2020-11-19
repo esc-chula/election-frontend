@@ -23,7 +23,11 @@ export function useElectionContext() {
 export default function ElectionProvider({
   children,
 }: PropsWithChildren<unknown>) {
-  const { data: elections, mutate } = useSWR<Election[]>('/elections')
+  const { data: rawElections, mutate } = useSWR<Election[]>('/elections')
+  const elections = rawElections?.map((election) => ({
+    ...election,
+    name: `การเลือกตั้ง${election.name}`,
+  }))
   const electionMap = useMemo(() => {
     const electionMap = {} as ElectionMap
     elections?.forEach((election) => {
