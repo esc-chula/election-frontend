@@ -1,16 +1,32 @@
 import React from 'react'
 import { withAccepted } from 'providers/authProvider'
-import { Route, Switch } from 'react-router-dom'
-import ElectionProvider from 'providers/electionProvider'
+import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import ElectionProvider, {
+  useElectionContext,
+} from 'providers/electionProvider'
 import RedirectFirstElection from 'components/RedirectFirstElection'
 import ElectionDetail from './electionDetail'
+import NotFound from './404'
+
+function ElectionFinder() {
+  const { electionMap } = useElectionContext()
+  const match = useRouteMatch<{ electionName: string }>(
+    '/election/:electionName',
+  )
+  const election = electionMap[match?.params.electionName || '']
+  if (!election) {
+    return <NotFound />
+  } else {
+    return <ElectionDetail election={election} />
+  }
+}
 
 function ElectionRouter() {
   return (
     <ElectionProvider>
       <Switch>
         <Route path="/election" exact component={RedirectFirstElection} />
-        <Route path="/election/:electionName" component={ElectionDetail} />
+        <Route path="/election/:electionName" component={ElectionFinder} />
       </Switch>
     </ElectionProvider>
   )

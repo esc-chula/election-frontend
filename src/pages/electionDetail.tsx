@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useCallback, useState } from 'react'
 import Container from 'components/Container'
 import { useElectionContext } from 'providers/electionProvider'
-import { Redirect, useHistory, useRouteMatch } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import NotFound from './404'
 import {
   Box,
@@ -19,7 +19,7 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import CandidateList from 'components/CandidateList'
-import { Position } from 'types/election'
+import { Election, Position } from 'types/election'
 import { useHttpContext } from 'providers/httpProvider'
 import { SubmitVoteDTO } from 'types/dto'
 import { CheckIcon } from '@chakra-ui/icons'
@@ -28,12 +28,8 @@ import { AiFillExclamationCircle } from 'react-icons/ai'
 
 type SelectedMap = Record<number, number>
 
-export default function ElectionDetail() {
-  const { electionMap, setVoted } = useElectionContext()
-  const match = useRouteMatch<{ electionName: string }>(
-    '/election/:electionName',
-  )
-  const election = electionMap[match?.params.electionName || '']
+export default function ElectionDetail({ election }: { election: Election }) {
+  const { setVoted } = useElectionContext()
   const [selected, setSelected] = useState<SelectedMap>({})
   const allPositionsSelected = election.positions.every(
     (position) => selected[position.id] !== undefined,
