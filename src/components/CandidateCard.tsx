@@ -15,11 +15,21 @@ import { Candidate } from 'types/election'
 import Card from './Card'
 import { CloseIcon } from '@chakra-ui/icons'
 import { useIntaniaRed } from 'util/hooks'
+import Markdown, { MarkdownToJSX } from 'markdown-to-jsx'
 
 type CandidateCardProps = BoxProps &
   Omit<CheckboxProps, 'index'> & {
     candidate: Candidate
   }
+
+const markdownOverrides: MarkdownToJSX.Overrides = {
+  h2: {
+    component: Text,
+    props: {
+      fontWeight: 500,
+    },
+  },
+}
 
 export function CandidateCard({
   candidate,
@@ -63,7 +73,13 @@ export function CandidateCard({
             alignSelf="flex-start"
             textAlign="start"
           >
-            {candidate.policy}
+            <Markdown
+              options={{
+                overrides: markdownOverrides,
+              }}
+            >
+              {candidate.policy}
+            </Markdown>
           </Text>
         </Stack>
       </Stack>
