@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, Text } from '@chakra-ui/react'
+import { Box, Flex, Stack, Text } from '@chakra-ui/react'
 import { Position } from 'types/election'
 import Card from './Card'
 import { CandidateCard, Checkbox } from './CandidateCard'
@@ -18,6 +18,8 @@ export default function CandidateList({
   setSelected,
   disabled,
 }: CandidateListProps) {
+  const isSingular = position.candidates.length === 1
+
   return (
     <Box pt="16px">
       <Card fontWeight="300" textAlign="center" fontSize={['sm', 'md', 'lg']}>
@@ -42,15 +44,46 @@ export default function CandidateList({
             selected={selected}
             setSelected={setSelected}
             disabled={disabled}
-            w={['100%', '354px', '474px']}
+            w={isSingular ? '100%' : ['100%', '354px', '474px']}
             mx={[0, '6px']}
             mt="12px"
+            isSingular={isSingular}
           />
         ))}
       </Flex>
+      {isSingular && (
+        <Stack my="12px" spacing="20px" direction="row">
+          <Card flexGrow={1}>
+            <Flex justify="center" alignItems="center">
+              <Text fontSize={['sm', 'md', 'lg']} fontWeight="medium" mr="16px">
+                รับรอง
+              </Text>
+              <Checkbox
+                index={-2}
+                selected={selected}
+                setSelected={setSelected}
+                disabled={disabled}
+              />
+            </Flex>
+          </Card>
+          <Card flexGrow={1}>
+            <Flex justify="center" alignItems="center">
+              <Text fontSize={['sm', 'md', 'lg']} fontWeight="medium" mr="16px">
+                ไม่รับรอง
+              </Text>
+              <Checkbox
+                index={-3}
+                selected={selected}
+                setSelected={setSelected}
+                disabled={disabled}
+              />
+            </Flex>
+          </Card>
+        </Stack>
+      )}
       <Card my="12px">
         <Flex justify="center" alignItems="center">
-          <Text fontSize={['sm', 'md', 'lg']} fontWeight="medium" mr="8px">
+          <Text fontSize={['sm', 'md', 'lg']} fontWeight="medium" mr="16px">
             งดออกเสียง
           </Text>
           <Checkbox

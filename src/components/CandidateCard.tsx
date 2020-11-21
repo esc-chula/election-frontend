@@ -20,6 +20,7 @@ import Markdown, { MarkdownToJSX } from 'markdown-to-jsx'
 type CandidateCardProps = BoxProps &
   Omit<CheckboxProps, 'index'> & {
     candidate: Candidate
+    isSingular: boolean
   }
 
 const markdownOverrides: MarkdownToJSX.Overrides = {
@@ -37,6 +38,7 @@ export function CandidateCard({
   selected,
   setSelected,
   disabled,
+  isSingular,
   ...rest
 }: CandidateCardProps) {
   return (
@@ -55,14 +57,16 @@ export function CandidateCard({
           </AspectRatio>
           <Stack direction="row" alignSelf="center" alignItems="center">
             <Text fontSize={['sm', 'sm', 'md']} fontWeight="medium">
-              หมายเลข {candidate.candidateID}
+              เบอร์ {candidate.candidateID}
             </Text>
-            <Checkbox
-              index={candidate.id}
-              selected={selected}
-              setSelected={setSelected}
-              disabled={disabled}
-            />
+            {!isSingular && (
+              <Checkbox
+                index={candidate.id}
+                selected={selected}
+                setSelected={setSelected}
+                disabled={disabled}
+              />
+            )}
           </Stack>
         </Stack>
 

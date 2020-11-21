@@ -19,7 +19,7 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import CandidateList from 'components/CandidateList'
-import { Election, Position } from 'types/election'
+import { Candidate, Election, Position } from 'types/election'
 import { useHttpContext } from 'providers/httpProvider'
 import { SubmitVoteDTO } from 'types/dto'
 import { CheckIcon } from '@chakra-ui/icons'
@@ -27,6 +27,32 @@ import { PrimaryButton } from 'components/PrimaryButton'
 import { AiFillExclamationCircle } from 'react-icons/ai'
 
 type SelectedMap = Record<number, number>
+
+interface SelectedCandidateBoxProps {
+  selectedCandidate: Candidate
+}
+
+function SelectedCandidateBox({
+  selectedCandidate,
+}: SelectedCandidateBoxProps) {
+  const intaniaRed = useColorModeValue(
+    'intaniaRed.500',
+    'intaniaRedSecondary.400',
+  )
+  const selectedCandidateColor = useColorModeValue('mono.4', 'whiteAlpha.800')
+  return (
+    <Box mt="16px" ml="32px">
+      <Text mt="16px" color={intaniaRed}>
+        เบอร์ {selectedCandidate.candidateID}
+      </Text>
+      <Text color={selectedCandidateColor} fontWeight={300} fontSize="14px">
+        {selectedCandidate.name}
+        <br />
+        {selectedCandidate.department} ปี {selectedCandidate.year}
+      </Text>
+    </Box>
+  )
+}
 
 export default function ElectionDetail({ election }: { election: Election }) {
   const { setVoted } = useElectionContext()
@@ -38,6 +64,7 @@ export default function ElectionDetail({ election }: { election: Election }) {
   const selectedCandidate = firstPosition.candidates.find(
     (candidate) => candidate.id === selected[firstPosition.id],
   )
+
   const { isOpen: modalOpen, onOpen, onClose } = useDisclosure()
   const [loading, setLoading] = useState(false)
 
@@ -84,7 +111,6 @@ export default function ElectionDetail({ election }: { election: Election }) {
     'intaniaRed.500',
     'intaniaRedSecondary.400',
   )
-  const selectedCandidateColor = useColorModeValue('mono.4', 'whiteAlpha.800')
 
   if (!election) {
     return <NotFound />
@@ -100,16 +126,6 @@ export default function ElectionDetail({ election }: { election: Election }) {
       <ModalContent rounded="md">
         <ModalHeader>
           <Flex direction="column" alignItems="center">
-            {/* <Flex
-              backgroundColor={yellow}
-              boxSize="30px"
-              rounded="100%"
-              alignItems="center"
-              justifyContent="center"
-              my="8px"
-            >
-              <CheckIcon color={markColor} />
-            </Flex> */}
             <Icon
               as={AiFillExclamationCircle}
               color="yellow.500"
@@ -126,20 +142,21 @@ export default function ElectionDetail({ election }: { election: Election }) {
           </Text>
           <hr />
           {selectedCandidate ? (
-            <Box mt="16px" ml="32px">
-              <Text mt="16px" color={intaniaRed}>
-                หมายเลข {selectedCandidate.candidateID}
-              </Text>
+            <SelectedCandidateBox selectedCandidate={selectedCandidate} />
+          ) : [-2, -3].includes(selected[firstPosition.id]) ? (
+            <>
               <Text
-                color={selectedCandidateColor}
-                fontWeight={300}
-                fontSize="14px"
+                mt="16px"
+                color={intaniaRed}
+                textAlign="center"
+                fontSize="2xl"
               >
-                {selectedCandidate.name}
-                <br />
-                {selectedCandidate.department} ปี {selectedCandidate.year}
+                {selected[firstPosition.id] === -2 ? 'รับรอง' : 'ไม่รับรอง'}
               </Text>
-            </Box>
+              <SelectedCandidateBox
+                selectedCandidate={firstPosition.candidates[0]}
+              />
+            </>
           ) : (
             <Text
               mt="16px"
@@ -147,7 +164,7 @@ export default function ElectionDetail({ election }: { election: Election }) {
               textAlign="center"
               fontSize="2xl"
             >
-              งดออกเสียง
+              {selected[firstPosition.id] === -1 ? 'งดออกเสียง' : 'ไม่รับรอง'}
             </Text>
           )}
           <Flex mt="20px" mb="16px" justifyContent="space-between">
