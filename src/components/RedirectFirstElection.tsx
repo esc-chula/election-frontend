@@ -10,7 +10,6 @@ import {
   Icon,
   Stack,
   useColorModeValue,
-  Image,
 } from '@chakra-ui/react'
 import { CheckIcon } from '@chakra-ui/icons'
 import { useAuthContext } from 'providers/authProvider'
