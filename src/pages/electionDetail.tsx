@@ -42,10 +42,10 @@ function SelectedCandidateBox({
   const selectedCandidateColor = useColorModeValue('mono.4', 'whiteAlpha.800')
   return (
     <Box mt="16px" ml="32px">
-      <Text mt="16px" color={intaniaRed}>
+      <Text mt="16px" color={intaniaRed} fontSize="20px">
         เบอร์ {selectedCandidate.candidateID}
       </Text>
-      <Text color={selectedCandidateColor} fontWeight={300} fontSize="14px">
+      <Text color={selectedCandidateColor} fontWeight={300} fontSize="16px">
         {selectedCandidate.name}
         <br />
         {selectedCandidate.department} ปี {selectedCandidate.year}
