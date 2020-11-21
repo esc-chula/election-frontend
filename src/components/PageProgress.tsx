@@ -16,8 +16,9 @@ interface PageProgressProps extends StackProps {
 
 const PageProgress = ({ page, ...rest }: PageProgressProps) => {
   const { authUser } = useAuthContext()
-  const accepted =
-    page === 'profile' && authUser.policyAccepted && authUser.ruleAccepted
+  // const accepted =
+  //   page === 'profile' && authUser.policyAccepted && authUser.ruleAccepted
+  const accepted = page === 'profile' && authUser.policyAccepted
   const { colorMode } = useColorMode()
   const activeStyle: TextProps = {
     fontSize: ['2xl', '2xl', '3xl'],
@@ -40,9 +41,9 @@ const PageProgress = ({ page, ...rest }: PageProgressProps) => {
           <Text {...(page === 'policy' ? activeStyle : inactiveStyle)}>
             2. นโยบายการจัดเก็บข้อมูล
           </Text>
-          <Text {...(page === 'rule' ? activeStyle : inactiveStyle)}>
+          {/* <Text {...(page === 'rule' ? activeStyle : inactiveStyle)}>
             3. กฎและกติกาการเลือกตั้ง
-          </Text>
+          </Text> */}
         </>
       )}
     </Stack>

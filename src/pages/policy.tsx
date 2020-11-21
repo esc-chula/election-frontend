@@ -24,7 +24,8 @@ const PolicyCard = () => {
   const [loading, onAcceptPolicy] = usePatchUser(
     'updatepolicy',
     { policyAccepted: true },
-    '/rules',
+    // '/rules', temporary fix
+    '/election',
   )
 
   const colorScheme = useColorModeValue('intaniaRed', 'intaniaRedSecondary')
