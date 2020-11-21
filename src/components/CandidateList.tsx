@@ -34,7 +34,7 @@ export default function CandidateList({
           transform="translateY(4px)"
         />
         <Box display={['none', 'none']} />
-        ของหมายเลขที่คุณต้องการเลือก
+        {!isSingular && 'ของเบอร์'}ที่คุณต้องการเลือก
       </Card>
       <Flex flexDirection={['column', 'row']} flexWrap="wrap" mx={[0, '-6px']}>
         {position.candidates.map((candidate) => (
