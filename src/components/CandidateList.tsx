@@ -23,7 +23,7 @@ export default function CandidateList({
   return (
     <Box pt="16px">
       <Card fontWeight="300" textAlign="center" fontSize={['sm', 'md', 'lg']}>
-        กาลงในช่อง
+        ทำเครื่องหมาย X ลงในช่อง
         <Box
           display="inline-block"
           mx="8px"

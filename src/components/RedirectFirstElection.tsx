@@ -10,10 +10,12 @@ import {
   Icon,
   Stack,
   useColorModeValue,
+  Image,
 } from '@chakra-ui/react'
 import { CheckIcon } from '@chakra-ui/icons'
 import { useAuthContext } from 'providers/authProvider'
-import { GrFacebook } from 'react-icons/gr'
+import { ReactComponent as FacebookLogo } from '../images/facebook.svg'
+import { ReactComponent as InstagramLogo } from '../images/instagram.svg'
 import { PrimaryButton } from './PrimaryButton'
 
 export default function RedirectFirstElection() {
@@ -63,23 +65,56 @@ export default function RedirectFirstElection() {
                     เรียบร้อยแล้ว
                   </Text>
                   <Text mt="20px" fontWeight={300} textAlign="center">
-                    สามารถติดตามรายละเอียดเพิ่มเติมได้ที่ :
+                    สามารถติดตามผลการเลือกตั้งได้ทาง
                   </Text>
-                  <a
-                    href="https://facebook.com/escchula"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <Text fontWeight={400} textAlign="center">
-                      <Icon
-                        as={GrFacebook}
-                        color="#4267B2"
-                        mr="10px"
-                        transform="translateY(-2px)"
-                      />
-                      กรรมการนิสิตคณะวิศวกรรมศาสตร์ กวศ.
-                    </Text>
-                  </a>
+                  <Flex alignItems="flex-start" flexDirection="column">
+                    <a
+                      href="https://facebook.com/escchula"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <Text fontWeight={400} textAlign="center">
+                        <Icon
+                          as={FacebookLogo}
+                          fontSize="16px"
+                          color="#4267B2"
+                          mr="10px"
+                          transform="translateY(-2px)"
+                        />
+                        กรรมการนิสิตคณะวิศวกรรมศาสตร์ กวศ.
+                      </Text>
+                    </a>
+                    <a
+                      href="https://instagram.com/escchula"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <Text fontWeight={400} textAlign="center">
+                        <Icon
+                          as={InstagramLogo}
+                          fontSize="16px"
+                          color="#4267B2"
+                          mr="10px"
+                          transform="translateY(-2px)"
+                        />
+                        @escchula
+                      </Text>
+                    </a>
+                  </Flex>
+                  <Text mt="20px" fontWeight={300} textAlign="center">
+                    และเว็บไซต์ของกวศ.{' '}
+                    <a
+                      href="https://esc.eng.chula.ac.th"
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        textDecoration: 'underline',
+                        fontWeight: 400,
+                      }}
+                    >
+                      https://esc.eng.chula.ac.th
+                    </a>
+                  </Text>
                 </>
               )}
             </Flex>
