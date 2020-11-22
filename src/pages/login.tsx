@@ -119,7 +119,7 @@ const Login = () => {
     <PrimaryButton
       as="a"
       isDisabled={!checked}
-      href={redirectURL}
+      href={checked ? redirectURL : undefined}
       size="md"
       variant="solid"
       width={['105px', '130px']}
