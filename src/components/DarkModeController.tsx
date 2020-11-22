@@ -46,7 +46,7 @@ export function DarkModeController() {
         <Global
           styles={{
             'html, body, *': {
-              transition: 'background-color 0.20s',
+              transition: 'background-color 0.20s, color 0.20s',
             },
           }}
         />
