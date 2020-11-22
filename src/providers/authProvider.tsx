@@ -3,7 +3,7 @@ import axios from 'axios'
 import { API_HOST } from 'config/env'
 import { ExchangeTokenDTO } from 'types/dto'
 import { handleAxiosError } from 'util/functions'
-import { useLocalStorageState, useNewRedirect } from 'util/hooks'
+import { useSessionStorageState, useNewRedirect } from 'util/hooks'
 import useSWR from 'swr'
 import { useHistory } from 'react-router-dom'
 import PageLoading from 'components/PageLoading'
@@ -39,7 +39,7 @@ async function fetchAuthUser(accessToken: string): Promise<StrapiUser | null> {
 }
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [accessToken, setAccessToken] = useLocalStorageState('accessToken')
+  const [accessToken, setAccessToken] = useSessionStorageState('accessToken')
   const { data: authUser, mutate: mutateAuthUser, error } = useSWR(
     accessToken,
     fetchAuthUser,

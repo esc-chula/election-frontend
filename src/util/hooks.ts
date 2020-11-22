@@ -35,6 +35,25 @@ export function useLocalStorageState(
   return [value, setValue]
 }
 
+export function useSessionStorageState(
+  key: string,
+): [string | null, Dispatch<SetStateAction<string | null>>] {
+  const [actualKey] = useState(key)
+  const [value, setValue] = useState<string | null>(() =>
+    sessionStorage.getItem(actualKey),
+  )
+
+  useEffect(() => {
+    if (value) {
+      sessionStorage.setItem(actualKey, value)
+    } else {
+      sessionStorage.removeItem(actualKey)
+    }
+  }, [actualKey, value])
+
+  return [value, setValue]
+}
+
 export function useNewRedirect() {
   const { pathname } = useLocation()
   const query = useQueryString()
