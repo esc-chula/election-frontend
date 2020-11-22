@@ -1,6 +1,5 @@
 import React from 'react'
 import Providers from 'providers'
-import './App.css'
 import './components/TopBar'
 import TopBar from './components/TopBar'
 import PageWrapper from './components/PageWrapper'
