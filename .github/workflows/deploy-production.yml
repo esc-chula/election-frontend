@@ -25,7 +25,7 @@ jobs:
           password: '${{ github.token }}'
           registry: docker.pkg.github.com
           image_name: 'esc-chula/election-frontend/election-frontend-production'
-          build_extra_args: '--build-arg=path_prefix='
+          build_extra_args: '--build-arg path_prefix= --build-arg generate_sourcemap=false'
 
       - uses: appleboy/ssh-action@master
         name: Deploy to VM
