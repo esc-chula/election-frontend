@@ -7,6 +7,7 @@ import ElectionProvider, {
 import RedirectFirstElection from 'components/RedirectFirstElection'
 import ElectionDetail from './electionDetail'
 import NotFound from './404'
+import { withAuth } from 'providers/authProvider'
 
 function ElectionFinder() {
   const { electionMap } = useElectionContext()
@@ -33,4 +34,4 @@ function ElectionRouter() {
 }
 
 // export default withAccepted(ElectionRouter)
-export default ElectionRouter
+export default withAuth(ElectionRouter)
