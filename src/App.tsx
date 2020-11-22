@@ -12,12 +12,10 @@ import {
 } from 'react-router-dom'
 import Login from 'pages/login'
 import ProfilePage from 'pages/profile'
-import PolicyPage from 'pages/policy'
 import { BASENAME } from 'config/env'
 import CallbackPage from 'pages/callback'
 import ElectionRouter from 'pages/electionRouter'
 import PageLoadingComponent from 'components/PageLoadingComponent'
-import Rulepage from 'pages/rules'
 import NotFound from 'pages/404'
 import { ScrollToTop } from 'components/ScrollToTop'
 
@@ -36,9 +34,7 @@ function App() {
             <Route path="/login" component={Login} />
             <Route path="/callback" component={CallbackPage} />
             <Route path="/profile" component={ProfilePage} />
-            <Route path="/policy" component={PolicyPage} />
             <Route path="/election" component={ElectionRouter} />
-            <Route path="/rules" component={Rulepage} />
             <Route component={NotFound} />
           </Switch>
         </PageWrapper>

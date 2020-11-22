@@ -1,5 +1,4 @@
 import React from 'react'
-// import { withAccepted } from 'providers/authProvider'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import ElectionProvider, {
   useElectionContext,
@@ -33,5 +32,4 @@ function ElectionRouter() {
   )
 }
 
-// export default withAccepted(ElectionRouter)
 export default withAuth(ElectionRouter)

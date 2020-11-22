@@ -115,18 +115,3 @@ export function withAuth<P>(
     return <PageLoading />
   }
 }
-
-// export function withAccepted<P>(
-//   ComposedComponent: React.ComponentType<P>,
-// ): React.ComponentType<P> {
-//   return withAuth(function WithAccepted(props: P) {
-//     const { authUser } = useAuthContext()
-
-//     // if (!authUser.policyAccepted || !authUser.ruleAccepted) {
-//     if (!authUser.policyAccepted) {
-//       return <Redirect to="/profile" />
-//     }
-
-//     return <ComposedComponent {...props} />
-//   })
-// }

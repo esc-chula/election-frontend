@@ -4,7 +4,7 @@ import { Text, TextProps, useColorModeValue } from '@chakra-ui/react'
 export function Header(props: TextProps) {
   return (
     <Text
-      fontSize={['xl', 'xl', '2xl']}
+      fontSize="xl"
       fontWeight="regular"
       color={useColorModeValue('mono.6', 'whiteAlpha.900')}
       {...props}
