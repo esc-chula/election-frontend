@@ -28,6 +28,7 @@ export default function ElectionProvider({
     ...election,
     name: `การเลือกตั้ง${election.name}`,
   }))
+  elections?.sort((a, b) => a.id - b.id)
   const electionMap = useMemo(() => {
     const electionMap = {} as ElectionMap
     elections?.forEach((election) => {
