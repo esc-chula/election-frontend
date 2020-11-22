@@ -1,25 +1,11 @@
-import React, { useState } from 'react'
-import {
-  Box,
-  Flex,
-  Text,
-  Checkbox,
-  Stack,
-  useColorModeValue,
-} from '@chakra-ui/react'
+import React from 'react'
+import { Box, Flex, Text, Stack, useColorModeValue } from '@chakra-ui/react'
 import Card from 'components/Card'
-import { useRedirectPath } from 'util/hooks'
-import { APP_HOST, SSO_URL } from 'config/env'
 import Container from 'components/Container'
 import { PrimaryButton } from 'components/PrimaryButton'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
-  const [checked, setChecked] = useState(false)
-
-  const onCheckBoxChange = () => {
-    setChecked(!checked)
-  }
-
   const ssoBar = (
     <Flex
       bg={useColorModeValue('intaniaRed.600', 'intaniaRedSecondary.600')}
@@ -60,38 +46,18 @@ const Login = () => {
     </Card>
   )
 
-  const tosCheckBox = (
-    <Checkbox
-      colorScheme="intaniaRed"
-      onChange={onCheckBoxChange}
-      isChecked={checked}
-    >
-      <Text
-        fontWeight="regular"
-        fontSize={['sm', 'md']}
-        color={useColorModeValue('mono.6', 'whiteAlpha.900')}
-      >
-        ข้าพเจ้ายินดีเปิดเผยข้อมูลส่วนตัวในระบบ CUNET เพื่อใช้ในการเข้าสู่ระบบ
-      </Text>
-    </Checkbox>
-  )
-
-  const redirect = useRedirectPath('')
-  const redirectURL = `${SSO_URL}?r=${APP_HOST}/callback?r=${redirect}`
-
   const loginButton = (
-    <PrimaryButton
-      as="a"
-      href={checked ? redirectURL : undefined}
-      size="md"
-      variant="solid"
-      isDisabled={!checked}
-      width={['105px', '130px']}
-      fontSize={['lg', 'xl']}
-      fontWeight="regular"
-    >
-      <Text>เข้าสู่ระบบ</Text>
-    </PrimaryButton>
+    <Link to="/policy">
+      <PrimaryButton
+        size="md"
+        variant="solid"
+        width={['105px', '130px']}
+        fontSize={['lg', 'xl']}
+        fontWeight="regular"
+      >
+        <Text>เริ่มต้น</Text>
+      </PrimaryButton>
+    </Link>
   )
 
   return (
@@ -104,7 +70,6 @@ const Login = () => {
           marginY={['18px', '40px']}
         >
           {textCard}
-          {tosCheckBox}
           {loginButton}
         </Stack>
       </Container>

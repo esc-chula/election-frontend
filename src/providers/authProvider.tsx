@@ -5,7 +5,7 @@ import { ExchangeTokenDTO } from 'types/dto'
 import { handleAxiosError } from 'util/functions'
 import { useLocalStorageState, useNewRedirect } from 'util/hooks'
 import useSWR from 'swr'
-import { Redirect, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import PageLoading from 'components/PageLoading'
 import { StrapiUser } from 'types/strapi'
 
@@ -116,17 +116,17 @@ export function withAuth<P>(
   }
 }
 
-export function withAccepted<P>(
-  ComposedComponent: React.ComponentType<P>,
-): React.ComponentType<P> {
-  return withAuth(function WithAccepted(props: P) {
-    const { authUser } = useAuthContext()
+// export function withAccepted<P>(
+//   ComposedComponent: React.ComponentType<P>,
+// ): React.ComponentType<P> {
+//   return withAuth(function WithAccepted(props: P) {
+//     const { authUser } = useAuthContext()
 
-    // if (!authUser.policyAccepted || !authUser.ruleAccepted) {
-    if (!authUser.policyAccepted) {
-      return <Redirect to="/profile" />
-    }
+//     // if (!authUser.policyAccepted || !authUser.ruleAccepted) {
+//     if (!authUser.policyAccepted) {
+//       return <Redirect to="/profile" />
+//     }
 
-    return <ComposedComponent {...props} />
-  })
-}
+//     return <ComposedComponent {...props} />
+//   })
+// }

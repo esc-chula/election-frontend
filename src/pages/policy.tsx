@@ -1,6 +1,7 @@
 import {
   Checkbox,
   Divider,
+  Flex,
   LightMode,
   Stack,
   Text,
@@ -8,25 +9,17 @@ import {
 } from '@chakra-ui/react'
 import Card from 'components/Card'
 import Container from 'components/Container'
-import PageProgress from 'components/PageProgress'
 import React, { useState } from 'react'
 import { ButtonLink } from 'components/ButtonLink'
-import { ResponsiveStack } from 'components/ResponsiveStack'
 import { withAuth } from 'providers/authProvider'
-import { usePatchUser } from 'util/hooks'
+import { useRedirectPath } from 'util/hooks'
 import { Header } from 'components/Header'
 import { Content } from 'components/Content'
 import { PrimaryButton } from 'components/PrimaryButton'
+import { APP_HOST, SSO_URL } from 'config/env'
 
 const PolicyCard = () => {
   const [checked, setChecked] = useState(false)
-
-  const [loading, onAcceptPolicy] = usePatchUser(
-    'updatepolicy',
-    { policyAccepted: true },
-    // '/rules', temporary fix
-    '/election',
-  )
 
   const colorScheme = useColorModeValue('intaniaRed', 'intaniaRedSecondary')
 
@@ -41,6 +34,9 @@ const PolicyCard = () => {
     '8.	กวศ. อาจจัดเก็บข้อมูลการใช้งานผ่านระบบคอมพิวเตอร์ของท่าน เช่น หมายเลข IP ชนิดของบราวเซอร์ อุปกรณ์ที่ท่านเข้าถึงระบบของ กวศ. คุกกี้ เป็นต้น ทั้งนี้เพื่อความถูกต้องของข้อมูลของท่านในระบบของ กวศ.',
     '9.	กวศ. จะพยายามอย่างยิ่งในการออกแบบระบบให้มีความปลอดภัยสูงที่สุด เพื่อไม่ให้ข้อมูลส่วนตัวของท่านที่อยู่ในระบบของ กวศ. เผยแพร่ออกไปสู่สาธารณชนโดยไม่ได้รับอนุญาตจากเจ้าของข้อมูล',
   ]
+
+  const redirect = useRedirectPath('')
+  const redirectURL = `${SSO_URL}?r=${APP_HOST}/callback?r=${redirect}`
 
   return (
     <Stack spacing="20px">
@@ -78,7 +74,7 @@ const PolicyCard = () => {
         spacing="16px"
       >
         <ButtonLink
-          to="/profile"
+          to="/login"
           variant="link"
           colorScheme="intaniaRed"
           fontSize="md"
@@ -87,14 +83,14 @@ const PolicyCard = () => {
           ย้อนกลับ
         </ButtonLink>
         <PrimaryButton
+          as="a"
           isDisabled={!checked}
-          width="130px"
-          fontSize="md"
+          href={redirectURL}
+          width="110px"
+          fontSize={['lg', 'lg']}
           fontWeight="regular"
-          onClick={onAcceptPolicy}
-          isLoading={loading}
         >
-          ขั้นตอนถัดไป
+          เข้าสู่ระบบ
         </PrimaryButton>
       </Stack>
     </Stack>
@@ -104,12 +100,12 @@ const PolicyCard = () => {
 const PolicyPage = () => {
   return (
     <Container padding={['20px', '48px']}>
-      <ResponsiveStack spacing={['20px', '0px']}>
-        <PageProgress page="policy" />
+      <Flex direction="column" alignItems="center">
         <PolicyCard />
-      </ResponsiveStack>
+      </Flex>
     </Container>
   )
 }
 
-export default withAuth(PolicyPage)
+// export default withAuth(PolicyPage)
+export default PolicyPage

@@ -45,7 +45,7 @@ const ProfileCard = () => {
   const { authUser } = useAuthContext()
   const colorScheme = useColorModeValue('intaniaRed', 'intaniaRedSecondary')
   // const accepted = authUser.policyAccepted && authUser.ruleAccepted
-  const accepted = authUser.policyAccepted
+  const accepted = true
 
   const year = academicYear - parseInt(authUser.username.substring(0, 2)) + 1
 
