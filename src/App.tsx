@@ -11,6 +11,7 @@ import {
 } from 'react-router-dom'
 import Login from 'pages/login'
 import ProfilePage from 'pages/profile'
+import RulesPage from 'pages/rules'
 import { BASENAME } from 'config/env'
 import CallbackPage from 'pages/callback'
 import ElectionRouter from 'pages/electionRouter'
@@ -33,6 +34,7 @@ function App() {
             <Route path="/login" component={Login} />
             <Route path="/callback" component={CallbackPage} />
             <Route path="/profile" component={ProfilePage} />
+            <Route path="/rules" component={RulesPage} />
             <Route path="/election" component={ElectionRouter} />
             <Route component={NotFound} />
           </Switch>

@@ -4,11 +4,11 @@ import {
   LightMode,
   Stack,
   Text,
-  useColorMode,
   useColorModeValue,
 } from '@chakra-ui/react'
 import Card from 'components/Card'
 import Container from 'components/Container'
+import PageProgress from 'components/PageProgress'
 import { useAuthContext, withAuth } from 'providers/authProvider'
 import { academicYear } from 'util/constants'
 import { ButtonLink } from 'components/ButtonLink'
@@ -44,6 +44,7 @@ const ProfileRow = ({ rowKey, rowValue }: RowProps) => {
 const ProfileCard = () => {
   const { authUser } = useAuthContext()
   const colorScheme = useColorModeValue('intaniaRed', 'intaniaRedSecondary')
+  const accepted = authUser.ruleAccepted
 
   const year = academicYear - parseInt(authUser.username.substring(0, 2)) + 1
 
@@ -58,7 +59,7 @@ const ProfileCard = () => {
       </Card>
       <LightMode>
         <ButtonLink
-          to="/election/"
+          to={accepted ? '/election' : '/rules'}
           alignSelf="flex-end"
           colorScheme={colorScheme}
           size="md"
@@ -74,18 +75,10 @@ const ProfileCard = () => {
 }
 
 const ProfilePage = () => {
-  const { colorMode } = useColorMode()
   return (
     <Container padding={['20px', '48px']}>
       <ResponsiveStack spacing={['20px', '0px']}>
-        <Text
-          width={['100%', '300px', '500px']}
-          fontSize={['2xl', '2xl', '3xl']}
-          fontWeight="medium"
-          color={colorMode === 'dark' ? 'whiteAlpha.900' : 'black'}
-        >
-          ข้อมูลผู้ใช้สิทธิ
-        </Text>
+        <PageProgress page="profile" />
         <ProfileCard />
       </ResponsiveStack>
     </Container>

@@ -3,9 +3,9 @@ import axios from 'axios'
 import { API_HOST } from 'config/env'
 import { ExchangeTokenDTO } from 'types/dto'
 import { handleAxiosError } from 'util/functions'
-import { useSessionStorageState, useNewRedirect } from 'util/hooks'
+import { useLocalStorageState, useNewRedirect } from 'util/hooks'
 import useSWR from 'swr'
-import { useHistory } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import PageLoading from 'components/PageLoading'
 import { StrapiUser } from 'types/strapi'
 
@@ -39,7 +39,7 @@ async function fetchAuthUser(accessToken: string): Promise<StrapiUser | null> {
 }
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [accessToken, setAccessToken] = useSessionStorageState('accessToken')
+  const [accessToken, setAccessToken] = useLocalStorageState('accessToken')
   const { data: authUser, mutate: mutateAuthUser, error } = useSWR(
     accessToken,
     fetchAuthUser,
@@ -114,4 +114,18 @@ export function withAuth<P>(
 
     return <PageLoading />
   }
+}
+
+export function withAccepted<P>(
+  ComposedComponent: React.ComponentType<P>,
+): React.ComponentType<P> {
+  return withAuth(function WithAccepted(props: P) {
+    const { authUser } = useAuthContext()
+
+    if (!authUser.ruleAccepted) {
+      return <Redirect to="/profile" />
+    }
+
+    return <ComposedComponent {...props} />
+  })
 }

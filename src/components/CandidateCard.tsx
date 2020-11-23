@@ -28,7 +28,6 @@ const markdownOverrides: MarkdownToJSX.Overrides = {
     component: Text,
     props: {
       fontWeight: 500,
-      fontSize: ['sm', 'md', 'xl'],
     },
   },
 }
