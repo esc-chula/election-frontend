@@ -44,7 +44,6 @@ const ProfileRow = ({ rowKey, rowValue }: RowProps) => {
 const ProfileCard = () => {
   const { authUser } = useAuthContext()
   const colorScheme = useColorModeValue('intaniaRed', 'intaniaRedSecondary')
-  const accepted = authUser.ruleAccepted
 
   const year = academicYear - parseInt(authUser.username.substring(0, 2)) + 1
 
@@ -59,7 +58,7 @@ const ProfileCard = () => {
       </Card>
       <LightMode>
         <ButtonLink
-          to={accepted ? '/election' : '/rules'}
+          to="/rules"
           alignSelf="flex-end"
           colorScheme={colorScheme}
           size="md"

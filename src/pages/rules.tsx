@@ -6,10 +6,8 @@ import React from 'react'
 import { ButtonLink } from 'components/ButtonLink'
 import { ResponsiveStack } from 'components/ResponsiveStack'
 import { withAuth } from 'providers/authProvider'
-import { usePatchUser } from 'util/hooks'
 import { Header } from 'components/Header'
 import { Content } from 'components/Content'
-import { PrimaryButton } from 'components/PrimaryButton'
 
 const articles = [
   {
@@ -173,12 +171,7 @@ const articles = [
 ]
 
 const RulesCard = () => {
-  const [loading, onAcceptRules] = usePatchUser(
-    'updaterule',
-    { ruleAccepted: true },
-    '/election',
-  )
-
+  const colorScheme = useColorModeValue('intaniaRed', 'intaniaRedSecondary')
   return (
     <Stack spacing="20px" text>
       <Card width={['100%', '450px', '500px']}>
@@ -236,15 +229,18 @@ const RulesCard = () => {
         >
           ย้อนกลับ
         </ButtonLink>
-        <PrimaryButton
+
+        <ButtonLink
+          to="/election"
+          alignSelf="flex-end"
+          colorScheme={colorScheme}
+          size="md"
           width="130px"
           fontSize="md"
           fontWeight="regular"
-          onClick={onAcceptRules}
-          isLoading={loading}
         >
           ขั้นตอนถัดไป
-        </PrimaryButton>
+        </ButtonLink>
       </Stack>
     </Stack>
   )

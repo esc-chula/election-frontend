@@ -6,7 +6,6 @@ import {
   TextProps,
   useColorMode,
 } from '@chakra-ui/react'
-import { useAuthContext } from 'providers/authProvider'
 
 export type CurrentPage = 'profile' | 'rules'
 
@@ -15,8 +14,6 @@ interface PageProgressProps extends StackProps {
 }
 
 const PageProgress = ({ page, ...rest }: PageProgressProps) => {
-  const { authUser } = useAuthContext()
-  const accepted = page === 'profile' && authUser.ruleAccepted
   const { colorMode } = useColorMode()
   const activeStyle: TextProps = {
     fontSize: ['2xl', '2xl', '3xl'],
@@ -32,15 +29,11 @@ const PageProgress = ({ page, ...rest }: PageProgressProps) => {
   return (
     <Stack spacing="8px" {...rest} width={['100%', '250px', '260px']}>
       <Text {...(page === 'profile' ? activeStyle : inactiveStyle)}>
-        {!accepted && '1. '}ข้อมูลผู้ใช้สิทธิ
+        1. ข้อมูลผู้ใช้สิทธิ
       </Text>
-      {!accepted && (
-        <>
-          <Text {...(page === 'rules' ? activeStyle : inactiveStyle)}>
-            2. ระเบียบการเลือกตั้ง
-          </Text>
-        </>
-      )}
+      <Text {...(page === 'rules' ? activeStyle : inactiveStyle)}>
+        2. ระเบียบการเลือกตั้ง
+      </Text>
     </Stack>
   )
 }
