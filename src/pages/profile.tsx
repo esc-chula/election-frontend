@@ -50,7 +50,7 @@ const ProfileCard = () => {
 
   return (
     <Stack spacing="20px">
-      <Card width={['100%', '335px', '500px']}>
+      <Card width={['100%', '450px', '500px']}>
         <ProfileRow rowKey="ชื่อ - นามสกุล" rowValue={authUser.name_th} />
         <Divider my="8px" />
         <ProfileRow rowKey="ชั้นปี" rowValue={`${year}`} />
@@ -76,8 +76,11 @@ const ProfileCard = () => {
 
 const ProfilePage = () => {
   return (
-    <Container padding={['20px', '48px']}>
-      <ResponsiveStack spacing={['20px', '0px']}>
+    <Container paddingTop={['20px', '48px']}>
+      <ResponsiveStack
+        spacing={['20px', '0px']}
+        justifyContent={['space-between', 'space-between', 'space-evenly']}
+      >
         <PageProgress page="profile" />
         <ProfileCard />
       </ResponsiveStack>

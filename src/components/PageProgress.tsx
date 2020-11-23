@@ -30,14 +30,14 @@ const PageProgress = ({ page, ...rest }: PageProgressProps) => {
   }
 
   return (
-    <Stack spacing="8px" {...rest} width={['100%', '300px', '500px']}>
+    <Stack spacing="8px" {...rest} width={['100%', '250px', '260px']}>
       <Text {...(page === 'profile' ? activeStyle : inactiveStyle)}>
         {!accepted && '1. '}ข้อมูลผู้ใช้สิทธิ
       </Text>
       {!accepted && (
         <>
           <Text {...(page === 'rules' ? activeStyle : inactiveStyle)}>
-            2. กฎและกติกาการเลือกตั้ง
+            2. ระเบียบการเลือกตั้ง
           </Text>
         </>
       )}
