@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import {
   Button,
   Flex,
@@ -14,7 +14,7 @@ import { ReactComponent as ESCLogoMono } from '../images/esc-logo-mono.svg'
 import Container from './Container'
 import { useAuthContext } from 'providers/authProvider'
 import { ChevronDownIcon } from '@chakra-ui/icons'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { DarkModeController } from './DarkModeController'
 
 const TopBar = () => {
@@ -22,6 +22,11 @@ const TopBar = () => {
   const bg = useColorModeValue('white', 'gray.900')
   const color = useColorModeValue('intaniaRed.500', 'intaniaRedSecondary.400')
   const activeColor = useColorModeValue('intaniaRed.700', 'intaniaRed.500')
+  const { push } = useHistory()
+
+  const goToProfile = useCallback(() => {
+    push('/profile')
+  }, [push])
 
   return (
     <Flex
@@ -58,6 +63,7 @@ const TopBar = () => {
                 {authUser.username}
               </MenuButton>
               <MenuList>
+                <MenuItem onClick={goToProfile}>ข้อมูลผู้ใช้สิทธิ์</MenuItem>
                 <MenuItem onClick={logout}>ออกจากระบบ</MenuItem>
               </MenuList>
             </Menu>
