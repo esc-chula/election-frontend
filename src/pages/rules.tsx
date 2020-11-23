@@ -1,17 +1,8 @@
-import {
-  Box,
-  Checkbox,
-  Divider,
-  Flex,
-  LightMode,
-  Stack,
-  Text,
-  useColorModeValue,
-} from '@chakra-ui/react'
+import { Box, Divider, Stack, Text, useColorModeValue } from '@chakra-ui/react'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import PageProgress from 'components/PageProgress'
-import React, { useState } from 'react'
+import React from 'react'
 import { ButtonLink } from 'components/ButtonLink'
 import { ResponsiveStack } from 'components/ResponsiveStack'
 import { withAuth } from 'providers/authProvider'
@@ -196,7 +187,6 @@ const RulesCard = () => {
         <Content
           overflowY="scroll"
           height="450px"
-          textAlign="justify"
           style={{
             textIndent: '2rem',
           }}

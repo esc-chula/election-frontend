@@ -81,7 +81,6 @@ const Login = () => {
         overflowY="scroll"
         height="350px"
         fontSize={['14px', '14px', '16px']}
-        textAlign="justify"
         style={{
           textIndent: '2rem ',
         }}
