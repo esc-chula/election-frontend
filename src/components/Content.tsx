@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 
 const StyledText = styled(Text)`
   &::-webkit-scrollbar {
-    width: 12px;
+    width: 11px;
   }
   &::-webkit-scrollbar-track {
     background: transparent;
