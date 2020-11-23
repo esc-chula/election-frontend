@@ -81,6 +81,10 @@ const Login = () => {
         overflowY="scroll"
         height="350px"
         fontSize={['14px', '14px', '16px']}
+        textAlign="justify"
+        style={{
+          textIndent: '2rem ',
+        }}
       >
         กรรมการนิสิตคณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย (ในที่นี้จะใช้แทนว่า
         “กวศ.”)
