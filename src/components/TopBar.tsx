@@ -9,13 +9,12 @@ import {
   Box,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { ReactComponent as ESCLogo } from '../images/esc-logo.svg'
-import { ReactComponent as ESCLogoMono } from '../images/esc-logo-mono.svg'
 import Container from './Container'
 import { useAuthContext } from 'providers/authProvider'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { Link, useHistory } from 'react-router-dom'
 import { DarkModeController } from './DarkModeController'
+import { APP_LOGO, APP_LOGO_MONO } from 'config/env'
 
 const TopBar = () => {
   const { isAuthenticated, authUser, logout } = useAuthContext()
@@ -43,7 +42,7 @@ const TopBar = () => {
       <Container w="100%">
         <Flex w="100%" alignItems="center">
           <Link to="/profile">
-            {useColorModeValue(<ESCLogo />, <ESCLogoMono />)}
+            <img src={useColorModeValue(APP_LOGO, APP_LOGO_MONO)} />
           </Link>
           <Box flex={1} />
           <DarkModeController />

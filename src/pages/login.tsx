@@ -11,10 +11,12 @@ import {
 import Card from 'components/Card'
 import { PrimaryButton } from 'components/PrimaryButton'
 import { useRedirectPath } from 'util/hooks'
-import { APP_HOST, SSO_URL } from 'config/env'
+import { APP_HOST, APP_NAME, SSO_URL } from 'config/env'
 import Container from 'components/Container'
 import { Header } from 'components/Header'
 import { Content } from 'components/Content'
+
+const appNameParts = APP_NAME.split(' ')
 
 const Login = () => {
   const [checked, setChecked] = useState(false)
@@ -39,8 +41,8 @@ const Login = () => {
           color="white"
           whiteSpace="break-spaces"
         >
-          ระบบเลือกตั้งออนไลน์
-          <Box as="br" display={['block', 'none']} /> คณะวิศวกรรมศาสตร์
+          {appNameParts[0]}
+          <Box as="br" display={['block', 'none']} /> {appNameParts[1]}
         </Text>
       </Box>
     </Flex>
@@ -54,7 +56,7 @@ const Login = () => {
         fontSize={['sm', 'md']}
         textAlign="center"
       >
-        การเข้าสู่ระบบเลือกตั้งออนไลน์ คณะวิศวกรรมศาสตร์
+        การเข้าสู่{APP_NAME + ' '}
         จำเป็นต้องมีการยืนยันตัวตนผู้ใช้ระบบด้วยบัญชี CUNET
         โปรดยอมรับนโยบายการจัดเก็บข้อมูลส่วนบุคคลดังกล่าวเพื่อเข้าสู่ระบบ
       </Text>

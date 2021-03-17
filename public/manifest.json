@@ -1,14 +1,14 @@
 {
-  "short_name": "Intania Election",
-  "name": "ระบบเลือกตั้งออนไลน์ กรรมการนิสิตคณะวิศวกรรมศาสตร์",
+  "short_name": "%REACT_APP_SHORT_NAME%",
+  "name": "%REACT_APP_NAME%",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "%REACT_APP_BRANDING%/favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "esclogo512.png",
+      "src": "%REACT_APP_BRANDING%/logo512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
