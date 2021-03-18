@@ -1,4 +1,5 @@
 import { APP_BRANDING } from '../config/env'
+import { escBranding } from './esc-branding'
 
 interface Tone {
   [50]: string
@@ -13,39 +14,12 @@ interface Tone {
   [900]: string
 }
 
-interface BrandPalette {
+export interface BrandPalette {
   primary: Tone
   alternate?: Tone
 }
 
-const esc: BrandPalette = {
-  primary: {
-    50: '#f4e7e8',
-    100: '#eacfd0',
-    200: '#d49fa1',
-    300: '#bf7072',
-    400: '#a94043',
-    500: '#941014',
-    600: '#760d10',
-    700: '#590a0c',
-    800: '#3b0608',
-    900: '#1e0304',
-  },
-  alternate: {
-    50: '#f5e9ea',
-    100: '#ead4d5',
-    200: '#d5a8ab',
-    300: '#c07d80',
-    400: '#ab5156',
-    500: '#96262c',
-    600: '#781e23',
-    700: '#5a171a',
-    800: '#3c0f12',
-    900: '#1e0809',
-  },
-}
-
-const example: BrandPalette = {
+const examplePalette: BrandPalette = {
   primary: {
     50: '#E6FFFA',
     100: '#B2F5EA',
@@ -60,13 +34,31 @@ const example: BrandPalette = {
   },
 }
 
-let current: BrandPalette = undefined
+const exampleRules: Rule[] = []
+const exampleBranding: Branding = {
+  rules: exampleRules,
+  palette: examplePalette,
+}
+
+interface Rule {
+  header?: string
+  contents: (string | JSX.Element)[]
+}
+
+export interface Branding {
+  rules: Rule[]
+  palette: BrandPalette
+}
+
+let current: Branding
 switch (APP_BRANDING) {
   case 'esc':
-    current = esc
+    current = escBranding
     break
   case 'example':
-    current = example
+    current = exampleBranding
     break
+  default:
+    console.error('APP BRANDING IS NOT SET.')
 }
-export { current as brandPalette }
+export { current as branding }

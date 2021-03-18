@@ -2,7 +2,7 @@ import { extendTheme, Theme, theme } from '@chakra-ui/react'
 import { createBreakpoints } from '@chakra-ui/theme-tools'
 import { GlobalStyleProps } from '@chakra-ui/theme-tools'
 import { isDarkMode } from 'util/functions'
-import { brandPalette } from './branding'
+import { branding } from './branding'
 
 const breakpoints = createBreakpoints({
   sm: '768px',
@@ -31,8 +31,8 @@ const appTheme = extendTheme({
   styles,
   colors: {
     ...theme.colors,
-    intaniaRed: brandPalette.primary,
-    intaniaRedSecondary: brandPalette.alternate ?? brandPalette.primary,
+    intaniaRed: branding.palette.primary,
+    intaniaRedSecondary: branding.palette.alternate ?? branding.palette.primary,
     mono: {
       0: '#FFFFFF',
       1: '#E0E0E0',
