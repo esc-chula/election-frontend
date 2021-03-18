@@ -16,6 +16,7 @@ import { useAuthContext } from 'providers/authProvider'
 import { ReactComponent as FacebookLogo } from '../images/facebook.svg'
 import { ReactComponent as InstagramLogo } from '../images/instagram.svg'
 import { PrimaryButton } from './PrimaryButton'
+import { branding } from 'config/branding'
 
 export default function RedirectFirstElection() {
   const { elections } = useElectionContext()
@@ -29,6 +30,8 @@ export default function RedirectFirstElection() {
   const noVotable = filtered.length === 0
   const green = useColorModeValue('green.500', 'green.200')
   const checkColor = useColorModeValue('white', 'gray.800')
+
+  const { fbName, fbLink, igName, igLink, website } = branding
 
   if (noVotable) {
     return (
@@ -67,53 +70,51 @@ export default function RedirectFirstElection() {
                     สามารถติดตามผลการเลือกตั้งได้ทาง
                   </Text>
                   <Flex alignItems="flex-start" flexDirection="column">
-                    <a
-                      href="https://facebook.com/escchula"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <Text fontWeight={400} textAlign="center">
-                        <Icon
-                          as={FacebookLogo}
-                          fontSize="16px"
-                          color="#4267B2"
-                          mr="10px"
-                          transform="translateY(-2px)"
-                        />
-                        กรรมการนิสิตคณะวิศวกรรมศาสตร์ กวศ.
-                      </Text>
-                    </a>
-                    <a
-                      href="https://instagram.com/escchula"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <Text fontWeight={400} textAlign="center">
-                        <Icon
-                          as={InstagramLogo}
-                          fontSize="16px"
-                          color="#4267B2"
-                          mr="10px"
-                          transform="translateY(-2px)"
-                        />
-                        @escchula
-                      </Text>
-                    </a>
+                    {fbLink && (
+                      <a href={fbLink} target="_blank" rel="noreferrer">
+                        <Text fontWeight={400} textAlign="center">
+                          <Icon
+                            as={FacebookLogo}
+                            fontSize="16px"
+                            color="#4267B2"
+                            mr="10px"
+                            transform="translateY(-2px)"
+                          />
+                          {fbName}
+                        </Text>
+                      </a>
+                    )}
+                    {igLink && (
+                      <a href={igLink} target="_blank" rel="noreferrer">
+                        <Text fontWeight={400} textAlign="center">
+                          <Icon
+                            as={InstagramLogo}
+                            fontSize="16px"
+                            color="#4267B2"
+                            mr="10px"
+                            transform="translateY(-2px)"
+                          />
+                          {igName}
+                        </Text>
+                      </a>
+                    )}
                   </Flex>
-                  <Text mt="20px" fontWeight={300} textAlign="center">
-                    และเว็บไซต์ของกวศ.{' '}
-                    <a
-                      href="https://esc.eng.chula.ac.th"
-                      target="_blank"
-                      rel="noreferrer"
-                      style={{
-                        textDecoration: 'underline',
-                        fontWeight: 400,
-                      }}
-                    >
-                      https://esc.eng.chula.ac.th
-                    </a>
-                  </Text>
+                  {website && (
+                    <Text mt="20px" fontWeight={300} textAlign="center">
+                      และเว็บไซต์{' '}
+                      <a
+                        href={website}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{
+                          textDecoration: 'underline',
+                          fontWeight: 400,
+                        }}
+                      >
+                        {website}
+                      </a>
+                    </Text>
+                  )}
                 </>
               )}
             </Flex>

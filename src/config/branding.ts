@@ -1,5 +1,6 @@
 import { APP_BRANDING } from '../config/env'
-import { escBranding } from './esc-branding'
+import { escBranding } from './esc'
+import { exampleBranding } from './example'
 
 interface Tone {
   [50]: string
@@ -19,28 +20,7 @@ export interface BrandPalette {
   alternate?: Tone
 }
 
-const examplePalette: BrandPalette = {
-  primary: {
-    50: '#E6FFFA',
-    100: '#B2F5EA',
-    200: '#81E6D9',
-    300: '#4FD1C5',
-    400: '#38B2AC',
-    500: '#319795',
-    600: '#2C7A7B',
-    700: '#285E61',
-    800: '#234E52',
-    900: '#1D4044',
-  },
-}
-
-const exampleRules: Rule[] = []
-const exampleBranding: Branding = {
-  rules: exampleRules,
-  palette: examplePalette,
-}
-
-interface Rule {
+export interface Rule {
   header?: string
   contents: (string | JSX.Element)[]
 }
@@ -48,6 +28,13 @@ interface Rule {
 export interface Branding {
   rules: Rule[]
   palette: BrandPalette
+  fbName?: string
+  fbLink?: string
+  igName?: string
+  igLink?: string
+  website?: string
+  logoURL: string
+  logoDarkURL: string
 }
 
 let current: Branding
@@ -59,6 +46,6 @@ switch (APP_BRANDING) {
     current = exampleBranding
     break
   default:
-    console.error('APP BRANDING IS NOT SET.')
+    console.error('APP_BRANDING IS NOT SET.')
 }
 export { current as branding }
