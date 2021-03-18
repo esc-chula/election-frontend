@@ -11,9 +11,9 @@ import {
 import { API_HOST } from 'config/env'
 import React from 'react'
 import { Candidate, Member } from 'types/election'
-import Card from './Card'
 import Markdown, { MarkdownToJSX } from 'markdown-to-jsx'
 import { CandidateCheckbox, CandidateCheckboxProps } from './CandidateCheckbox'
+import { useIntaniaRed } from 'util/hooks'
 
 type MemberCardProps = BoxProps &
   Omit<CandidateCheckboxProps, 'index'> & {
@@ -93,12 +93,13 @@ export function MemberCard({
 }
 
 function CardHeader({ member, ...props }: { member: Member } & StackProps) {
+  const intaniaRed = useIntaniaRed()
   return (
     <Stack spacing="2px" {...props}>
       <Text
         fontSize={['2xs', 'sm', 'md']}
         fontWeight="regular"
-        color="intaniaRed.500"
+        color={intaniaRed}
       >
         ผู้สมัครตำแหน่ง {member.position}
       </Text>
