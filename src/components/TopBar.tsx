@@ -14,7 +14,7 @@ import { useAuthContext } from 'providers/authProvider'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { Link, useHistory } from 'react-router-dom'
 import { DarkModeController } from './DarkModeController'
-import { APP_LOGO, APP_LOGO_MONO } from 'config/env'
+import { branding } from 'config/branding'
 
 const TopBar = () => {
   const { isAuthenticated, authUser, logout } = useAuthContext()
@@ -26,6 +26,8 @@ const TopBar = () => {
   const goToProfile = useCallback(() => {
     push('/profile')
   }, [push])
+
+  const { logoURL, logoDarkURL } = branding
 
   return (
     <Flex
@@ -42,7 +44,7 @@ const TopBar = () => {
       <Container w="100%">
         <Flex w="100%" alignItems="center">
           <Link to="/profile">
-            <img src={useColorModeValue(APP_LOGO, APP_LOGO_MONO)} />
+            <img src={useColorModeValue(logoURL, logoDarkURL)} />
           </Link>
           <Box flex={1} />
           <DarkModeController />

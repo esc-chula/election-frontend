@@ -5,5 +5,3 @@ export const BASENAME = process.env.REACT_APP_BASENAME
 
 export const APP_BRANDING = process.env.REACT_APP_BRANDING
 export const APP_NAME = process.env.REACT_APP_NAME
-export const APP_LOGO = process.env.REACT_APP_LOGO
-export const APP_LOGO_MONO = process.env.REACT_APP_LOGO_DARK
