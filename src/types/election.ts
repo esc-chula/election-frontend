@@ -14,26 +14,32 @@ export interface ImageInfo {
   formats: Record<string, ImageAsset>
 }
 
-export interface Candidate {
+export interface Member {
   id: number
   name: string
   year: number
   department: string
   policy: string
+  position: string
   avatar: ImageInfo & ImageAsset
+}
+
+export interface Candidate {
+  id: number
+  name: string
   candidateID: number
+  members: Member[]
 }
 
 export interface Position {
   id: number
-  position: string
   candidates: Candidate[]
 }
 
 export interface Election {
   id: number
   name: string
-  positions: Position[]
+  candidates: Candidate[]
   startDate: string
   endDate: string
   voted: boolean

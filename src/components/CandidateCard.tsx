@@ -1,36 +1,15 @@
-import {
-  BoxProps,
-  ControlBox,
-  Image,
-  Text,
-  VisuallyHidden,
-  Stack,
-  AspectRatio,
-  StackProps,
-  Divider,
-} from '@chakra-ui/react'
-import { API_HOST } from 'config/env'
-import React, { ChangeEventHandler, useCallback } from 'react'
+import { BoxProps, Text, Flex } from '@chakra-ui/react'
+import React from 'react'
 import { Candidate } from 'types/election'
 import Card from './Card'
-import { CloseIcon } from '@chakra-ui/icons'
-import { useIntaniaRed } from 'util/hooks'
-import Markdown, { MarkdownToJSX } from 'markdown-to-jsx'
+import { MemberCard } from './MemberCard'
+import { CandidateCheckbox, CandidateCheckboxProps } from './CandidateCheckbox'
 
 type CandidateCardProps = BoxProps &
-  Omit<CheckboxProps, 'index'> & {
+  Omit<CandidateCheckboxProps, 'index'> & {
     candidate: Candidate
     isSingular: boolean
   }
-
-const markdownOverrides: MarkdownToJSX.Overrides = {
-  h2: {
-    component: Text,
-    props: {
-      fontWeight: 500,
-    },
-  },
-}
 
 export function CandidateCard({
   candidate,
@@ -40,116 +19,50 @@ export function CandidateCard({
   isSingular,
   ...rest
 }: CandidateCardProps) {
+  const isParty = candidate.members.length !== 1
   return (
-    <Card {...rest}>
-      <CardHeader candidate={candidate} display={['none', 'block']} />
-      <Stack direction="row" spacing="15px">
-        <Stack spacing="8px">
-          <AspectRatio minW={['100px', '100px', '130px']} ratio={3 / 4}>
-            <Image
-              src={
-                candidate.avatar
-                  ? `${API_HOST}${candidate.avatar.url}`
-                  : undefined
-              }
-            />
-          </AspectRatio>
-          <Stack direction="row" alignSelf="center" alignItems="center">
-            <Text fontSize={['sm', 'sm', 'md']} fontWeight="medium">
-              เบอร์ {candidate.candidateID}
-            </Text>
-            {!isSingular && (
-              <Checkbox
-                index={candidate.id}
-                selected={selected}
-                setSelected={setSelected}
-                disabled={disabled}
-              />
-            )}
-          </Stack>
-        </Stack>
-
-        <Stack spacing="2px">
-          <CardHeader candidate={candidate} display={['block', 'none']} />
-          <Text
-            fontSize={['xs', 'sm', 'md']}
-            fontWeight={['extraLight', 'light']}
-            alignSelf="flex-start"
-            textAlign="start"
-          >
-            <Markdown
-              options={{
-                overrides: markdownOverrides,
-              }}
-            >
-              {candidate.policy}
-            </Markdown>
+    <>
+      {isParty && (
+        <Flex mt={4} ml={4}>
+          <Text fontSize={['sm', 'lg', 'xl']} fontWeight="regular" mr={2}>
+            หมายเลข {candidate.candidateID}
           </Text>
-        </Stack>
-      </Stack>
-    </Card>
-  )
-}
-
-function CardHeader({
-  candidate,
-  ...props
-}: { candidate: Candidate } & StackProps) {
-  return (
-    <Stack spacing="2px" {...props}>
-      <Text fontSize={['sm', 'lg', 'xl']} fontWeight="regular">
-        {candidate.name}
-      </Text>
-      <Text fontSize={['2xs', 'sm', 'md']} fontWeight="extraLight">
-        {candidate.department} ปี {candidate.year}
-      </Text>
-      <Divider mb={['0', '8px']} />
-    </Stack>
-  )
-}
-
-interface CheckboxProps {
-  index: number
-  selected: number
-  setSelected: (selected: number) => void
-  disabled: boolean
-}
-
-export function Checkbox({
-  index,
-  selected,
-  setSelected,
-  disabled,
-}: CheckboxProps) {
-  const checked = selected === index
-  const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
-    (e) => {
-      if (!disabled && e.target.value) {
-        setSelected(index)
-      }
-    },
-    [index, setSelected, disabled],
-  )
-  const intaniaRed = useIntaniaRed()
-  return (
-    <label>
-      <VisuallyHidden as="input" {...{ type: 'checkbox', checked, onChange }} />
-
-      <ControlBox
-        borderWidth="2px"
-        boxSize={['24px', '24px', '32px']}
-        cursor={!disabled ? 'pointer' : undefined}
-        rounded="sm"
-        borderColor={intaniaRed}
-        _checked={{
-          bg: intaniaRed,
-          color: 'white',
-          borderColor: intaniaRed,
-        }}
-        _focus={{ borderColor: 'intaniaRed.600', boxShadow: 'none' }}
-      >
-        <CloseIcon boxSize={['16px', '16px', '20px']} />
-      </ControlBox>
-    </label>
+          {!isSingular && (
+            <CandidateCheckbox
+              index={candidate.id}
+              selected={selected}
+              setSelected={setSelected}
+              disabled={disabled}
+            />
+          )}
+        </Flex>
+      )}
+      <Card {...rest}>
+        <Text fontSize={['sm', 'lg', 'xl']} fontWeight="regular" mb={2}>
+          {candidate.name}
+        </Text>
+        <Flex
+          flexDirection={['column', 'row']}
+          flexWrap="wrap"
+          mx={[0, '-6px']}
+          mt={-4}
+        >
+          {candidate.members.map((member) => (
+            <MemberCard
+              key={member.id}
+              member={member}
+              candidate={candidate}
+              selected={selected}
+              setSelected={setSelected}
+              disabled={disabled}
+              isSingular={isSingular}
+              w={!isParty ? '100%' : ['100%', '342px', '462px']}
+              mx={[0, '6px']}
+              mt={4}
+            />
+          ))}
+        </Flex>
+      </Card>
+    </>
   )
 }

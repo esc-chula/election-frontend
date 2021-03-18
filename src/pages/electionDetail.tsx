@@ -48,7 +48,6 @@ function SelectedCandidateBox({
       <Text color={selectedCandidateColor} fontWeight={300} fontSize="16px">
         {selectedCandidate.name}
         <br />
-        {selectedCandidate.department} ปี {selectedCandidate.year}
       </Text>
     </Box>
   )
@@ -57,11 +56,13 @@ function SelectedCandidateBox({
 export default function ElectionDetail({ election }: { election: Election }) {
   const { setVoted } = useElectionContext()
   const [selected, setSelected] = useState<SelectedMap>({})
-  const allPositionsSelected = election.positions.every(
-    (position) => selected[position.id] !== undefined,
-  )
-  const firstPosition = election.positions[0]
-  const selectedCandidate = firstPosition.candidates.find(
+  const firstPosition = {
+    id: 0,
+    candidates: election.candidates,
+  }
+  const position = firstPosition
+  const allPositionsSelected = selected[firstPosition.id] !== undefined
+  const selectedCandidate = election.candidates.find(
     (candidate) => candidate.id === selected[firstPosition.id],
   )
 
@@ -76,10 +77,7 @@ export default function ElectionDetail({ election }: { election: Election }) {
     try {
       const body: SubmitVoteDTO = {
         electionID: election.id,
-        positions: election.positions.map((position) => ({
-          positionID: position.id,
-          candidateID: selected[position.id],
-        })),
+        candidateID: selected[firstPosition.id],
       }
       await client.post('/vote', body)
       setVoted(election.id)
@@ -89,6 +87,7 @@ export default function ElectionDetail({ election }: { election: Election }) {
       })
       push('/election')
     } catch (error) {
+      console.log(error)
       if (error.response?.status === 409) {
         toast({
           title: 'ไม่สามารถลงคะแนนได้',
@@ -154,7 +153,7 @@ export default function ElectionDetail({ election }: { election: Election }) {
                 {selected[firstPosition.id] === -2 ? 'รับรอง' : 'ไม่รับรอง'}
               </Text>
               <SelectedCandidateBox
-                selectedCandidate={firstPosition.candidates[0]}
+                selectedCandidate={election.candidates[0]}
               />
             </>
           ) : (
@@ -190,15 +189,12 @@ export default function ElectionDetail({ election }: { election: Election }) {
       <Text pt="16px" fontWeight="medium" fontSize={['xl', '2xl']}>
         {election.name}
       </Text>
-      {election.positions.map((position) => (
-        <PositionAdapter
-          key={position.id}
-          position={position}
-          selected={selected}
-          setSelected={setSelected}
-          disabled={loading}
-        />
-      ))}
+      <PositionAdapter
+        position={position}
+        selected={selected}
+        setSelected={setSelected}
+        disabled={loading}
+      />
       <Button
         width="100%"
         mt="8px"

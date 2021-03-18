@@ -7,8 +7,5 @@ export interface ExchangeTokenDTO {
 
 export interface SubmitVoteDTO {
   electionID: number
-  positions: {
-    positionID: number
-    candidateID: number
-  }[]
+  candidateID: number
 }

@@ -2,8 +2,9 @@ import React from 'react'
 import { Box, Flex, Stack, Text } from '@chakra-ui/react'
 import { Position } from 'types/election'
 import Card from './Card'
-import { CandidateCard, Checkbox } from './CandidateCard'
+import { CandidateCard } from './CandidateCard'
 import { useIntaniaRed } from 'util/hooks'
+import { CandidateCheckbox } from './CandidateCheckbox'
 
 interface CandidateListProps {
   position: Position
@@ -19,6 +20,7 @@ export default function CandidateList({
   disabled,
 }: CandidateListProps) {
   const isSingular = position.candidates.length === 1
+  const isParty = position.candidates[0].members.length !== 1
 
   return (
     <Box pt="16px">
@@ -44,7 +46,7 @@ export default function CandidateList({
             selected={selected}
             setSelected={setSelected}
             disabled={disabled}
-            w={isSingular ? '100%' : ['100%', '354px', '474px']}
+            w={isSingular || isParty ? '100%' : ['100%', '354px', '474px']}
             mx={[0, '6px']}
             mt="12px"
             isSingular={isSingular}
@@ -58,7 +60,7 @@ export default function CandidateList({
               <Text fontSize={['sm', 'md', 'lg']} fontWeight="medium" mr="16px">
                 รับรอง
               </Text>
-              <Checkbox
+              <CandidateCheckbox
                 index={-2}
                 selected={selected}
                 setSelected={setSelected}
@@ -71,7 +73,7 @@ export default function CandidateList({
               <Text fontSize={['sm', 'md', 'lg']} fontWeight="medium" mr="16px">
                 ไม่รับรอง
               </Text>
-              <Checkbox
+              <CandidateCheckbox
                 index={-3}
                 selected={selected}
                 setSelected={setSelected}
@@ -86,7 +88,7 @@ export default function CandidateList({
           <Text fontSize={['sm', 'md', 'lg']} fontWeight="medium" mr="16px">
             งดออกเสียง
           </Text>
-          <Checkbox
+          <CandidateCheckbox
             index={-1}
             selected={selected}
             setSelected={setSelected}
