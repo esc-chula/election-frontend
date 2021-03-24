@@ -29,6 +29,7 @@ export interface Candidate {
   name: string
   candidateID: number
   members: Member[]
+  policy: string
 }
 
 export interface Position {

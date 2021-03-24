@@ -4,6 +4,8 @@ import { Candidate } from 'types/election'
 import Card from './Card'
 import { MemberCard } from './MemberCard'
 import { CandidateCheckbox, CandidateCheckboxProps } from './CandidateCheckbox'
+import Markdown from 'markdown-to-jsx'
+import { useIntaniaRed } from 'util/hooks'
 
 type CandidateCardProps = BoxProps &
   Omit<CandidateCheckboxProps, 'index'> & {
@@ -20,6 +22,7 @@ export function CandidateCard({
   ...rest
 }: CandidateCardProps) {
   const isParty = candidate.members.length !== 1
+  const intaniaRed = useIntaniaRed()
   return (
     <>
       {isParty && (
@@ -38,9 +41,30 @@ export function CandidateCard({
         </Flex>
       )}
       <Card {...rest}>
-        <Text fontSize={['sm', 'lg', 'xl']} fontWeight="regular" mb={2}>
+        <Text fontSize={['sm', 'lg', 'xl']} fontWeight="regular" mb={4}>
           {candidate.name}
         </Text>
+        {candidate.policy && (
+          <>
+            <Text
+              fontSize={['xs', 'md', 'lg']}
+              fontWeight="regular"
+              mb={2}
+              color={intaniaRed}
+            >
+              วิสัยทัศน์พรรค
+            </Text>
+            <Text
+              fontSize={['xs', 'sm', 'md']}
+              fontWeight={'light'}
+              mb={8}
+              style={{ textIndent: '2rem' }}
+            >
+              <Markdown>{candidate.policy}</Markdown>
+            </Text>
+          </>
+        )}
+
         <Flex
           flexDirection={['column', 'row']}
           flexWrap="wrap"
