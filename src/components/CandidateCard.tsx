@@ -41,28 +41,32 @@ export function CandidateCard({
         </Flex>
       )}
       <Card {...rest}>
-        <Text fontSize={['sm', 'lg', 'xl']} fontWeight="regular" mb={4}>
-          {candidate.name}
-        </Text>
-        {candidate.policy && (
+        {isParty && (
           <>
-            <Text
-              fontSize={['xs', 'md', 'lg']}
-              fontWeight="regular"
-              mb={2}
-              color={intaniaRed}
-            >
-              วิสัยทัศน์พรรค
+            <Text fontSize={['sm', 'lg', 'xl']} fontWeight="regular" mb={4}>
+              {candidate.name}
             </Text>
-            <Text
-              fontSize={['xs', 'sm', 'md']}
-              fontWeight={'light'}
-              mb={8}
-              style={{ textIndent: '2rem' }}
-              as="div"
-            >
-              <Markdown>{candidate.policy}</Markdown>
-            </Text>
+            {candidate.policy && (
+              <>
+                <Text
+                  fontSize={['xs', 'md', 'lg']}
+                  fontWeight="regular"
+                  mb={2}
+                  color={intaniaRed}
+                >
+                  วิสัยทัศน์พรรค
+                </Text>
+                <Text
+                  fontSize={['xs', 'sm', 'md']}
+                  fontWeight={'light'}
+                  mb={8}
+                  style={{ textIndent: '2rem' }}
+                  as="div"
+                >
+                  <Markdown>{candidate.policy}</Markdown>
+                </Text>
+              </>
+            )}
           </>
         )}
 
