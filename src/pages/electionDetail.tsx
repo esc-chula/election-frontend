@@ -41,9 +41,8 @@ function SelectedCandidateBox({
   )
   const selectedCandidateColor = useColorModeValue('mono.4', 'whiteAlpha.800')
   const isParty = selectedCandidate.members.length !== 1
-  const name = isParty
-    ? selectedCandidate.name
-    : selectedCandidate.members[0].name
+  const member = !isParty && selectedCandidate.members[0]
+  const name = member?.name ?? selectedCandidate.name
   return (
     <Box mt="16px" ml="32px">
       <Text mt="16px" color={intaniaRed} fontSize="20px">
@@ -52,6 +51,7 @@ function SelectedCandidateBox({
       <Text color={selectedCandidateColor} fontWeight={300} fontSize="16px">
         {name}
         <br />
+        {member && `${member.department} ปี ${member.year}`}
       </Text>
     </Box>
   )
