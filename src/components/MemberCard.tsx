@@ -77,6 +77,7 @@ export function MemberCard({
             fontWeight={['extraLight', 'light']}
             alignSelf="flex-start"
             textAlign="start"
+            as="div"
           >
             <Markdown
               options={{

@@ -59,6 +59,7 @@ export function CandidateCard({
               fontWeight={'light'}
               mb={8}
               style={{ textIndent: '2rem' }}
+              as="div"
             >
               <Markdown>{candidate.policy}</Markdown>
             </Text>
