@@ -43,7 +43,11 @@ export function MemberCard({
   const isParty = candidate.members.length !== 1
   return (
     <Box {...rest}>
-      <CardHeader member={member} display={['none', 'block']} />
+      <CardHeader
+        member={member}
+        display={['none', 'block']}
+        isParty={isParty}
+      />
       <Stack direction="row" spacing="15px">
         <Stack spacing="8px">
           <AspectRatio minW={['100px', '100px', '130px']} ratio={3 / 4}>
@@ -71,7 +75,11 @@ export function MemberCard({
         </Stack>
 
         <Stack spacing="2px">
-          <CardHeader member={member} display={['block', 'none']} />
+          <CardHeader
+            member={member}
+            display={['block', 'none']}
+            isParty={isParty}
+          />
           <Text
             fontSize={['xs', 'sm', 'md']}
             fontWeight={['extraLight', 'light']}
@@ -93,13 +101,23 @@ export function MemberCard({
   )
 }
 
-function CardHeader({ member, ...props }: { member: Member } & StackProps) {
+function CardHeader({
+  member,
+  isParty,
+  ...props
+}: { member: Member; isParty: boolean } & StackProps) {
   const redText = useRedText()
   return (
     <Stack spacing="2px" {...props}>
-      <Text fontSize={['2xs', 'sm', 'md']} fontWeight="regular" color={redText}>
-        ผู้สมัครตำแหน่ง {member.position}
-      </Text>
+      {isParty && (
+        <Text
+          fontSize={['2xs', 'sm', 'md']}
+          fontWeight="regular"
+          color={redText}
+        >
+          ผู้สมัครตำแหน่ง {member.position}
+        </Text>
+      )}
       <Text fontSize={['sm', 'lg', 'xl']} fontWeight="regular">
         {member.name}
       </Text>

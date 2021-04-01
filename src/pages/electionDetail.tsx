@@ -14,60 +14,45 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
-  useColorModeValue,
   useDisclosure,
   useToast,
 } from '@chakra-ui/react'
 import CandidateList from 'components/CandidateList'
-import { Candidate, Election, Position } from 'types/election'
+import { Election, Position } from 'types/election'
 import { useHttpContext } from 'providers/httpProvider'
 import { SubmitVoteDTO } from 'types/dto'
-import { CheckIcon } from '@chakra-ui/icons'
+import { CheckIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import { PrimaryButton } from 'components/PrimaryButton'
 import { AiFillExclamationCircle } from 'react-icons/ai'
+import { PositionSelection } from 'components/PositionSelection'
+import Card from 'components/Card'
+import { useIntaniaRed } from 'util/hooks'
+import { PositionBar } from 'components/PositionBar'
+import { UnloadPrompt } from 'components/UnloadPrompt'
 
-type SelectedMap = Record<number, number>
-
-interface SelectedCandidateBoxProps {
-  selectedCandidate: Candidate
-}
-
-function SelectedCandidateBox({
-  selectedCandidate,
-}: SelectedCandidateBoxProps) {
-  const intaniaRed = useColorModeValue(
-    'intaniaRed.500',
-    'intaniaRedSecondary.400',
-  )
-  const selectedCandidateColor = useColorModeValue('mono.4', 'whiteAlpha.800')
-  const isParty = selectedCandidate.members.length !== 1
-  const member = !isParty && selectedCandidate.members[0]
-  const name = member?.name ?? selectedCandidate.name
-  return (
-    <Box mt="16px" ml="32px">
-      <Text mt="16px" color={intaniaRed} fontSize="20px">
-        เบอร์ {selectedCandidate.candidateID}
-      </Text>
-      <Text color={selectedCandidateColor} fontWeight={300} fontSize="16px">
-        {name}
-        <br />
-        {member && `${member.department} ปี ${member.year}`}
-      </Text>
-    </Box>
-  )
-}
+export type SelectedMap = Record<number, number>
 
 export default function ElectionDetail({ election }: { election: Election }) {
   const { setVoted } = useElectionContext()
   const [selected, setSelected] = useState<SelectedMap>({})
-  const firstPosition = {
-    id: 0,
-    candidates: election.candidates,
-  }
-  const position = firstPosition
-  const allPositionsSelected = selected[firstPosition.id] !== undefined
-  const selectedCandidate = election.candidates.find(
-    (candidate) => candidate.id === selected[firstPosition.id],
+  const [positionIndex, setPositionIndex] = useState(0)
+  const somePositionsSelected = election.positions.some(
+    (position) => selected[position.id] !== undefined,
+  )
+  const allPositionsSelected = election.positions.every(
+    (position) => selected[position.id] !== undefined,
+  )
+  const multiplePosition = election.positions.length !== 1
+  const currentPosition = election.positions[positionIndex]
+  const selectedCandidates: PositionSelection[] = election.positions.map(
+    (position, positionIndex) => ({
+      position,
+      positionIndex,
+      selectedValue: selected[position.id],
+      selectedCandidate: position.candidates.find(
+        (candidate) => candidate.id === selected[position.id],
+      ),
+    }),
   )
 
   const { isOpen: modalOpen, onOpen, onClose } = useDisclosure()
@@ -81,7 +66,9 @@ export default function ElectionDetail({ election }: { election: Election }) {
     try {
       const body: SubmitVoteDTO = {
         electionID: election.id,
-        candidateID: selected[firstPosition.id],
+        candidateIDs: election.positions.map(
+          (position) => selected[position.id],
+        ),
       }
       await client.post('/vote', body)
       setVoted(election.id)
@@ -89,7 +76,6 @@ export default function ElectionDetail({ election }: { election: Election }) {
         title: 'ลงคะแนนสำเร็จ',
         status: 'success',
       })
-      push('/election')
     } catch (error) {
       console.log(error)
       if (error.response?.status === 409) {
@@ -110,10 +96,16 @@ export default function ElectionDetail({ election }: { election: Election }) {
     }
   }, [client, selected, election, push, toast, onClose, setVoted])
 
-  const intaniaRed = useColorModeValue(
-    'intaniaRed.500',
-    'intaniaRedSecondary.400',
-  )
+  const intaniaRed = useIntaniaRed()
+
+  const goNextPosition = useCallback(() => {
+    setPositionIndex((index) => index + 1)
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    })
+  }, [])
 
   if (!election) {
     return <NotFound />
@@ -144,32 +136,13 @@ export default function ElectionDetail({ election }: { election: Election }) {
             {election.name}
           </Text>
           <hr />
-          {selectedCandidate ? (
-            <SelectedCandidateBox selectedCandidate={selectedCandidate} />
-          ) : [-2, -3].includes(selected[firstPosition.id]) ? (
-            <>
-              <Text
-                mt="16px"
-                color={intaniaRed}
-                textAlign="center"
-                fontSize="2xl"
-              >
-                {selected[firstPosition.id] === -2 ? 'รับรอง' : 'ไม่รับรอง'}
-              </Text>
-              <SelectedCandidateBox
-                selectedCandidate={election.candidates[0]}
-              />
-            </>
-          ) : (
-            <Text
-              mt="16px"
-              color={intaniaRed}
-              textAlign="center"
-              fontSize="2xl"
-            >
-              {selected[firstPosition.id] === -1 ? 'งดออกเสียง' : 'ไม่รับรอง'}
-            </Text>
-          )}
+          {selectedCandidates.map((selection) => (
+            <PositionSelection
+              key={selection.position.id}
+              multiplePosition={multiplePosition}
+              selection={selection}
+            />
+          ))}
           <Flex mt="20px" mb="16px" justifyContent="space-between">
             <Button
               fontWeight={400}
@@ -193,24 +166,73 @@ export default function ElectionDetail({ election }: { election: Election }) {
       <Text pt="16px" fontWeight="medium" fontSize={['xl', '2xl']}>
         {election.name}
       </Text>
+      <PositionBar
+        positions={election.positions}
+        selected={selected}
+        positionIndex={positionIndex}
+        setPositionIndex={setPositionIndex}
+      />
+      <Card
+        mt="16px"
+        fontWeight="300"
+        textAlign="center"
+        fontSize={['sm', 'md', 'lg']}
+      >
+        ทำเครื่องหมาย X ลงในช่อง
+        <Box
+          display="inline-block"
+          mx="8px"
+          borderWidth="2px"
+          borderColor={intaniaRed}
+          boxSize="20px"
+          rounded="sm"
+          transform="translateY(4px)"
+        />
+        <Box display={['none', 'none']} />
+        {currentPosition.candidates[0].members.length === 1 && 'ของเบอร์'}
+        ที่คุณต้องการเลือก
+        {multiplePosition && (
+          <>
+            <br />
+            หากต้องการกลับไปแก้ไขตำแหน่งก่อนหน้า ให้กดที่ตำแหน่งในแถวด้านบน
+          </>
+        )}
+      </Card>
       <PositionAdapter
-        position={position}
+        position={currentPosition}
         selected={selected}
         setSelected={setSelected}
         disabled={loading}
       />
-      <Button
-        width="100%"
-        mt="8px"
-        mb="20px"
-        colorScheme="green"
-        fontWeight={400}
-        isDisabled={!allPositionsSelected || loading}
-        onClick={onOpen}
-      >
-        ลงคะแนนเสียง <CheckIcon ml="8px" />
-      </Button>
+      {positionIndex === election.positions.length - 1 ? (
+        <Button
+          width="100%"
+          mt="8px"
+          mb="20px"
+          colorScheme="green"
+          fontWeight={400}
+          isDisabled={!allPositionsSelected || loading}
+          onClick={onOpen}
+        >
+          ลงคะแนนเสียง <CheckIcon ml={2} />
+        </Button>
+      ) : (
+        <PrimaryButton
+          width="100%"
+          mt="8px"
+          mb="20px"
+          fontWeight={400}
+          isDisabled={!selected[currentPosition.id] || loading}
+          onClick={goNextPosition}
+        >
+          เลือกตำแหน่งถัดไป <ChevronRightIcon ml={2} />
+        </PrimaryButton>
+      )}
       {modal}
+      <UnloadPrompt
+        when={somePositionsSelected && !election.voted}
+        message="ยังไม่ได้บันทึกผลการเลือกตั้ง ต้องการออกจากหน้านี้หรือไม่?"
+      />
     </Container>
   )
 }

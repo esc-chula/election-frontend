@@ -34,13 +34,14 @@ export interface Candidate {
 
 export interface Position {
   id: number
+  name: string
   candidates: Candidate[]
 }
 
 export interface Election {
   id: number
   name: string
-  candidates: Candidate[]
+  positions: Position[]
   startDate: string
   endDate: string
   voted: boolean

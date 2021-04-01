@@ -3,7 +3,6 @@ import { Box, Flex, Stack, Text } from '@chakra-ui/react'
 import { Position } from 'types/election'
 import Card from './Card'
 import { CandidateCard } from './CandidateCard'
-import { useIntaniaRed } from 'util/hooks'
 import { CandidateCheckbox } from './CandidateCheckbox'
 
 interface CandidateListProps {
@@ -23,21 +22,7 @@ export default function CandidateList({
   const isParty = position.candidates[0].members.length !== 1
 
   return (
-    <Box pt="16px">
-      <Card fontWeight="300" textAlign="center" fontSize={['sm', 'md', 'lg']}>
-        ทำเครื่องหมาย X ลงในช่อง
-        <Box
-          display="inline-block"
-          mx="8px"
-          borderWidth="2px"
-          borderColor={useIntaniaRed()}
-          boxSize="20px"
-          rounded="sm"
-          transform="translateY(4px)"
-        />
-        <Box display={['none', 'none']} />
-        {!isSingular && 'ของเบอร์'}ที่คุณต้องการเลือก
-      </Card>
+    <Box>
       <Flex flexDirection={['column', 'row']} flexWrap="wrap" mx={[0, '-6px']}>
         {position.candidates.map((candidate) => (
           <CandidateCard
