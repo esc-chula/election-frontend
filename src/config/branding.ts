@@ -35,6 +35,7 @@ export interface Branding {
   website?: string
   logoURL: string
   logoDarkURL: string
+  electionName: string
 }
 
 let current: Branding
