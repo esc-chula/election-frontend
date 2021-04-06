@@ -5,7 +5,7 @@ import Card from './Card'
 import { MemberCard } from './MemberCard'
 import { CandidateCheckbox, CandidateCheckboxProps } from './CandidateCheckbox'
 import Markdown from 'markdown-to-jsx'
-import { useIntaniaRed } from 'util/hooks'
+import { useRedText } from 'util/hooks'
 
 type CandidateCardProps = BoxProps &
   Omit<CandidateCheckboxProps, 'index'> & {
@@ -22,7 +22,7 @@ export function CandidateCard({
   ...rest
 }: CandidateCardProps) {
   const isParty = candidate.members.length !== 1
-  const intaniaRed = useIntaniaRed()
+  const redText = useRedText()
   return (
     <>
       {isParty && (
@@ -52,7 +52,7 @@ export function CandidateCard({
                   fontSize={['xs', 'md', 'lg']}
                   fontWeight="regular"
                   mb={2}
-                  color={intaniaRed}
+                  color={redText}
                 >
                   วิสัยทัศน์พรรค
                 </Text>

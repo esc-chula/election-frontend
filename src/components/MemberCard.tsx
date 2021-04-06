@@ -13,7 +13,7 @@ import React from 'react'
 import { Candidate, Member } from 'types/election'
 import Markdown, { MarkdownToJSX } from 'markdown-to-jsx'
 import { CandidateCheckbox, CandidateCheckboxProps } from './CandidateCheckbox'
-import { useIntaniaRed } from 'util/hooks'
+import { useRedText } from 'util/hooks'
 
 type MemberCardProps = BoxProps &
   Omit<CandidateCheckboxProps, 'index'> & {
@@ -94,14 +94,10 @@ export function MemberCard({
 }
 
 function CardHeader({ member, ...props }: { member: Member } & StackProps) {
-  const intaniaRed = useIntaniaRed()
+  const redText = useRedText()
   return (
     <Stack spacing="2px" {...props}>
-      <Text
-        fontSize={['2xs', 'sm', 'md']}
-        fontWeight="regular"
-        color={intaniaRed}
-      >
+      <Text fontSize={['2xs', 'sm', 'md']} fontWeight="regular" color={redText}>
         ผู้สมัครตำแหน่ง {member.position}
       </Text>
       <Text fontSize={['sm', 'lg', 'xl']} fontWeight="regular">
