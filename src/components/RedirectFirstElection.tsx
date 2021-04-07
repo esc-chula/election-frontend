@@ -40,7 +40,9 @@ export default function RedirectFirstElection() {
           <Card mt="24px">
             <Flex flexDirection="column" alignItems="center">
               {noElections ? (
-                <Text fontSize="20px">ไม่มีการเลือกตั้งในขณะนี้</Text>
+                <Text fontSize="20px">
+                  ไม่มีการเลือกตั้งที่คุณมีสิทธิ์เลือกตั้งในขณะนี้
+                </Text>
               ) : (
                 <>
                   <Flex
