@@ -1,0 +1,21 @@
+version: '3'
+services:
+  app:
+    container_name: ${PROJECT_NAME}
+    image: docker.pkg.github.com/esc-chula/election-frontend/${PROJECT_NAME}:latest
+    restart: unless-stopped
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=shared'
+      - 'traefik.http.routers.${PROJECT_NAME}.entrypoints=websecure'
+      - 'traefik.http.routers.${PROJECT_NAME}.rule=Host(`${HOST}`) && PathPrefix(`${PATH_PREFIX}`)'
+      - 'traefik.http.routers.${PROJECT_NAME}.tls=true'
+      - 'traefik.http.routers.${PROJECT_NAME}.tls.certresolver=myhttpchallenge'
+      - 'traefik.http.routers.${PROJECT_NAME}.middlewares=${PROJECT_NAME}-strip-prefix'
+      - 'traefik.http.middlewares.${PROJECT_NAME}-strip-prefix.stripprefix.prefixes=${PATH_PREFIX}'
+    networks:
+      - shared
+networks:
+  shared:
+    external:
+      name: shared
