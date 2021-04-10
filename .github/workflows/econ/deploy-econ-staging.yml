@@ -1,4 +1,4 @@
-name: deploy-staging
+name: deploy-econ-staging
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the dev branch
@@ -21,7 +21,10 @@ jobs:
       - name: Set env for staging build
         run: |
           rm .env.production -rf
-          cp .env.development .env.production
+          cp envs/econ/.env.development .env.production
+
+          echo "PROJECT_NAME=election-frontend-econ-staging" >> $GITHUB_ENV
+          echo "PATH_PREFIX=/staging/election/econ" >> $GITHUB_ENV
 
       - uses: whoan/docker-build-with-cache-action@v5
         name: Build Docker image
@@ -29,33 +32,38 @@ jobs:
           username: bombnp
           password: '${{ github.token }}'
           registry: docker.pkg.github.com
-          image_name: 'esc-chula/election-frontend/election-frontend-staging'
-          build_extra_args: '--build-arg=path_prefix=/staging/election'
+          image_name: 'esc-chula/election-frontend/${{ env.PROJECT_NAME }}'
+          build_extra_args: '--build-arg=path_prefix=${{ env.PATH_PREFIX }}'
 
       - uses: appleboy/ssh-action@master
         name: Deploy to VM
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          PROJECT_NAME: ${{ env.PROJECT_NAME }}
+          PATH_PREFIX: ${{ env.PATH_PREFIX }}
         with:
           host: ${{ secrets.VM_HOST }}
           username: ${{ secrets.VM_USER }}
           password: ${{ secrets.VM_PASS }}
           port: ${{ secrets.VM_PORT }}
-          envs: GITHUB_TOKEN
+          envs: GITHUB_TOKEN, PROJECT_NAME, PATH_PREFIX
           script: |
             set -e
 
-            PROJECT_NAME=election-frontend-staging
+            export PROJECT_NAME=$PROJECT_NAME
+            export HOST=esc.eng.chula.ac.th
+            export PATH_PREFIX=$PATH_PREFIX
+
             rm -rf $PROJECT_NAME
 
             git clone -b dev https://.:$GITHUB_TOKEN@github.com/esc-chula/election-frontend $PROJECT_NAME
             cd $PROJECT_NAME
 
             docker login docker.pkg.github.com -u "bombnp" -p "$GITHUB_TOKEN"
-            docker pull docker.pkg.github.com/esc-chula/election-frontend/election-frontend-staging:latest
+            docker pull docker.pkg.github.com/esc-chula/election-frontend/$PROJECT_NAME:latest
 
-            docker-compose --project-name=$PROJECT_NAME -f docker-compose.staging.yml stop
-            docker-compose --project-name=$PROJECT_NAME -f docker-compose.staging.yml up -d
+            docker-compose --project-name=$PROJECT_NAME -f docker-compose.deploy.yml stop
+            docker-compose --project-name=$PROJECT_NAME -f docker-compose.deploy.yml up -d
 
             cd ..
             rm -rf $PROJECT_NAME

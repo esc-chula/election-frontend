@@ -1,5 +1,4 @@
-name: deploy-production
-
+name: deploy-econ-production
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the dev branch
 on:
@@ -18,39 +17,52 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: Set env for staging build
+        run: |
+          rm .env.production -rf
+          cp envs/econ/.env.production .env.production
+
+          echo "PROJECT_NAME=election-frontend-econ-production" >> $GITHUB_ENV
+          echo "PATH_PREFIX=/econ" >> $GITHUB_ENV
+
       - uses: whoan/docker-build-with-cache-action@v5
         name: Build Docker image
         with:
-          username: paphonb
+          username: bombnp
           password: '${{ github.token }}'
           registry: docker.pkg.github.com
-          image_name: 'esc-chula/election-frontend/election-frontend-production'
-          build_extra_args: '--build-arg path_prefix= --build-arg generate_sourcemap=false'
+          image_name: 'esc-chula/election-frontend/${{ env.PROJECT_NAME }}'
+          build_extra_args: '--build-arg=path_prefix=${{ env.PATH_PREFIX }} --build-arg generate_sourcemap=false'
 
       - uses: appleboy/ssh-action@master
         name: Deploy to VM
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          PROJECT_NAME: ${{ env.PROJECT_NAME }}
+          PATH_PREFIX: ${{ env.PATH_PREFIX }}
         with:
           host: ${{ secrets.PROD_VM_HOST }}
           username: ${{ secrets.PROD_VM_USER }}
           password: ${{ secrets.PROD_VM_PASS }}
           port: ${{ secrets.PROD_VM_PORT }}
-          envs: GITHUB_TOKEN
+          envs: GITHUB_TOKEN, PROJECT_NAME, PATH_PREFIX
           script: |
             set -e
 
-            PROJECT_NAME=election-frontend-production
+            export PROJECT_NAME=$PROJECT_NAME
+            export HOST=elect.esc.eng.chula.ac.th
+            export PATH_PREFIX=$PATH_PREFIX
+
             rm -rf $PROJECT_NAME
 
             git clone -b dev https://.:$GITHUB_TOKEN@github.com/esc-chula/election-frontend $PROJECT_NAME
             cd $PROJECT_NAME
 
             docker login docker.pkg.github.com -u "bombnp" -p "$GITHUB_TOKEN"
-            docker pull docker.pkg.github.com/esc-chula/election-frontend/election-frontend-production:latest
+            docker pull docker.pkg.github.com/esc-chula/election-frontend/$PROJECT_NAME:latest
 
-            docker-compose --project-name=$PROJECT_NAME -f docker-compose.production.yml stop
-            docker-compose --project-name=$PROJECT_NAME -f docker-compose.production.yml up -d
+            docker-compose --project-name=$PROJECT_NAME -f docker-compose.deploy.yml stop
+            docker-compose --project-name=$PROJECT_NAME -f docker-compose.deploy.yml up -d
 
             cd ..
             rm -rf $PROJECT_NAME
