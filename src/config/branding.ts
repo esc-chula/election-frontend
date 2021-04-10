@@ -1,5 +1,6 @@
 import { APP_BRANDING } from '../config/env'
 import { escBranding } from './esc'
+import { econBranding } from './econ'
 import { exampleBranding } from './example'
 
 interface Tone {
@@ -42,6 +43,9 @@ let current: Branding
 switch (APP_BRANDING) {
   case 'esc':
     current = escBranding
+    break
+  case 'econ':
+    current = econBranding
     break
   case 'example':
     current = exampleBranding

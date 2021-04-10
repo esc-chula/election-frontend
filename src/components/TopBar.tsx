@@ -44,7 +44,10 @@ const TopBar = () => {
       <Container w="100%">
         <Flex w="100%" alignItems="center">
           <Link to="/profile">
-            <img src={useColorModeValue(logoURL, logoDarkURL)} />
+            <img
+              style={{ height: 75 }}
+              src={useColorModeValue(logoURL, logoDarkURL)}
+            />
           </Link>
           <Box flex={1} />
           <DarkModeController />
