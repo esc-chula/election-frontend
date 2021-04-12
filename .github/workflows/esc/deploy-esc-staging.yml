@@ -18,7 +18,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Set env for staging build
+      - name: Set env for esc staging build
         run: |
           rm .env.production -rf
           cp envs/esc/.env.development .env.production
