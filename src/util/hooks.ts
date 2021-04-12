@@ -10,6 +10,7 @@ import qs from 'query-string'
 import { StrapiUser } from 'types/strapi'
 import { useAuthContext } from 'providers/authProvider'
 import { useColorModeValue } from '@chakra-ui/react'
+import { APP_BRANDING } from 'config/env'
 
 export const useQueryString = () => {
   const { search } = useLocation()
@@ -19,7 +20,7 @@ export const useQueryString = () => {
 export function useLocalStorageState(
   key: string,
 ): [string | null, Dispatch<SetStateAction<string | null>>] {
-  const [actualKey] = useState(key)
+  const [actualKey] = useState(`${APP_BRANDING}:${key}`)
   const [value, setValue] = useState<string | null>(() =>
     localStorage.getItem(actualKey),
   )
