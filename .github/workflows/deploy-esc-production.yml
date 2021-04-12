@@ -1,10 +1,11 @@
-name: deploy-esc-staging
-
+name: deploy-production
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the dev branch
 on:
   push:
-    branches: [dev]
+    branches:
+      - master
+      - deploy-econ
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -18,13 +19,21 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Set env for esc staging build
+      - name: Set env for production build
         run: |
           rm .env.production -rf
-          cp envs/esc/.env.development .env.production
 
-          echo "PROJECT_NAME=election-frontend-staging" >> $GITHUB_ENV
-          echo "PATH_PREFIX=/staging/election" >> $GITHUB_ENV
+          if [ $BRANCH = "refs/heads/master" ] ; then
+            cp envs/esc/.env.production .env.production
+            echo "PROJECT_NAME=election-frontend-production" >> $GITHUB_ENV
+            echo "PATH_PREFIX=''" >> $GITHUB_ENV
+          elif [ $BRANCH = "refs/heads/deploy-econ" ] ; then
+            cp envs/econ/.env.production .env.production
+            echo "PROJECT_NAME=election-frontend-econ-production" >> $GITHUB_ENV
+            echo "PATH_PREFIX=/econ" >> $GITHUB_ENV
+          else
+            exit 1
+          fi
 
       - uses: whoan/docker-build-with-cache-action@v5
         name: Build Docker image
@@ -33,7 +42,7 @@ jobs:
           password: '${{ github.token }}'
           registry: docker.pkg.github.com
           image_name: 'esc-chula/election-frontend/${{ env.PROJECT_NAME }}'
-          build_extra_args: '--build-arg=path_prefix=${{ env.PATH_PREFIX }}'
+          build_extra_args: '--build-arg=path_prefix=${{ env.PATH_PREFIX }} --build-arg generate_sourcemap=false'
 
       - uses: appleboy/ssh-action@master
         name: Deploy to VM
@@ -42,16 +51,16 @@ jobs:
           PROJECT_NAME: ${{ env.PROJECT_NAME }}
           PATH_PREFIX: ${{ env.PATH_PREFIX }}
         with:
-          host: ${{ secrets.VM_HOST }}
-          username: ${{ secrets.VM_USER }}
-          password: ${{ secrets.VM_PASS }}
-          port: ${{ secrets.VM_PORT }}
+          host: ${{ secrets.PROD_VM_HOST }}
+          username: ${{ secrets.PROD_VM_USER }}
+          password: ${{ secrets.PROD_VM_PASS }}
+          port: ${{ secrets.PROD_VM_PORT }}
           envs: GITHUB_TOKEN, PROJECT_NAME, PATH_PREFIX
           script: |
             set -e
 
             export PROJECT_NAME=$PROJECT_NAME
-            export HOST=esc.eng.chula.ac.th
+            export HOST=elect.esc.eng.chula.ac.th
             export PATH_PREFIX=$PATH_PREFIX
 
             rm -rf $PROJECT_NAME
