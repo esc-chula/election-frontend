@@ -13,4 +13,16 @@ export const palette: BrandPalette = {
     800: '#F89E11',
     900: '#F68E0A',
   },
+  alternate: {
+    50: '#fff7db',
+    100: '#ffe7ae',
+    200: '#fdd77f',
+    300: '#fbc74e',
+    400: '#fab61e',
+    500: '#e19d05',
+    600: '#af7a00',
+    700: '#7e5700',
+    800: '#4c3400',
+    900: '#1d1000',
+  },
 }
