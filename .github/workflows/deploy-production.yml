@@ -28,7 +28,6 @@ jobs:
           if [ $BRANCH = "refs/heads/master" ] ; then
             cp envs/esc/.env.production .env.production
             echo "PROJECT_NAME=election-frontend-production" >> $GITHUB_ENV
-            echo "PATH_PREFIX=''" >> $GITHUB_ENV
           elif [ $BRANCH = "refs/heads/deploy-econ" ] ; then
             cp envs/econ/.env.production .env.production
             echo "PROJECT_NAME=election-frontend-econ-production" >> $GITHUB_ENV
