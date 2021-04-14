@@ -12,7 +12,8 @@ const econBranding: Branding = {
   igLink: 'https://instagram.com/smoeconcu',
   logoURL: econLogo,
   logoDarkURL: econLogo,
-  electionName: 'การเลือกตั้งสโมสรนิสิตคณะเศรษฐศาสตร์',
+  electionName:
+    'การเลือกตั้งซ่อมคณะกรรมการสโมสรนิสิตคณะเศรษฐศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย ประจำปีการศึกษา 2564',
 }
 
 export { econBranding }
