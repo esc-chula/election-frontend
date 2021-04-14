@@ -81,7 +81,7 @@ export function PositionButton({
           <CheckIcon color={backgroundColor} />
         )}
       </Circle>
-      <Text color={color} fontWeight={200}>
+      <Text color={color} fontWeight={300}>
         {position.name}
       </Text>
     </Layout>
