@@ -5,7 +5,12 @@ export interface ExchangeTokenDTO {
   user: StrapiUser
 }
 
+export interface BallotDTO {
+  positionID: number
+  candidateID: number
+}
+
 export interface SubmitVoteDTO {
   electionID: number
-  candidateIDs: number[]
+  ballots: BallotDTO[]
 }

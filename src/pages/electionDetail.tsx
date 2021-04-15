@@ -66,9 +66,10 @@ export default function ElectionDetail({ election }: { election: Election }) {
     try {
       const body: SubmitVoteDTO = {
         electionID: election.id,
-        candidateIDs: election.positions.map(
-          (position) => selected[position.id],
-        ),
+        ballots: election.positions.map((position) => ({
+          positionID: position.id,
+          candidateID: selected[position.id],
+        })),
       }
       await client.post('/vote', body)
       setVoted(election.id)
