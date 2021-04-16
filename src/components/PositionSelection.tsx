@@ -95,6 +95,9 @@ function SmallSelectionBox({ selection }: { selection: PositionSelection }) {
   const showCandidate = selectedCandidate ?? position.candidates[0]
   const isParty = showCandidate.members.length !== 1
   const mutedText = useColorModeValue('mono.4', 'whiteAlpha.700')
+  const candidateName = isParty
+    ? showCandidate.name
+    : showCandidate.members[0].name
 
   return (
     <Layout>
@@ -111,9 +114,9 @@ function SmallSelectionBox({ selection }: { selection: PositionSelection }) {
               ? alternateStates[selectedValue]
               : `เบอร์ ${selectedCandidate.candidateID}`}
           </Text>
-          {selectedValue !== -1 && (
+          {selectedValue !== -1 && candidateName && (
             <Text color={mutedText} ml={1} fontWeight={300} fontSize={14}>
-              - {isParty ? showCandidate.name : showCandidate.members[0].name}
+              - {candidateName}
             </Text>
           )}
         </div>
