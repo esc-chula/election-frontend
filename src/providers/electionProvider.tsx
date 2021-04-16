@@ -26,7 +26,7 @@ export default function ElectionProvider({
   const { data: rawElections, mutate } = useSWR<Election[]>('/elections')
   const elections = rawElections?.map((election) => ({
     ...election,
-    name: `การเลือกตั้ง${election.name}`,
+    name: election.name,
   }))
   const electionMap = useMemo(() => {
     const electionMap = {} as ElectionMap
