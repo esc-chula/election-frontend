@@ -7,6 +7,7 @@ import {
   StackProps,
   Divider,
   Box,
+  ListItem,
 } from '@chakra-ui/react'
 import { API_HOST } from 'config/env'
 import React from 'react'
@@ -27,6 +28,12 @@ const markdownOverrides: MarkdownToJSX.Overrides = {
     component: Text,
     props: {
       fontWeight: 500,
+    },
+  },
+  li: {
+    component: ListItem,
+    props: {
+      ml: '1rem',
     },
   },
 }

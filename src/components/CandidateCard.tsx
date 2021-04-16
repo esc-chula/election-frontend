@@ -1,10 +1,10 @@
-import { BoxProps, Text, Flex } from '@chakra-ui/react'
+import { BoxProps, Text, Flex, ListItem } from '@chakra-ui/react'
 import React from 'react'
 import { Candidate } from 'types/election'
 import Card from './Card'
 import { MemberCard } from './MemberCard'
 import { CandidateCheckbox, CandidateCheckboxProps } from './CandidateCheckbox'
-import Markdown from 'markdown-to-jsx'
+import Markdown, { MarkdownToJSX } from 'markdown-to-jsx'
 import { useRedText } from 'util/hooks'
 
 type CandidateCardProps = BoxProps &
@@ -13,6 +13,22 @@ type CandidateCardProps = BoxProps &
     isSingular: boolean
   }
 
+const markdownOverrides: MarkdownToJSX.Overrides = {
+  li: {
+    component: ListItem,
+    props: {
+      ml: '3rem',
+    },
+  },
+  span: {
+    component: Text,
+    props: {
+      style: {
+        textIndent: '2rem',
+      },
+    },
+  },
+}
 export function CandidateCard({
   candidate,
   selected,
@@ -43,9 +59,11 @@ export function CandidateCard({
       <Card {...rest}>
         {isParty && (
           <>
-            <Text fontSize={['sm', 'lg', 'xl']} fontWeight="regular" mb={4}>
-              {candidate.name}
-            </Text>
+            {candidate.name && (
+              <Text fontSize={['sm', 'lg', 'xl']} fontWeight="regular" mb={4}>
+                {candidate.name}
+              </Text>
+            )}
             {candidate.policy && (
               <>
                 <Text
@@ -60,10 +78,11 @@ export function CandidateCard({
                   fontSize={['xs', 'sm', 'md']}
                   fontWeight={'light'}
                   mb={8}
-                  style={{ textIndent: '2rem' }}
                   as="div"
                 >
-                  <Markdown>{candidate.policy}</Markdown>
+                  <Markdown options={{ overrides: markdownOverrides }}>
+                    {candidate.policy}
+                  </Markdown>
                 </Text>
               </>
             )}
