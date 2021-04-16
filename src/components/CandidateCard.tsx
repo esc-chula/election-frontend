@@ -18,6 +18,7 @@ const markdownOverrides: MarkdownToJSX.Overrides = {
     component: ListItem,
     props: {
       ml: '3rem',
+      mb: '4px',
     },
   },
   span: {

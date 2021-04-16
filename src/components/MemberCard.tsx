@@ -34,6 +34,7 @@ const markdownOverrides: MarkdownToJSX.Overrides = {
     component: ListItem,
     props: {
       ml: '1rem',
+      mb: '4px',
     },
   },
 }
