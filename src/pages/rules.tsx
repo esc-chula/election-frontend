@@ -16,6 +16,7 @@ import { withAuth } from 'providers/authProvider'
 import { Header } from 'components/Header'
 import { Content } from 'components/Content'
 import { branding } from 'config/branding'
+import { useHistory } from 'react-router'
 
 const RulesCard = () => {
   const colorScheme = useColorModeValue('intaniaRed', 'intaniaRedSecondary')
@@ -86,6 +87,11 @@ const RulesCard = () => {
 }
 
 const RulesPage = () => {
+  const history = useHistory()
+  const hasRules = branding.rules.length !== 0
+  if (!hasRules) {
+    history.replace('/election')
+  }
   return (
     <Container paddingTop={['20px', '48px']}>
       <ResponsiveStack

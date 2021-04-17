@@ -6,6 +6,7 @@ import {
   TextProps,
   useColorMode,
 } from '@chakra-ui/react'
+import { branding } from 'config/branding'
 
 export type CurrentPage = 'profile' | 'rules'
 
@@ -25,15 +26,17 @@ const PageProgress = ({ page, ...rest }: PageProgressProps) => {
     fontWeight: 'light',
     color: colorMode === 'dark' ? 'gray.500' : 'mono.2',
   }
-
+  const hasRules = branding.rules.length !== 0
   return (
     <Stack spacing="8px" {...rest} width={['100%', '250px', '260px']}>
       <Text {...(page === 'profile' ? activeStyle : inactiveStyle)}>
-        1. ข้อมูลผู้ใช้สิทธิ
+        {hasRules && '1. '}ข้อมูลผู้ใช้สิทธิ
       </Text>
-      <Text {...(page === 'rules' ? activeStyle : inactiveStyle)}>
-        2. ระเบียบการเลือกตั้ง
-      </Text>
+      {hasRules && (
+        <Text {...(page === 'rules' ? activeStyle : inactiveStyle)}>
+          2. ระเบียบการเลือกตั้ง
+        </Text>
+      )}
     </Stack>
   )
 }
