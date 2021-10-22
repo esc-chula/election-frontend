@@ -2,7 +2,6 @@
 This project is an election system used by Engineering Student Committee, Chulalongkorn University. All users are required to authenticate with their CUNET account before casting their votes on elections in which they are eligible.  
   
 Production: https://elect.esc.eng.chula.ac.th  
-Staging: https://esc.eng.chula.ac.th/staging/election  
 DON'T FORGET TO RENAME `.env.development.local.template` to `.env.development.local`
   
   
