@@ -128,7 +128,6 @@ const Login = () => {
       href={checked ? redirectURL : undefined}
       size="md"
       variant="solid"
-      width={['105px', '130px']}
       fontSize={['lg', 'xl']}
       fontWeight="regular"
     >
