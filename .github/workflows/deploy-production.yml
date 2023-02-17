@@ -34,7 +34,7 @@ jobs:
             exit 1
           fi
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag election-frontend-production --build-arg pathPrefix=${{ env.PATH_PREFIX }}
+        run: docker build . --file Dockerfile --tag election-frontend-production --build-arg path_prefix=${{ env.PATH_PREFIX }}
       - name: Docker login using Github Token
         uses: docker/login-action@v1
         with:
