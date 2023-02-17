@@ -18,6 +18,8 @@ function ElectionFinder() {
   const election = electionMap[match?.params.electionName || '']
   if (!election) {
     return <NotFound />
+  } else if (election.positions.length === 0) {
+    return <PermissionDenied />
   } else if (
     election.positions.length === 1 &&
     election.positions[0].name ===
