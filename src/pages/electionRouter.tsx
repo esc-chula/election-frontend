@@ -7,6 +7,8 @@ import RedirectFirstElection from 'components/RedirectFirstElection'
 import ElectionDetail from './electionDetail'
 import NotFound from './404'
 import { withAuth } from 'providers/authProvider'
+import PermissionDenied from '../components/PermissionDenied'
+import PermissionAccept from '../components/PermissionAccept'
 
 function ElectionFinder() {
   const { electionMap } = useElectionContext()
@@ -16,6 +18,12 @@ function ElectionFinder() {
   const election = electionMap[match?.params.electionName || '']
   if (!election) {
     return <NotFound />
+  } else if (
+    election.positions.length === 1 &&
+    election.positions[0].name ===
+      'เช็กสิทธิ์การเลือกตั้งกรรมการนิสิตคณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย ประจำปีการศึกษา 2566'
+  ) {
+    return <PermissionAccept />
   } else {
     return <ElectionDetail election={election} />
   }
