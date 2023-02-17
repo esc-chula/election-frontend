@@ -27,7 +27,7 @@ jobs:
             echo "PROJECT_NAME=election-frontend-econ-production" >> $GITHUB_ENV
             echo "PATH_PREFIX=/econ" >> $GITHUB_ENV
           elif [ $BRANCH = "refs/heads/dev" ] ; then
-            cp envs/esc/.env.production .env.production
+            cp envs/esc/.env.development .env.development
             echo "PROJECT_NAME=election-frontend-dev" >> $GITHUB_ENV
             echo "PATH_PREFIX=/staging/election" >> $GITHUB_ENV
           else
