@@ -17,10 +17,11 @@ function ElectionFinder() {
   )
   const election = electionMap[match?.params.electionName || '']
   if (!election) {
-    return <PermissionDenied />
+    return <NotFound />
   } else if (
-    election.name ===
-    'เช็กสิทธิ์การเลือกตั้งกรรมการนิสิตคณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย ประจำปีการศึกษา 2566'
+    election.positions.length === 1 &&
+    election.positions[0].name ===
+      'เช็กสิทธิ์การเลือกตั้งกรรมการนิสิตคณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย ประจำปีการศึกษา 2566'
   ) {
     return <PermissionAccept />
   } else {
