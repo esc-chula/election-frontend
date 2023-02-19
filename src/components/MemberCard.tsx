@@ -58,13 +58,13 @@ export function MemberCard({
       />
       <Stack direction="row" spacing="15px">
         <Stack spacing="8px">
-          <AspectRatio minW={['100px', '100px', '130px']} ratio={3 / 4}>
+          {/* <AspectRatio minW={['100px', '100px', '130px']} ratio={3 / 4}>
             <Image
               src={
                 member.avatar ? `${API_HOST}${member.avatar.url}` : undefined
               }
             />
-          </AspectRatio>
+          </AspectRatio> */}
           {!isParty && (
             <Stack direction="row" alignSelf="center" alignItems="center">
               <Text fontSize={['sm', 'sm', 'md']} fontWeight="medium">
