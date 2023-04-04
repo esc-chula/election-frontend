@@ -42,8 +42,11 @@ export default function CandidateList({
         <Stack my="12px" spacing="20px" direction="row">
           <Card flexGrow={1}>
             <Flex justify="center" alignItems="center">
-              <Text fontSize={['sm', 'md', 'lg']} fontWeight="medium" mr="16px">
+              {/* <Text fontSize={['sm', 'md', 'lg']} fontWeight="medium" mr="16px">
                 รับรอง
+              </Text> */}
+              <Text fontSize={['sm', 'md', 'lg']} fontWeight="medium" mr="16px">
+                เห็นด้วย
               </Text>
               <CandidateCheckbox
                 index={-2}
@@ -55,8 +58,11 @@ export default function CandidateList({
           </Card>
           <Card flexGrow={1}>
             <Flex justify="center" alignItems="center">
-              <Text fontSize={['sm', 'md', 'lg']} fontWeight="medium" mr="16px">
+              {/* <Text fontSize={['sm', 'md', 'lg']} fontWeight="medium" mr="16px">
                 ไม่รับรอง
+              </Text> */}
+              <Text fontSize={['sm', 'md', 'lg']} fontWeight="medium" mr="16px">
+                ไม่เห็นด้วย
               </Text>
               <CandidateCheckbox
                 index={-3}

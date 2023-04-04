@@ -17,10 +17,16 @@ interface IProps {
   multiplePosition: boolean
 }
 
+// const alternateStates = {
+//   [-1]: 'งดออกเสียง',
+//   [-2]: 'รับรอง',
+//   [-3]: 'ไม่รับรอง',
+// }
+
 const alternateStates = {
   [-1]: 'งดออกเสียง',
-  [-2]: 'รับรอง',
-  [-3]: 'ไม่รับรอง',
+  [-2]: 'เห็นด้วย',
+  [-3]: 'ไม่เห็นด้วย',
 }
 
 export function PositionSelection({ selection, multiplePosition }: IProps) {

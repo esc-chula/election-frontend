@@ -67,9 +67,9 @@ export function MemberCard({
           </AspectRatio> */}
           {!isParty && (
             <Stack direction="row" alignSelf="center" alignItems="center">
-              <Text fontSize={['sm', 'sm', 'md']} fontWeight="medium">
+              {/* <Text fontSize={['sm', 'sm', 'md']} fontWeight="medium">
                 เบอร์ {candidate.candidateID}
-              </Text>
+              </Text> */}
               {!isSingular && (
                 <CandidateCheckbox
                   index={candidate.id}
