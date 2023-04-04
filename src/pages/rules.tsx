@@ -32,25 +32,26 @@ const RulesCard = () => {
             textIndent: '2rem',
           }}
         >
-          {branding.rules.map((article, indexHeader) => (
-            <Box key={indexHeader}>
-              {article.header && (
-                <Text
-                  color={useColorModeValue('black', 'white')}
-                  fontWeight="regular"
-                  style={{
-                    textIndent: '0',
-                  }}
-                  mt="1rem"
-                >
-                  {article.header}
-                </Text>
-              )}
-              {article.contents.map((content, indexContent) => (
-                <Content key={indexContent}>{content}</Content>
-              ))}
-            </Box>
-          ))}
+          {branding.rules.length !== 0 &&
+            branding.rules.map((article, indexHeader) => (
+              <Box key={indexHeader}>
+                {article.header && (
+                  <Text
+                    color={useColorModeValue('black', 'white')}
+                    fontWeight="regular"
+                    style={{
+                      textIndent: '0',
+                    }}
+                    mt="1rem"
+                  >
+                    {article.header}
+                  </Text>
+                )}
+                {article.contents.map((content, indexContent) => (
+                  <Content key={indexContent}>{content}</Content>
+                ))}
+              </Box>
+            ))}
         </Content>
       </Card>
       <Stack
