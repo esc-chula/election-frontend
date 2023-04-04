@@ -77,9 +77,9 @@ function SelectedCandidateBox({
   const name = member?.name ?? selectedCandidate.name
   return (
     <Box mt="16px" ml="32px">
-      <Text mt="16px" color={intaniaRed} fontSize="20px">
+      {/* <Text mt="16px" color={intaniaRed} fontSize="20px">
         เบอร์ {selectedCandidate.candidateID}
-      </Text>
+      </Text> */}
       <Text color={selectedCandidateColor} fontWeight={300} fontSize="16px">
         {name}
         <br />
