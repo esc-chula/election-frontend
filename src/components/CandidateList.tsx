@@ -46,7 +46,7 @@ export default function CandidateList({
                 รับรอง
               </Text> */}
               <Text fontSize={['sm', 'md', 'lg']} fontWeight="medium" mr="16px">
-                เห็นด้วย
+                รับรอง
               </Text>
               <CandidateCheckbox
                 index={-2}
@@ -62,7 +62,7 @@ export default function CandidateList({
                 ไม่รับรอง
               </Text> */}
               <Text fontSize={['sm', 'md', 'lg']} fontWeight="medium" mr="16px">
-                ไม่เห็นด้วย
+                ไม่รับรอง
               </Text>
               <CandidateCheckbox
                 index={-3}
