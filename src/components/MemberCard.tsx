@@ -21,6 +21,7 @@ type MemberCardProps = BoxProps &
     candidate: Candidate
     member: Member
     isSingular: boolean
+    candidateId: number
   }
 
 const markdownOverrides: MarkdownToJSX.Overrides = {
@@ -42,6 +43,7 @@ const markdownOverrides: MarkdownToJSX.Overrides = {
 export function MemberCard({
   member,
   candidate,
+  candidateId,
   selected,
   setSelected,
   disabled,
@@ -51,11 +53,27 @@ export function MemberCard({
   const isParty = candidate.members.length !== 1
   return (
     <Box {...rest}>
-      <CardHeader
-        member={member}
-        display={['none', 'block']}
-        isParty={isParty}
-      />
+      <Stack
+        direction="row"
+        spacing={['8px', '15px']}
+        alignItems="center"
+        paddingLeft={[isSingular ? '0px' : '10px', '10px']}
+      >
+        {!isSingular && (
+          <CandidateCheckbox
+            index={candidate.id}
+            selected={selected}
+            setSelected={setSelected}
+            disabled={disabled}
+          />
+        )}
+        <CardHeader
+          member={member}
+          candidateId={candidateId}
+          display={'block'}
+          isParty={isParty}
+        />
+      </Stack>
       <Stack direction="row" spacing="15px">
         <Stack spacing="8px">
           {/* <AspectRatio minW={['100px', '100px', '130px']} ratio={3 / 4}>
@@ -70,21 +88,22 @@ export function MemberCard({
               {/* <Text fontSize={['sm', 'sm', 'md']} fontWeight="medium">
                 เบอร์ {candidate.candidateID}
               </Text> */}
-              {!isSingular && (
+              {/* {!isSingular && (
                 <CandidateCheckbox
                   index={candidate.id}
                   selected={selected}
                   setSelected={setSelected}
                   disabled={disabled}
                 />
-              )}
+              )} */}
             </Stack>
           )}
         </Stack>
 
-        <Stack spacing="2px">
+        {/* <Stack spacing="2px">
           <CardHeader
             member={member}
+            candidateId={candidateId}
             display={['block', 'none']}
             isParty={isParty}
           />
@@ -103,7 +122,7 @@ export function MemberCard({
               {member.policy}
             </Markdown>
           </Text>
-        </Stack>
+        </Stack> */}
       </Stack>
     </Box>
   )
@@ -117,22 +136,34 @@ function CardHeader({
   const redText = useRedText()
   return (
     <Stack spacing="2px" {...props}>
-      {isParty && (
+      <Stack direction="row" alignSelf="center" alignItems="center">
         <Text
-          fontSize={['2xs', 'sm', 'md']}
-          fontWeight="regular"
-          color={redText}
+          fontSize={['4xl', '5xl']}
+          fontWeight="medium"
+          paddingLeft="12px"
+          paddingRight="12px"
+          width={['35px', '50px']}
         >
-          ผู้สมัครตำแหน่ง {member.position}
+          {props.candidateId}
         </Text>
-      )}
-      <Text fontSize={['sm', 'lg', 'xl']} fontWeight="regular">
-        {member.name}
-      </Text>
-      <Text fontSize={['2xs', 'sm', 'md']} fontWeight="extraLight">
-        {member.department} ปี {member.year}
-      </Text>
-      <Divider mb={['0', '8px']} />
+        <Stack spacing="2px" {...props}>
+          {isParty && (
+            <Text
+              fontSize={['2xs', 'sm', 'md']}
+              fontWeight="regular"
+              color={redText}
+            >
+              ผู้สมัครตำแหน่ง {member.position}
+            </Text>
+          )}
+          <Text fontSize={['sm', 'lg', 'xl']} fontWeight="regular">
+            {member.name}
+          </Text>
+          <Text fontSize={['2xs', 'sm', 'md']} fontWeight="extraLight">
+            {member.department} ปี {member.year}
+          </Text>
+        </Stack>
+      </Stack>
     </Stack>
   )
 }
