@@ -101,6 +101,7 @@ export function CandidateCard({
               key={member.id}
               member={member}
               candidate={candidate}
+              candidateId={candidate.candidateID}
               selected={selected}
               setSelected={setSelected}
               disabled={disabled}

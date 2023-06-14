@@ -32,7 +32,7 @@ export function CandidateCheckbox({
 
       <ControlBox
         borderWidth="2px"
-        boxSize={['24px', '24px', '32px']}
+        boxSize={'32px'}
         cursor={!disabled ? 'pointer' : undefined}
         rounded="sm"
         borderColor={intaniaRed}
@@ -43,7 +43,7 @@ export function CandidateCheckbox({
         }}
         _focus={{ borderColor: 'intaniaRed.600', boxShadow: 'none' }}
       >
-        <CloseIcon boxSize={['16px', '16px', '20px']} />
+        <CloseIcon boxSize={'20px'} />
       </ControlBox>
     </label>
   )
