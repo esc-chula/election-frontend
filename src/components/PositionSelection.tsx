@@ -25,8 +25,8 @@ interface IProps {
 
 const alternateStates = {
   [-1]: 'งดออกเสียง',
-  [-2]: 'เห็นด้วย',
-  [-3]: 'ไม่เห็นด้วย',
+  [-2]: 'รับรอง',
+  [-3]: 'ไม่รับรอง',
 }
 
 export function PositionSelection({ selection, multiplePosition }: IProps) {
@@ -46,7 +46,18 @@ export function PositionSelection({ selection, multiplePosition }: IProps) {
   if ([-2, -3].includes(selectedValue)) {
     return (
       <>
-        <Text mt="16px" color={intaniaRed} textAlign="center" fontSize="2xl">
+        <Text
+          mt="16px"
+          color={
+            alternateStates[selectedValue] === 'รับรอง'
+              ? '#9ae6b4'
+              : alternateStates[selectedValue] === 'ไม่รับรอง'
+              ? intaniaRed
+              : '#FFFFFF'
+          }
+          textAlign="center"
+          fontSize="2xl"
+        >
           {alternateStates[selectedValue]}
         </Text>
         <SelectedCandidateBox selectedCandidate={position.candidates[0]} />
@@ -54,7 +65,7 @@ export function PositionSelection({ selection, multiplePosition }: IProps) {
     )
   }
   return (
-    <Text mt="16px" color={intaniaRed} textAlign="center" fontSize="2xl">
+    <Text mt="16px" color={'#FFFFFF'} textAlign="center" fontSize="2xl">
       {alternateStates[selectedValue]}
     </Text>
   )
