@@ -21,7 +21,7 @@ import CandidateList from 'components/CandidateList'
 import { Election, Position } from 'types/election'
 import { useHttpContext } from 'providers/httpProvider'
 import { SubmitVoteDTO } from 'types/dto'
-import { CheckIcon, ChevronRightIcon } from '@chakra-ui/icons'
+import { CheckIcon, ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import { PrimaryButton } from 'components/PrimaryButton'
 import { AiFillExclamationCircle } from 'react-icons/ai'
 import { PositionSelection } from 'components/PositionSelection'
@@ -198,6 +198,15 @@ export default function ElectionDetail({ election }: { election: Election }) {
             หากต้องการกลับไปแก้ไขตำแหน่งก่อนหน้า ให้กดที่ตำแหน่งในแถวด้านบน
           </>
         )}
+      </Card>
+      <Card
+        mt="16px"
+        fontWeight="300"
+        textAlign="center"
+        fontSize={['sm', 'md', 'lg']}
+      >
+        กดที่เครื่องหมาย <ChevronDownIcon />{' '}
+        ทางด้านขวาของชื่อเพื่อดูประวัติการทำงานเเละวิสัยทัศน์
       </Card>
       <PositionAdapter
         position={currentPosition}
