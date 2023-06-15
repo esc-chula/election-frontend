@@ -23,7 +23,7 @@ export default function CandidateList({
 
   return (
     <Box>
-      <Flex flexDirection={['column', 'row']} flexWrap="wrap" mx={[0, '-6px']}>
+      <Flex flexDirection={['column']} flexWrap="wrap" mx={[0]}>
         {position.candidates.map((candidate) => (
           <CandidateCard
             key={candidate.id}
@@ -31,8 +31,8 @@ export default function CandidateList({
             selected={selected}
             setSelected={setSelected}
             disabled={disabled}
-            w={isSingular || isParty ? '100%' : ['100%', '354px', '474px']}
-            mx={[0, '6px']}
+            w={isSingular || isParty ? '100%' : ['100%']}
+            mx={[0]}
             mt="12px"
             isSingular={isSingular}
           />
