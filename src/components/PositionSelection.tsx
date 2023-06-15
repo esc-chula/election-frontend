@@ -37,6 +37,8 @@ export function PositionSelection({ selection, multiplePosition }: IProps) {
     'intaniaRedSecondary.400',
   )
 
+  const isSingular = position.candidates.length === 1
+
   if (multiplePosition) {
     return <SmallSelectionBox selection={selection} />
   }
@@ -60,7 +62,10 @@ export function PositionSelection({ selection, multiplePosition }: IProps) {
         >
           {alternateStates[selectedValue]}
         </Text>
-        <SelectedCandidateBox selectedCandidate={position.candidates[0]} />
+        <SelectedCandidateBox
+          isSingular={isSingular}
+          selectedCandidate={position.candidates[0]}
+        />
       </>
     )
   }
@@ -72,10 +77,12 @@ export function PositionSelection({ selection, multiplePosition }: IProps) {
 }
 
 interface SelectedCandidateBoxProps {
+  isSingular?: boolean
   selectedCandidate: Candidate
 }
 
 function SelectedCandidateBox({
+  isSingular,
   selectedCandidate,
 }: SelectedCandidateBoxProps) {
   const intaniaRed = useColorModeValue(
@@ -86,12 +93,19 @@ function SelectedCandidateBox({
   const isParty = selectedCandidate.members.length !== 1
   const member = !isParty && selectedCandidate.members[0]
   const name = member?.name ?? selectedCandidate.name
+  const candidateId = selectedCandidate.candidateID
   return (
     <Box mt="16px" ml="32px">
       {/* <Text mt="16px" color={intaniaRed} fontSize="20px">
         เบอร์ {selectedCandidate.candidateID}
       </Text> */}
       <Text color={selectedCandidateColor} fontWeight={300} fontSize="16px">
+        {!isSingular && (
+          <>
+            เบอร์ {candidateId}
+            <br />
+          </>
+        )}
         {name}
         <br />
         {member && `${member.department} ปี ${member.year}`}
