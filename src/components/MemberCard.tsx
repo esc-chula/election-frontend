@@ -8,13 +8,15 @@ import {
   Divider,
   Box,
   ListItem,
+  Flex,
 } from '@chakra-ui/react'
 import { API_HOST } from 'config/env'
-import React from 'react'
+import React, { useState } from 'react'
 import { Candidate, Member } from 'types/election'
 import Markdown, { MarkdownToJSX } from 'markdown-to-jsx'
 import { CandidateCheckbox, CandidateCheckboxProps } from './CandidateCheckbox'
 import { useRedText } from 'util/hooks'
+import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
 
 type MemberCardProps = BoxProps &
   Omit<CandidateCheckboxProps, 'index'> & {
@@ -51,29 +53,93 @@ export function MemberCard({
   ...rest
 }: MemberCardProps) {
   const isParty = candidate.members.length !== 1
+
+  const [showDetail, setShowDetail] = useState<boolean>(false)
+
   return (
     <Box {...rest}>
-      <Stack
+      <Flex
         direction="row"
-        spacing={['8px', '15px']}
         alignItems="center"
-        paddingLeft={[isSingular ? '0px' : '10px', '10px']}
+        justifyContent={'space-between'}
+        paddingLeft={[isSingular ? '0px' : '3px', '10px']}
+        paddingRight={['0px', '10px']}
       >
-        {!isSingular && (
-          <CandidateCheckbox
-            index={candidate.id}
-            selected={selected}
-            setSelected={setSelected}
-            disabled={disabled}
+        <Stack direction="row" spacing={['2px', '15px']} alignItems="center">
+          {!isSingular && (
+            <CandidateCheckbox
+              index={candidate.id}
+              selected={selected}
+              setSelected={setSelected}
+              disabled={disabled}
+            />
+          )}
+          <CardHeader
+            member={member}
+            candidateId={candidateId}
+            display={'block'}
+            isParty={isParty}
+            cursor="pointer"
+          />
+        </Stack>
+        {showDetail ? (
+          <ChevronUpIcon
+            boxSize={['24px', '36px']}
+            cursor="pointer"
+            onClick={() => setShowDetail(false)}
+          />
+        ) : (
+          <ChevronDownIcon
+            boxSize={['24px', '36px']}
+            cursor="pointer"
+            onClick={() => setShowDetail(true)}
           />
         )}
-        <CardHeader
-          member={member}
-          candidateId={candidateId}
-          display={'block'}
-          isParty={isParty}
-        />
-      </Stack>
+      </Flex>
+      {/* detail */}
+      {showDetail && (
+        <Stack padding={['0px', '5px 10px']}>
+          <Divider />
+          <Stack
+            direction={['column', 'row']}
+            spacing={['16px', '32px']}
+            paddingTop={['4px', '14px']}
+          >
+            <Stack>
+              <AspectRatio
+                overflow="hidden"
+                rounded="md"
+                width={['130px', '200px']}
+                ratio={1 / 1}
+              >
+                <Image
+                  src={
+                    member.avatar
+                      ? `${API_HOST}${member.avatar.url}`
+                      : undefined
+                  }
+                />
+              </AspectRatio>
+            </Stack>
+            <Text
+              fontSize={['xs', 'sm', 'md']}
+              fontWeight={['extraLight', 'light']}
+              alignSelf="flex-start"
+              textAlign="start"
+              as="div"
+            >
+              <Markdown
+                options={{
+                  overrides: markdownOverrides,
+                }}
+              >
+                {member.policy}
+              </Markdown>
+            </Text>
+          </Stack>
+        </Stack>
+      )}
+
       <Stack direction="row" spacing="15px">
         <Stack spacing="8px">
           {/* <AspectRatio minW={['100px', '100px', '130px']} ratio={3 / 4}>
