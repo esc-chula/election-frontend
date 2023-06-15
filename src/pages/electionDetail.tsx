@@ -153,7 +153,11 @@ export default function ElectionDetail({ election }: { election: Election }) {
             >
               กลับไปแก้ไข
             </Button>
-            <PrimaryButton isLoading={loading} onClick={submitVote}>
+            <PrimaryButton
+              isConfirmVote={true}
+              isLoading={loading}
+              onClick={submitVote}
+            >
               ยืนยันการลงคะแนน
             </PrimaryButton>
           </Flex>
