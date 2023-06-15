@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import {
   Button,
@@ -11,6 +12,7 @@ import styled from '@emotion/styled'
 const StyledButton = styled(Button)`
   p {
     color: white !important;
+    background-color: #9ae6b4 !important;
   }
 `
 
@@ -20,7 +22,10 @@ export const PrimaryButton: ComponentWithAs<'button', ButtonProps> = (
   const scheme = useColorModeValue('intaniaRed', 'intaniaRedSecondary')
   return (
     <LightMode>
-      <StyledButton colorScheme={scheme} {...props} />
+      <StyledButton
+        colorScheme={props?.isConfirmVote ? 'green' : scheme}
+        {...props}
+      />
     </LightMode>
   )
 }
