@@ -11,7 +11,7 @@ const PermissionAccept = () => {
           <Flex flexDirection="column" alignItems="center">
             <Text fontSize="20px">
               คุณมีสิทธิ์ในการเลือกตั้งในการเลือกตั้งกรรมการนิสิตคณะวิศวกรรมศาสตร์
-              จุฬาลงกรณ์มหาวิทยาลัย ประจำปีการศึกษา 2566
+              จุฬาลงกรณ์มหาวิทยาลัย ประจำปีการศึกษา 2567
             </Text>
           </Flex>
         </Card>
