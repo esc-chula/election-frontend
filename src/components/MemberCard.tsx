@@ -17,6 +17,7 @@ import Markdown, { MarkdownToJSX } from 'markdown-to-jsx'
 import { CandidateCheckbox, CandidateCheckboxProps } from './CandidateCheckbox'
 import { useRedText } from 'util/hooks'
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
+import { academicYear } from 'util/constants'
 
 type MemberCardProps = BoxProps &
   Omit<CandidateCheckboxProps, 'index'> & {
@@ -81,6 +82,18 @@ export function MemberCard({
             isParty={isParty}
             cursor="pointer"
           />
+          <AspectRatio
+            overflow="hidden"
+            rounded="md"
+            width={['50px', '80px']}
+            ratio={1 / 1}
+          >
+            <Image
+              src={
+                member.avatar ? `${API_HOST}${member.avatar.url}` : undefined
+              }
+            />
+          </AspectRatio>
         </Stack>
         {showDetail ? (
           <ChevronUpIcon
@@ -226,7 +239,7 @@ function CardHeader({
             {member.name}
           </Text>
           <Text fontSize={['2xs', 'sm', 'md']} fontWeight="extraLight">
-            {member.department} ปี {member.year}
+            {member.department} ชั้นปีที่ {academicYear - member.year + 1}
           </Text>
         </Stack>
       </Stack>
