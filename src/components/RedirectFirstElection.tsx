@@ -101,7 +101,7 @@ export default function RedirectFirstElection() {
                       </a>
                     )}
                   </Flex>
-                  {website && (
+                  {/* {website && (
                     <Text mt="20px" fontWeight={300} textAlign="center">
                       และเว็บไซต์{' '}
                       <a
@@ -116,7 +116,7 @@ export default function RedirectFirstElection() {
                         {website}
                       </a>
                     </Text>
-                  )}
+                  )} */}
                 </>
               )}
             </Flex>

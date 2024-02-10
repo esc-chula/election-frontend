@@ -203,7 +203,7 @@ export default function ElectionDetail({ election }: { election: Election }) {
           </>
         )}
       </Card>
-      <Card
+      {/* <Card
         mt="16px"
         fontWeight="300"
         textAlign="center"
@@ -211,7 +211,7 @@ export default function ElectionDetail({ election }: { election: Election }) {
       >
         กดที่เครื่องหมาย <ChevronDownIcon />{' '}
         ทางด้านขวาของชื่อเพื่อดูประวัติการทำงานเเละวิสัยทัศน์
-      </Card>
+      </Card> */}
       <PositionAdapter
         position={currentPosition}
         selected={selected}

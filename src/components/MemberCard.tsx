@@ -83,7 +83,7 @@ export function MemberCard({
             cursor="pointer"
           />
         </Stack>
-        {showDetail ? (
+        {/* {showDetail ? (
           <ChevronUpIcon
             boxSize={['24px', '36px']}
             cursor="pointer"
@@ -95,7 +95,7 @@ export function MemberCard({
             cursor="pointer"
             onClick={() => setShowDetail(true)}
           />
-        )}
+        )} */}
       </Flex>
       {/* detail */}
       {showDetail && (
@@ -216,8 +216,8 @@ function CardHeader({
         <AspectRatio
           overflow="hidden"
           rounded="md"
-          width={['50px', '80px']}
-          ratio={1 / 1}
+          width={['40px', '70px']}
+          ratio={425 / 486}
         >
           <Image
             src={member.avatar ? `${API_HOST}${member.avatar.url}` : undefined}
