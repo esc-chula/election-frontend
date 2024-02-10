@@ -82,18 +82,6 @@ export function MemberCard({
             isParty={isParty}
             cursor="pointer"
           />
-          <AspectRatio
-            overflow="hidden"
-            rounded="md"
-            width={['50px', '80px']}
-            ratio={1 / 1}
-          >
-            <Image
-              src={
-                member.avatar ? `${API_HOST}${member.avatar.url}` : undefined
-              }
-            />
-          </AspectRatio>
         </Stack>
         {showDetail ? (
           <ChevronUpIcon
@@ -225,6 +213,16 @@ function CardHeader({
         >
           {props.candidateId}
         </Text>
+        <AspectRatio
+          overflow="hidden"
+          rounded="md"
+          width={['50px', '80px']}
+          ratio={1 / 1}
+        >
+          <Image
+            src={member.avatar ? `${API_HOST}${member.avatar.url}` : undefined}
+          />
+        </AspectRatio>
         <Stack spacing="2px" {...props}>
           {isParty && (
             <Text
